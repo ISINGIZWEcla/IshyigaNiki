@@ -22,6 +22,7 @@ public class TrashInput {
 	private String external_info_1;
 	private String external_info_2;
 	private Timestamp time;
+	private Object usernameExc;
 	private Object username;
 	private String filename;
 	private String status;
@@ -96,6 +97,14 @@ public class TrashInput {
 
 	public void setTime(Timestamp time) {
 		this.time = time;
+	}
+	
+	public Object getUsernameExc() {
+		return usernameExc;
+	}
+
+	public void setUsernameExc(Object usernameExc) {
+		this.usernameExc = usernameExc;
 	}
 
 	public Object getUsername() {
@@ -199,7 +208,7 @@ public class TrashInput {
 		try 
         {
 
-            PreparedStatement pst = conn.prepareStatement("insert into Trash_from_excel values(?,?,?,?,?,?,?,?,?,?,?,?)");
+            PreparedStatement pst = conn.prepareStatement("insert into Trash_from_excel values(?,?,?,?,?,?,?,?,now(),?,?,?,?,?)");
            
 
             pst.setString(1, fromExcelId);
@@ -210,10 +219,11 @@ public class TrashInput {
             pst.setString(6, external_info_1);
             pst.setString(7, external_info_2);
             pst.setTimestamp(8, time);
-            pst.setObject(9, username);
-            pst.setString(10, filename);
-            pst.setString(11, niki_code); 
-            pst.setString(12, status);
+            pst.setObject(9, usernameExc);
+            pst.setObject(10, username);
+            pst.setString(11, filename);
+            pst.setString(12, niki_code); 
+            pst.setString(13, status);
             
             
             pst.execute();

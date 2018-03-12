@@ -57,10 +57,10 @@
                     company = rs1.getString(5);
                     external_info_1 = rs1.getString(6);
                     external_info_2 = rs1.getString(7);
-                    username = rs1.getString(9);
-                    filename = rs1.getString(10);
-                    niki_code = rs1.getString(11); 
-                    status = rs1.getString(12);
+                    username = rs1.getString(10);
+                    filename = rs1.getString(12);
+                    niki_code = rs1.getString(13); 
+                    status = rs1.getString(14);
                     
                 }
             	
@@ -83,10 +83,14 @@
         	//removing the restored item FROM TRASH table
             if(trsh_excl.deleteTrashInput()){
             	 //call the method to restore the item back to ExcelItem Table
-                it_excl.insertExcelInput();
+                
+            	 if(it_excl.insertExcelInput()){
             	
-              //the data is restored
-                it_excl.setInsertMsg("Successfully restored");
+              	//the data is restored
+                	it_excl.setInsertMsg("Successfully restored");
+            	 }else{
+            		 it_excl.setInsertMsg("Error in restoring, contact administrator");
+            	 }
             }
             
    

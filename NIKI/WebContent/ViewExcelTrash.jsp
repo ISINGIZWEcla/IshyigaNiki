@@ -158,7 +158,8 @@ String userLanguage = session.getAttribute("userInSessionLanguage").toString();
                             <th> Company </th>                            
                         	<th> ext_info_1 </th>   
                         	<th> ext_info_2 </th>
-                        	<th> time </th>             
+                        	<th> time </th> 
+                        	<th> time Trashed</th>             
                         	<!-- <th> user_name </th>
                         	<th> file_name </th>  -->
                         	<th> niki_code </th>
@@ -180,7 +181,8 @@ String userLanguage = session.getAttribute("userInSessionLanguage").toString();
                             <th> Company </th>                            
                         	<th> ext_info_1 </th>   
                         	<th> ext_info_2 </th>
-                        	<th> time </th>             
+                        	<th> time </th> 
+                        	<th> time Trashed</th>             
                         	<!-- <th> user_name </th>
                         	<th> file_name </th>  -->
                         	<th> niki_code </th>
@@ -213,10 +215,10 @@ String userLanguage = session.getAttribute("userInSessionLanguage").toString();
                                     String gg = rs.getString(6);
                                     String hh = rs.getString(7);
                                     String ii = rs.getString(8);
-                                    //String jj = rs.getString(9);
+                                    String jj = rs.getString(9);
                                     //String kk = rs.getString(10);
-                                    String ll = rs.getString(11);
-                                    String mm = rs.getString(12);
+                                    String ll = rs.getString(13);
+                                    String mm = rs.getString(14);
 
                                  
 						if(mm.equals("TRANSFORMED")){
@@ -232,6 +234,7 @@ String userLanguage = session.getAttribute("userInSessionLanguage").toString();
                             <td> <%= gg%></td>
                             <td> <%= hh%></td>
                             <td> <%= ii%></td>
+                            <td> <%= jj%></td>
                            <!-- <td> </td>
                             <td> </td>  -->
                             <td> <%= ll%> </td>
@@ -257,12 +260,13 @@ String userLanguage = session.getAttribute("userInSessionLanguage").toString();
 	                            <td> <%= gg%></td>
 	                            <td> <%= hh%></td>
 	                            <td> <%= ii%></td>
+	                            <td> <%= jj%></td>
 	                           <!-- <td> </td>
 	                            <td> </td>  -->
 	                            <td> <%= ll%> </td>
 	                            <td> <%= mm%> </td>
 	                          
-                            <td> <a href="ItemRestoreResponse.jsp?itemRestore=<%=bb%>" class="btn btn-primary disabled">Restore </a></td>
+                            <td> <a href="ItemRestoreResponse.jsp?itemRestore=<%=bb%>" class="btn btn-primary">Restore </a></td>
 	                            
 	                            
 	                        </tr>
@@ -282,6 +286,7 @@ String userLanguage = session.getAttribute("userInSessionLanguage").toString();
 	                            <td> <%= gg%></td>
 	                            <td> <%= hh%></td>
 	                            <td> <%= ii%></td>
+	                            <td> <%= jj%></td>
 	                           <!-- <td> </td>
 	                            <td> </td>  -->
 	                            <td> <%= ll%> </td>

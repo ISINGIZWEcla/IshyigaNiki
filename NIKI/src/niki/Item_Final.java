@@ -473,7 +473,35 @@ public class Item_Final {
         }
     }
     
+    
     /*
+     * (CR)Change Request  March 2018
+     * This function counts the number of items that are in the final Items table that have the 
+     * Parameter: subcategory_abbreviation
+     */
+    
+    public int countItemsInSubcategory(String subCategoryAbbrev){
+    	try{
+    		
+    		PreparedStatement pst1 = conn.prepareStatement("select count(niki_code) from niki_items where niki_code like '"+subCategoryAbbrev+"%' ");
+    		
+    		ResultSet rs = pst1.executeQuery();
+    		int numberOfItemsInSubcategory = 0;
+    		if(rs.next()){
+    			numberOfItemsInSubcategory = rs.getInt(1);
+    		}
+    		
+    		return numberOfItemsInSubcategory;
+    	}catch (Exception e) {
+    		setError(e.getMessage());
+    		return 0;
+		}
+    	
+    }
+    
+    
+    /*
+     ***************TODO: TO REMOVE THIS FUNCTION NO LONGER USED, CR MARCH 2018**********
      * this function helps to get the items niki_code
      * it returns an auto-incremented number to add on the items niki_code
      */

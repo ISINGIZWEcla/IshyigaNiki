@@ -17,6 +17,11 @@
     <jsp:setProperty name="it_bus_cat" property="*" />
 </jsp:useBean>
 
+<!-- it_sub_cat ADDED FOR CR (Change Request), March 2018 -->
+<jsp:useBean id="it_sub_cat" scope="request" class="niki.Sub_Category">
+    <jsp:setProperty name="it_sub_cat" property="*" />
+</jsp:useBean>
+
 <%
     String itemValidate = request.getParameter("itmIdOrig").toUpperCase();
 
@@ -32,34 +37,7 @@
     String sbcatN = request.getParameter("subcat").toUpperCase().replaceAll("'", " ");
     String []bsncatN = request.getParameterValues("busin_cat");
     
-    //here I am getting the first char of the id, I should instead get the first char of the descr (to be done)
-    //same on the corresponding category
-    char subcatFirstChar =sbcatN.charAt(0);
-    String subcatFirstCharStr = Character.toString(subcatFirstChar);
     
-    String categName=""; //this is the variable to hold the category corresponding to the subcategory
-
-        
-    /*
-    connecting to the db and getting the category corresponding to the entered subcategory
-    */
-    try{
-    	Connection con = ConnectionClass.getConnection();
-    	Statement ST1 = con.createStatement();
-        ResultSet rs1 = ST1.executeQuery("SELECT category_id FROM niki_subcategories where subcategory_id='"+ sbcatN + "'");
-        
-        while(rs1.next()){
-        	categName = rs1.getString(1);
-        }
-    	
-    }catch(Exception e){
-    	
-    }
-    
-  //here I am getting the first char of the category_id, 
-    char catFirstChar =categName.charAt(0);
-    String catFirstCharStr = Character.toString(catFirstChar);//converting it to string
-
     //getting the first 4chars of itmDescE 
     String itmDescEFirst4;
     String itmDescEWithNoSpace=itmDescE.replace(" ", "");//removing spaces in the string
@@ -70,15 +48,25 @@
     	itmDescEFirst4 = itmDescEWithNoSpace.substring(0, 4);
     }
     
-    //getting autoincrement value
-    int autoincr_value = itf.insertCode();
+    /*
+    STRUCTURING NIKI_CODE, CR (Change Request) March 2018
+    */
+    //getting subcategory abbreviation to be used in niki_code structuring
+    it_sub_cat.setSubcategory_id(sbcatN);
+    String subCategoryAbbrev = it_sub_cat.findSubcategoryAbbrev(); //TODO: have to check for the case it returns null
     
-    //padding the autoincremented value with zeros
-    String autoincr_valueWithZeroes=String.format("%05d", autoincr_value);
+    //count current number of items of the same subcategory in the Final items table
+    Integer countItemsInSubcategory = itf.countItemsInSubcategory(subCategoryAbbrev); // TODO: have to check for the case when it returns 0
+    
+    //getting the number of the next item in the subcategory by incrementing and padding the value with zeros
+    String nextItemInSubcategory = String.format("%05d", (countItemsInSubcategory+1)); 
     
     //making the niki_code structure
-    String niki_code = catFirstCharStr+subcatFirstCharStr+itmDescEFirst4+autoincr_valueWithZeroes;
-    out.println(niki_code);
+    String niki_code = subCategoryAbbrev + itmDescEFirst4 + nextItemInSubcategory;
+    
+    /*
+    end of niki_code formatting
+    */
 
     itf.setNiki_code(niki_code);
     if(codeb.isEmpty() || codeb=="null" || codeb == null){

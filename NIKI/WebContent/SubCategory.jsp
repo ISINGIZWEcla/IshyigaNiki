@@ -149,7 +149,7 @@ session.setAttribute("fromChooseCompany", from);
             
            
         <h3>${subcat.insertMsg}</h3>
-        <h4>${subcat.error} </h4>
+        <h4 style= "color: red">${subcat.error} </h4>
         
 
         
@@ -245,7 +245,7 @@ session.setAttribute("fromChooseCompany", from);
                         
         <div>
                 <h3>${subcat.insertMsg}</h3>
-                <h4>${subcat.error} </h4>
+                <h4 style= "color: red">${subcat.error} </h4>
                  
                 <h3 style="background-color:buttonface">Sub_Categories List</h3>
                 
@@ -255,6 +255,7 @@ session.setAttribute("fromChooseCompany", from);
                             <th> Sub_Category Id</th>               
                             <th> Sub_Category Desc</th>  
                             <th> Category Id</th>
+                            <th> Abbrev</th> 
                             <th> Status </th>
                             <th> Edit </th>
                             <th> Sleep </th>
@@ -267,6 +268,7 @@ session.setAttribute("fromChooseCompany", from);
                             <th> Sub_Category Id</th>               
                             <th> Sub_Category Desc</th>
                             <th> Category Id</th>
+                            <th> Abbrev</th>
                             <th> Status </th>
                             <th> Edit </th>
                             <th> Sleep </th>
@@ -289,9 +291,7 @@ session.setAttribute("fromChooseCompany", from);
                                     String cc = rs.getString(2);
                                     String dd = rs.getString(3);
                                     String ee = rs.getString(4);
-                                    
-
-                                 
+                                    String ff = rs.getString(5);
 
                         %>  
                         <tr> 
@@ -300,6 +300,7 @@ session.setAttribute("fromChooseCompany", from);
                             <td> <%= cc%></td>
                             <td> <%= dd%></td>
                             <td> <%= ee%></td>
+                            <td> <%= ff%></td>
                            
                             <td> <a href="SubcategoryUpdate.jsp?subcatEdit=<%=bb%>&action=update"> Edit </a></td>
                             <td> <a href="SubCategoryResponse.jsp?subcatRejectSleep=<%=bb%>&action=subcatSleep">Sleep </a></td>

@@ -18,6 +18,7 @@ public class Sub_Category {
     private String subcategory_descr;
     private String status="LIVE";
     private String category_id;
+    private String subcategory_abbrev; //Added as a CR, March 2018
     private String insertMsg,selectMsg,updateMsg,error;
     private boolean valid=true;
     
@@ -61,8 +62,15 @@ public class Sub_Category {
         this.category_id = category_id;
     }
     
+    public String getSubcategory_abbrev() {
+		return subcategory_abbrev;
+	}
 
-    public String getStatus() {
+	public void setSubcategory_abbrev(String subcategory_abbrev) {
+		this.subcategory_abbrev = subcategory_abbrev;
+	}
+
+	public String getStatus() {
 		return status;
 	}
 
@@ -128,7 +136,7 @@ public class Sub_Category {
         try 
         {
 
-            PreparedStatement pst = conn.prepareStatement("insert into niki_subcategories values(?,?,?,?)");
+            PreparedStatement pst = conn.prepareStatement("insert into niki_subcategories values(?,?,?,?,?)");
             PreparedStatement pst2 = conn.prepareStatement("select subcategory_descr from niki_subcategories where subcategory_descr = '"+subcategory_descr +"'");
 
             
@@ -145,7 +153,8 @@ public class Sub_Category {
                 pst.setString(3, category_id); 
                 pst.setString(1, subcategory_id);
                 pst.setString(2, subcategory_descr);
-                pst.setString(4, status);
+                pst.setString(4, subcategory_abbrev);
+                pst.setString(5, status);
                 
                 pst.execute();
                 conn.close(); 
@@ -154,7 +163,7 @@ public class Sub_Category {
             }
         } catch (Exception e) {
             insertMsg="Not Inserted";
-            setError(e.getMessage());
+            setError("There was an error, Contact the administrator");
             return false;
         }
         
@@ -268,6 +277,34 @@ public class Sub_Category {
             return false;
 
         }
+    }
+    
+    
+    /*
+     * CR(Change Request) March 2018
+     * This functions returns the subcategory abbreviation
+     * parameter: subcategory_id
+     */
+    
+    public String findSubcategoryAbbrev(){
+    	
+    	try {
+    		
+    		PreparedStatement pst = conn.prepareStatement("select subcategory_abbrev from niki_subcategories where subcategory_id=? ");
+    		
+    		pst.setString(1, subcategory_id);
+    		
+    		ResultSet rs = pst.executeQuery();
+    		
+    		if(rs.next()){
+    			subcategory_abbrev = rs.getString(1);
+    		}
+			
+    		return subcategory_abbrev;
+		} catch (Exception e) {
+			setError(e.getMessage());
+			return null;
+		}
     }
     
 }

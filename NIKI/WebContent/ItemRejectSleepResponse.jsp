@@ -29,6 +29,8 @@
 </jsp:useBean>
 
 <%
+	Object username = session.getAttribute("userInSessionUsername");
+
     String action = request.getParameter("action");
 	String itmDescription = request.getParameter("itemDesc");
 	session.setAttribute("actionInSession", action);
@@ -114,8 +116,8 @@
             */
             
             String fromExcelId = null, externalId = null, itemDesc = null, codebar = null, external_info_1 = null, external_info_2 = null, filename = null, niki_code = null, status = null;
-         	String company = null, username = null;
-         	Timestamp time= Timestamp.valueOf("2007-09-23 10:10:10.0");
+         	String company = null, usernameExc = null;
+         	Timestamp timeExc= Timestamp.valueOf("2007-09-23 10:10:10.0");
             try{
             	Connection con = ConnectionClass.getConnection();
             	Statement ST1 = con.createStatement();
@@ -129,8 +131,8 @@
                     company = rs1.getString(5);
                     external_info_1 = rs1.getString(6);
                     external_info_2 = rs1.getString(7);
-                    time = rs1.getTimestamp(8);
-                    username = rs1.getString(9);
+                    timeExc = rs1.getTimestamp(8);
+                    usernameExc = rs1.getString(9);
                     filename = rs1.getString(10);
                     niki_code = rs1.getString(11); 
                     status = rs1.getString(12);
@@ -147,24 +149,29 @@
         	trsh_excl.setExternal_info_2(external_info_2);
         	trsh_excl.setExternalId(externalId);
         	trsh_excl.setItemDesc(itemDesc);
+        	trsh_excl.setUsernameExc(usernameExc);
         	trsh_excl.setUsername(username);
         	trsh_excl.setFilename(filename);
         	trsh_excl.setNiki_code(niki_code);
         	trsh_excl.setStatus(status);
-        	trsh_excl.setTime(time);
+        	trsh_excl.setTime(timeExc);
         	
-            trsh_excl.insertTrashInput();
             
-          //call the method to reject the item
-            it_excl.deleteExcelInput();
-        
-            %>
-            <jsp:forward page="finalItemsRejectionLinking.jsp"> 
-            	<jsp:param name="itemRej" value="<%=itmReject %>"/>
-            	<jsp:param name="itemDesc" value="<%=itmDescription %>"/>
-            </jsp:forward>
-            <%
+        	if(trsh_excl.insertTrashInput()){
             
+	          	//call the method to reject the item
+	            it_excl.deleteExcelInput();
+	        	
+	            %>
+	            <jsp:forward page="finalItemsRejectionLinking.jsp"> 
+	            	<jsp:param name="itemRej" value="<%=itmReject %>"/>
+	            	<jsp:param name="itemDesc" value="<%=itmDescription %>"/>
+	            </jsp:forward>
+	            <%
+        	}
+        	else{
+        		trsh_excl.setInsertMsg("rejection has failed, contact administrator");
+        	}
         } else {
             //the data is not valid
             it_excl.setInsertMsg("Invalid data");
@@ -172,7 +179,7 @@
 
         }
         
-      	//part of CR setting initialExcelView attrubute to No, cause we are directing to View excel data, and it is not initial. 
+      	//part of CR setting initialExcelView attribute to 'No', cause we are directing to View excel data, and it is not initial. 
      	session.setAttribute("initialExcelView", "no");
         %>
         <jsp:forward page="ViewFilesData.jsp"/>
