@@ -182,7 +182,6 @@ public class ExcelInput {
 	 * returns true if it is successful and false otherwise
 	 */
 
-
 	public boolean insertExcelInput(){
 		try 
         {
@@ -213,6 +212,36 @@ public class ExcelInput {
             return false;
         }
 		
+	}
+	
+
+	public String insertExcelLogs(String user,String filename,String companyname,int total,int inserted){
+		try 
+        {
+
+            PreparedStatement pst = conn.prepareStatement
+            		("insert into niki_excel_logs values(null,?,?,?,now(),?,?)");
+           
+         
+
+           
+            pst.setString(1, user);
+            pst.setString(2, filename);
+            pst.setString(3, companyname);
+            pst.setInt(4, total);
+            pst.setInt(5, inserted); 
+            
+            pst.execute();
+           // conn.close(); 
+            insertMsg="Successfully inserted";
+          //  return true;
+            
+        } catch (Exception e) {
+            insertMsg="insertExcelLogs Not Inserted "+e.getMessage();
+            setError(e.getMessage());
+            //return false;
+        }
+		return insertMsg;
 	}
 	
 	
@@ -326,5 +355,29 @@ public class ExcelInput {
 		
 	}
 	
+	
+	public boolean isRowDuplicate(String externalId, String company){
+		try {
+    		
+    		PreparedStatement pst = conn.prepareStatement("select externalId from itemsfromexcel where externalId=? and company=?");
+    		
+    		pst.setString(1, externalId);
+    		pst.setString(2, company);
+    		
+    		ResultSet rs = pst.executeQuery();
+    		
+    		if(rs.next()){
+    			insertMsg=externalId+" NDIMO "+company	;
+    			return true;
+    		}
+    		else{
+    			return false;
+    		}
+			
+		} catch (Exception e) {
+			setError(e.getMessage());
+			return true;
+		}
+	}
 
 }

@@ -169,11 +169,11 @@ String user=session.getAttribute("userInSessionfName").toString();
 		
 		
 		int i=0;
-		
+		int insertedRow=0;
 		while(rowIterator.hasNext()) {
 			
 			Row row = rowIterator.next();
-			
+			i++;
 			String data="";
 			//array to store data for the whole row
 			String [] dataForRow=new String[5];
@@ -193,20 +193,20 @@ String user=session.getAttribute("userInSessionfName").toString();
 					
 					switch(cell.getCellType()) {
 						case Cell.CELL_TYPE_BOOLEAN:
-							System.out.print(cell.getBooleanCellValue() + "\t\t");
+							///System.out.print(cell.getBooleanCellValue() + "\t\t");
 							data=cell.getBooleanCellValue()+"";
 	
 							break;
 						case Cell.CELL_TYPE_NUMERIC:
-							System.out.print(cell.getNumericCellValue() + "\t\t");
+							//System.out.print(cell.getNumericCellValue() + "\t\t");
 							data=cell.getNumericCellValue()+"";
 							break;
 						case Cell.CELL_TYPE_STRING:
-							System.out.print(cell.getStringCellValue() + "\t\t");
+							//System.out.print(cell.getStringCellValue() + "\t\t");
 							data=cell.getStringCellValue()+"";
 							break;
 						case Cell.CELL_TYPE_BLANK:
-							System.out.print(cell.getStringCellValue() + "\t\t");
+							///System.out.print(cell.getStringCellValue() + "\t\t");
 							data="";
 							break;
 					}//end switch
@@ -219,13 +219,21 @@ String user=session.getAttribute("userInSessionfName").toString();
 			/*
 			data to be stored in the database
 			*/
-			
-			String externalId=dataForRow[0].replaceAll("'", " ");
-			
+			//System.out.println("hereeeeeeeeeeeeeeee: "+String.valueOf(dataForRow[0]));
+			String externalId="";
+			if(dataForRow[0] != null){
+				
+			//	out.println("String.valueOf(dataForRow[1])  " +String.valueOf(dataForRow[1]));
+		    externalId=dataForRow[0].replaceAll("'", " ");
+			//out.println(i+" $$$$    iiiiii externalId  " +externalId);
 			String itemDesc = String.valueOf(dataForRow[1]).replaceAll("'", " "); 
+			//out.println(" $$$$ itemDesc " +itemDesc);
 			String barcode = String.valueOf(dataForRow[2]).replaceAll("'", " ");
+			//out.println("$$$$  barcode  " +barcode);
 			String externalInfo1 = String.valueOf(dataForRow[3]).replaceAll("'", " ");
+			//out.println("$$$$ externalInfo1  " +externalInfo1);
 			String externalInfo2 = String.valueOf(dataForRow[4]).replaceAll("'", " "); 
+			//out.println("SexternalInfo2 " +externalInfo2);
 			
 			/*
 			setting the attributes
@@ -238,25 +246,33 @@ String user=session.getAttribute("userInSessionfName").toString();
 			excInpt.setExternal_info_1(externalInfo1);
 			excInpt.setExternal_info_2(externalInfo2);
 			excInpt.setUsername(username);
-			excInpt.setFilename(filename[n-1]);
-			
-			/*
-			calling the method to insert in the database
-			*/
-			if(excInpt.insertExcelInput()){
+			//excInpt.setFilename(filename[n-1]);
+			excInpt.setFilename("medical.xls");
 				
 			}
 			else{
-				out.println(excInpt.getInsertMsg()+"<br>");
-				out.println(excInpt.getError()+"<br>");
+				out.println("wamenetse");
+			}
+			/*
+			calling the method to insert in the database
+			*/
+			boolean ndimo=!excInpt.isRowDuplicate(externalId, companyName);
+			
+			if(ndimo && excInpt.insertExcelInput()){
+				insertedRow++;
+			}
+			else{
+				//out.println(excInpt.getInsertMsg()+"<br>");
+				//out.println(excInpt.getError()+"<br>");
 				
 			}			
 						
 		}//end while (which iterate in rows)
 		
-
+		String res=excInpt.insertExcelLogs( username.toString(), filepath,companyName, i, insertedRow);
+		out.println(" res: "+res+"<br>");
 		out.println(" filepath: "+filepath+"<br>");
-		out.println(" filename: "+filename[n-1]+"<br><br>");
+		out.println(i+" received   ||  inserted: "+insertedRow+"<br><br>");
 		out.println(" Excel loading is done! ");
 			
 		file.close();//closing the file
