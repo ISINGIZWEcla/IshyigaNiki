@@ -146,42 +146,26 @@ session.setAttribute("category",null);
         
 
         
-        <form name="inputCat" action="CategoryResponse.jsp" method="POST">
-            
-            
-            <table>
-                
-               
-                <tr>
-                    <td>
-                       category Number: 
-                    </td>
-                    <td>
-                        <input type="text" name="ctn" value="" required=true size="35"/> 
-                    </td>
-                    
-                </tr> 
-                <tr>
-                    <td>
-                        category description:
-                    </td>
-                    <td>
-                        <input type="text" name="ctd" value="" required=true size="35" >
-                    </td>
-                    
-                </tr>
-                
-                
-                <tr>
-                    <td>
-                        
-                    </td>
-                    <td>
-                        <input value="save" type="submit"/>
-                    </td>
-                    
-                </tr>
-                
+        <form name="inputCat" action="CategoryResponse.jsp" method="POST"> 
+            <table> 
+            <tr>  <td> category code  </td>
+            <td> <input type="text" name="ctn" value="" required=true size="35"/></td>
+            </tr> 
+            <tr>  <td> category description: </td>
+            <td> <input type="text" name="ctd" value="" required=true size="35" >
+            </td> </tr>
+            <tr>  <td> Parent </td>
+            <td> <input type="text" name="parent" value="" required=true size="35" >
+            </td> </tr>
+            <tr>  <td> French description: </td>
+            <td> <input type="text" name="french" value="" required=true size="35" >
+            </td> </tr>
+            <tr>  <td> Kinya description: </td>
+            <td> <input type="text" name="kinya" value="" required=true size="35" >
+            </td> </tr>
+            <tr>  <td> </td>
+                  <td> <input value="save" type="submit"/>  </td>
+             </tr> 
             </table>
 
             
@@ -198,7 +182,10 @@ session.setAttribute("category",null);
                         <tr>
                             <th> Category Id</th>               
                             <th> Category Desc</th>   
-                            <th> Status </th>
+                            <th> Status </th>                            
+                            <th> Parent</th>               
+                            <th> French</th>   
+                            <th> Kinya</th>
                             <th> Edit </th>
                             <th> Sleep </th>
                         </tr>
@@ -210,6 +197,9 @@ session.setAttribute("category",null);
                             <th> Category Id</th>               
                             <th> Category Desc</th>   
                             <th> Status </th>
+                            <th> Parent</th>               
+                            <th> French</th>   
+                            <th> Kinya</th>
                             <th> Edit </th>
                             <th> Sleep </th>
                            
@@ -230,7 +220,9 @@ session.setAttribute("category",null);
                                     String bb = rs.getString(1);
                                     String cc = rs.getString(2);
                                     String dd = rs.getString(3);
-                                    
+                                    String vv = rs.getString(4);
+                                    String kk = rs.getString(5);
+                                    String oo = rs.getString(6);
 
                                  
 
@@ -240,7 +232,9 @@ session.setAttribute("category",null);
                             <td><%=bb%>  </td>
                             <td> <%= cc%></td>
                             <td> <%=dd %></td>
-                           
+                            <td><%=vv%>  </td>
+                            <td> <%= kk%></td>
+                            <td> <%=oo %></td>
                             <td> <a href="CategoryUpdate.jsp?catEdit=<%=bb%>&catDesc=<%=cc%>&action=update"> Edit </a></td>
                             <td> <a href="CategoryResponse.jsp?catRejectSleep=<%=bb%>&action=catSleep">Sleep </a></td>
                             

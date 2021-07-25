@@ -24,7 +24,7 @@
 
 
    
-    String query = "select user_type,privileges,first_name,status,language from users where user_name='" + name + "'";
+    String query = "select user_type,privileges,first_name,status,language,company_affected from users where user_name='" + name + "'";
   
     System.out.println("className.methodName()  "+query);
      Connection conn = ConnectionClass.getConnection();
@@ -36,7 +36,8 @@
     String usernameFromDb="";
     String statusFromDb="";
     String languageFromDb="";
-
+    String company_affected="";
+    
     if (rs.next()) {
 
         userTypeFromDb = rs.getString("user_type");
@@ -44,6 +45,7 @@
         fNamefromDb=rs.getString("first_name");
         statusFromDb=rs.getString("status");
         languageFromDb=rs.getString("language");
+        company_affected=rs.getString("company_affected");
     }
 
     session.setAttribute("errorLogin", "");
@@ -73,7 +75,7 @@
             session.setAttribute("userInSessionPrivileges", userPrivsFromDb);
             session.setAttribute("userInSessionUsername", name);
             session.setAttribute("userInSessionLanguage", languageFromDb);
-            
+            session.setAttribute("userInSessionCompany", company_affected);
             session.setAttribute("formToUse", "index.html");
             String nextForm = session.getAttribute("formToUse").toString();
             response.sendRedirect(nextForm);

@@ -8,6 +8,7 @@ package niki;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 
 /**
  *
@@ -15,7 +16,7 @@ import java.sql.ResultSet;
  */
 public class Tax_Rate {
     private String taxLabel;
-    private String taxValue;
+    private String taxValue,taxClass;
     private String status="LIVE";
     private String insertMsg,selectMsg,updateMsg,error;
     private boolean valid=true;
@@ -50,7 +51,9 @@ public class Tax_Rate {
     public void setTaxValue(String taxValue) {
         this.taxValue = taxValue;
     }
-
+ public void setTaxClass(String taxClass) {
+        this.taxClass = taxClass;
+    }
     public String getInsertMsg() {
         return insertMsg;
     }
@@ -187,7 +190,12 @@ public class Tax_Rate {
     public boolean updateTaxrate() {
 
         try {
-            PreparedStatement pst = conn.prepareStatement("update niki_tax_rates set taxValue=? where taxLabel=? ");
+          
+            String sql ="update niki_tax_rates set "
+                    + " taxValue="+taxValue+" where "
+                    + "taxLabel='"+taxLabel+"'  and taxClass='"+taxClass+"'";
+            
+            Statement state = conn.createStatement();
 
 
             /*
@@ -222,16 +230,12 @@ public class Tax_Rate {
            
             else
             {
-
-                pst.setString(1, taxValue);
-                pst.setString(2, taxLabel);   
-                
-                
+ 
                                 
-                pst.execute(); //updating the taxrate
+                state.execute(sql); //updating the taxrate
                                 
                 conn.close(); 
-                insertMsg="Successfully updated";
+                insertMsg="Successfully updated "+sql;
                 return true;
             }
             

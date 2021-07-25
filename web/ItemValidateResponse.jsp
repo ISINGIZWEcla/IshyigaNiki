@@ -29,37 +29,58 @@
     <jsp:setProperty name="it_sub_cat" property="*" />
 </jsp:useBean>
 
-<%
-    String itemValidate = request.getParameter("itmIdOrig").toUpperCase();
-
+<% 
+    int item_temp_id = Integer.parseInt(request.getParameter("item_temp_id"));
 	//setting the original item id to be validated to a session attribute
-	session.setAttribute("itemOriginal", itemValidate);
+	session.setAttribute("item_temp_id", ""+item_temp_id);
 
-    String codeb = request.getParameter("cdb").toUpperCase().replaceAll("'", " ");
-    String itmDescE = request.getParameter("itmdE").toUpperCase().replaceAll("'", " ");
-    String itmDescK = request.getParameter("itmdK").toUpperCase().replaceAll("'", " ");
-    String itmDescF = request.getParameter("itmdF").toUpperCase().replaceAll("'", " ");
-    String itmDescS = request.getParameter("itmdS").toUpperCase().replaceAll("'", " ");
-    String taxR = request.getParameter("txrt").replaceAll("'", " ");
-    String sbcatN = request.getParameter("subcat").toUpperCase().replaceAll("'", " ");
-    String []bsncatN = request.getParameterValues("busin_cat");
+String category_id= request.getParameter("category_id").toUpperCase().replaceAll("'", " "); 
+ 
+String item_commercial_name= request.getParameter("item_commercial_name").toUpperCase().replaceAll("'", " ");
+String item_form= request.getParameter("item_form").toUpperCase().replaceAll("'", " "); 
+String item_emballage= request.getParameter("item_emballage").toUpperCase().replaceAll("'", " ");
+String item_inn= request.getParameter("item_inn").toUpperCase().replaceAll("'", " ");
+String tax_vat= request.getParameter("tax_vat").toUpperCase().replaceAll("'", " ");
+String tax_excise= "NA";//request.getParameter("tax_excise").toUpperCase().replaceAll("'", " "); 
+String tax_duty= "NA";//request.getParameter("tax_duty").toUpperCase().replaceAll("'", " ");
+String updated_time;
+String item_fabricant= request.getParameter("item_fabricant").toUpperCase().replaceAll("'", " "); 
+double item_packet= Double.parseDouble(request.getParameter("item_packet"));
+int item_longeur_mm= Integer.parseInt(request.getParameter("item_longeur_mm"));
+int item_largeur_mm= Integer.parseInt(request.getParameter("item_largeur_mm"));
+int item_hauteur_mm= Integer.parseInt(request.getParameter("item_hauteur_mm"));
+double item_poids_gr= Double.parseDouble(request.getParameter("item_poids_gr"));
+double item_dosage= Double.parseDouble(request.getParameter("item_dosage"));
+String shipment_type= request.getParameter("shipment_type").toUpperCase().replaceAll("'", " ");
+String item_key_words= request.getParameter("item_key_words").toUpperCase().replaceAll("'", " ");
+String hs_code= request.getParameter("hs_code").toUpperCase().replaceAll("'", " "); 
+String gtin_code= request.getParameter("gtin_code").toUpperCase().replaceAll("'", " ");
+String bar_code= request.getParameter("bar_code").toUpperCase().replaceAll("'", " ");
+String created;
+String global_id=  session.getAttribute("userInSessionfName").toString(); 
+String bus_category_id= request.getParameter("bus_category_id").toUpperCase().replaceAll("'", " ");
+    
+    
+    
+String []bsncatN = request.getParameterValues("bus_category_id");
     
 
     //getting the first 4chars of itmDescE 
     String itmDescEFirst4;
-    itmDescE=itmDescE.replace(" ", "");//removing spaces in the string
-    if(itmDescE.length()<4){
-    	itmDescEFirst4 = itmDescE;
+    String item_commercial_name3=item_commercial_name.replace(" ", "");//removing spaces in the string
+    if(item_commercial_name3.length()<4){
+    	itmDescEFirst4 = item_commercial_name3+"RRRRRRR";
+        itmDescEFirst4 = item_commercial_name3.substring(0, 4);
     }
     else{
-    	itmDescEFirst4 = itmDescE.substring(0, 4);
+    	itmDescEFirst4 = item_commercial_name3.substring(0, 4);
     }
 
     /*
     STRUCTURING NIKI_CODE, CR (Change Request) March 2018
     */
     //getting subcategory abbreviation to be used in niki_code structuring
-    it_sub_cat.setSubcategory_id(sbcatN);
+    it_sub_cat.setSubcategory_id(category_id);
     String subCategoryAbbrev = it_sub_cat.findSubcategoryAbbrev(); //TODO: have to check for the case it returns null
     
     //count current number of items of the same subcategory in the Final items table
@@ -76,31 +97,30 @@
     */
     		
     itf.setNiki_code(niki_code);
-    if(codeb.isEmpty() || codeb=="null" || codeb == null){
-        itf.setCodebar(null);    
-    }
-    else{
-        itf.setCodebar(codeb);    	
-    }
-    itf.setItemDescriptionENGL(itmDescE);
-    itf.setItemDescriptionKINYA(itmDescK);
-    itf.setItemDescriptionFRENCH(itmDescF);
-    itf.setItemDescriptionSWAHILI(itmDescS);
-    itf.setSubcategory_id(sbcatN);
-    itf.setTaxRate(taxR);
+    if(bar_code.isEmpty() || bar_code=="null" || bar_code == null){
+       bar_code=null;    
+    } 
+    
+    itf.setItem_Final(  niki_code,   bar_code,   category_id, 
+              item_temp_id,   item_commercial_name,   item_form, 
+              item_emballage,   item_inn,   tax_vat,   tax_excise, 
+              tax_duty,   item_fabricant,  item_packet,   item_longeur_mm,
+                item_largeur_mm, item_hauteur_mm,   item_poids_gr,   item_dosage, 
+              shipment_type,   item_key_words,   hs_code, 
+              gtin_code,   bar_code,       global_id,   bus_category_id ); 
     
     //identifying the temp item we are validating
-    it_tmp.setItem_id(itemValidate); 
+    it_tmp.setItem_id(item_temp_id); 
     
     it_bus_cat.setNiki_code(niki_code);//setting the niki_code of the item business category instance
     
     /*
     checking if the select values are empty and prompting the users to enter them if they are so
     */
-    if(taxR.isEmpty()){
+    if(tax_vat.isEmpty()){
         itf.setInsertMsg("please select the taxrate ");
     }
-    else if(bsncatN == null){
+    else if(bus_category_id == null){
         itf.setInsertMsg("please select the business category ");
 
     }
@@ -114,16 +134,16 @@
         if (itf.insertItem()) {
         	//item is inserted in itemfinal successfully
             
-        	boolean inserted=false; //variable to help to check if business categories are  inserted successfully
+        	boolean inserted=true; //variable to help to check if business categories are  inserted successfully
         	
         	//Matching an item to the selected business categories
-            for (String bscat:bsncatN){ 
+          /*  for (String bscat:bsncatN){ 
             	//for each selected business category
                 it_bus_cat.setBusin_category_id(bscat.toUpperCase()); //setting the business category for the item
                 inserted=it_bus_cat.insertItemBusinCategory();//inserting the business category
                             	
             }
-
+*/
             if(inserted){
             	//the item is matched with the business category successfully
                 

@@ -21,6 +21,7 @@ if(action!=null && action.equals("update")){
 		session.setAttribute("taxlabelS", taxLabel);	//keeping taxlabel in a session for later use
 		
 	    String taxValue = request.getParameter("taxV").toUpperCase().replaceAll("'", " ");
+String taxClass = request.getParameter("taxClass").toUpperCase().replaceAll("'", " ");
 
 
 	    
@@ -29,7 +30,7 @@ if(action!=null && action.equals("update")){
 		*/
 		txr.setTaxLabel(taxLabel);
 		txr.setTaxValue(taxValue);
-		
+		txr.setTaxClass(taxClass);
 	    	    
 	    
 	    /*

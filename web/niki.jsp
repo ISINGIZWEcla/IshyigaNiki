@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>niki</title>
+  <title>NIKI</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
@@ -43,79 +43,73 @@
     }
   </style>
 </head>
-<body>
-
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">Logo</a>
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="index.html">Home</a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="Login.jsp" class="btn btn-info btn-lg" style="color: white;">
-          <span class="glyphicon glyphicon-log-in"></span> Login
-        </a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
-  
-<div class="container-fluid text-center">
-  <div class="row content">
-    <div class="col-sm-2 sidenav">
-      
-    </div>
-    <div class="col-sm-8 text-left" >
-		<div class="page-header">
-			<h1 style="text-align: center; text-shadow: maroon;">Welcome to NIKI</h1>
-		</div>         
-            
-
-        <div style="float: left;margin-right:20px">
-        	<form action="FinalItems.jsp">
-        		<input type="submit" style="font-weight:bold; background: blue; width: 15em; height: 12em;color: black;" value="VIEW"/>
-        	</form> 
+ <meta charset="UTF-8"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+    
+    	<div style="background-color: orange; border-style: solid;width:100%;">
+	        <div style="text-align: center; border:medium; "><h1>Welcome To NIKI</h1> </div>         
         </div>
-        <div style="float: left;margin-right:20px">
-        	<form action="ItemsSearching.jsp">
-        		<input type="submit" style="font-weight:bold; background: red ; width: 15em; height: 12em;color: black;" value="SEARCH"/>
-        	</form> 
-        </div>
-        <div style="margin-right:20px;margin-bottom:20px">
-        	<form action="PendingItems.jsp">
-        		<input type="submit" style="font-weight:bold; background: orange; width: 15em; height: 12em;color: black;" value="ADD"/>
-        	</form> 
-        </div>
-        <div style="float: left;margin-right:20px">
-        	<form action="FinalItems.jsp">
-        		<input type="submit" style="font-weight:bold; background: yellow; width: 15em; height: 12em;color: black;" value="UPDATE"/>
-        	</form> 
-        </div>
-        <div style="float: left;margin-right:20px">
-        	<form action="">
-        		<input type="submit" style="font-weight:bold; background: green ; width: 15em; height: 12em;color: black;" value="ATTACH"/>
-        	</form> 
-        </div>
-    </div>
-    <div class="col-sm-2 sidenav" >
-      
-    </div>
-  </div>
-</div>
+        <div style="background: #CCCCCC; position:absolute;width:100%;height:100%">
+	        <div style=" margin-left:25%; margin-top:5%;">  
+	        
+		        <div style="float: left;margin-right:20px">
+		        	<form action="ItemLookup.jsp">
+		        		<input type="submit" style="font-weight:bold;width: 15em; height: 12em;color: black;font-size: 100; background-color:  powderblue;" value="REQUEST A CODE"/>
+		        	</form> 
+		        </div>
+		        <div style="float: left;margin-right:20px">
+		        	<form action="Item.jsp">
+		        		<input type="submit" style="font-weight:bold; background: pink; width: 15em; height: 12em;color: black;" value="NIKI LIST"/>
+		        	</form> 
+		        </div>
+		        <div style="margin-right:20px;margin-bottom:20px;">
+                            <a href="../build/web/settings.jsp"></a>
+		        	<form action="accountsPage.jsp">
+		        		<input type="submit" style="font-weight:bold; width: 15em; height: 12em;color: black ; background: red;" value="MOLECULAR LIST"/>
+		        	</form> 
+		        </div>
+		        <div style="float: left;margin-right:20px">
+		        	<form action="temporariesPage.jsp">
+		        		<input type="submit" style="font-weight:bold; width: 15em; height: 12em;color: black; background-color: orange;" value="TRANSFORM"/>
+		        	</form> 
+		        </div>
+		        <div style="float: left;margin-right:20px">
+		        	<form action="import&export.jsp">
+		        		<input type="submit" style="font-weight:bold; width: 15em; height: 12em;color: black; background-color:  lightgreen; " value="IMPORT EXCEL"/>
+		        	</form> 
+		        </div>
+		        <div style="margin-right:20px;margin-bottom:20px;">
+		        	<form action="import&export.jsp">
+		        		<input type="submit" style="font-weight:bold; width: 15em; height: 12em;color: black;background-color: yellow; " value="EXPORT EXCEL"/>
+		        	</form> 
+		        </div>
+                       <div style="float: left;margin-right:20px">
+		        	<form action="temporariesPage.jsp">
+		        		<input type="submit" style="font-weight:bold; width: 15em; height: 12em;color: black; background-color: gray;" value="MANUFACTURE"/>
+		        	</form> 
+		        </div>
+		        <div style="float: left;margin-right:20px">
+		        	<form action="Company.jsp">
+		        		<input type="submit" style="font-weight:bold; width: 15em; height: 12em;color: black; background-color:  mediumvioletred; " value="COMPANIES"/>
+		        	</form> 
+		        </div>
+		        <div style="margin-right:20px">
+		        	<form action="Settings.jsp">
+		        		<input type="submit" style="font-weight:bold; width: 15em; height: 12em;color: black;background-color: lightskyblue; " value="SETTINGS"/>
+		        	</form> 
+		        </div>
+	        </div>
 
+<!--         <div><a href="testDesign.jsp">Design</a></div> -->
+        <!-- <div><a href="PopUpButtonDemo.jsp">Pop up demo</a></div>
+        <div><a href="testModal.jsp">Test Modal</a></div> -->
+    
+		</div>
+		<div style="background-color: orange; border-style: solid;width:100%;">
+	        <div style="text-align: center; border:medium; "><h1>Welcome To NIKI items codification</h1> </div>         
+        </div>
+		
 
-<footer class="container-fluid text-center">
-  <p><strong> Copyright &#169; 2016 Algorithm,Inc.</strong></p>
-</footer>
-
-</body>
 </html>
 
