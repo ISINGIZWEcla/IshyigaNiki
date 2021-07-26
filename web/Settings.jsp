@@ -64,13 +64,13 @@
 		        	</form> 
 		        </div>
 		        <div style="float: left;margin-right:20px">
-		        	<form action="categoriesPage.jsp">
+		        	<form action="Emballage.jsp">
 		        		<input type="submit" style="font-weight:bold; background: pink; width: 15em; height: 12em;color: black;" value="EMBALLAGE"/>
 		        	</form> 
 		        </div>
 		        <div style="margin-right:20px;margin-bottom:20px;">
                             <a href="../build/web/settings.jsp"></a>
-		        	<form action="accountsPage.jsp">
+		        	<form action="Form.jsp">
 		        		<input type="submit" style="font-weight:bold; width: 15em; height: 12em;color: black ; background: red;" value="FORM"/>
 		        	</form> 
 		        </div>

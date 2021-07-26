@@ -25,13 +25,15 @@
 <%    } else {
 	String userLanguage = session.getAttribute("userInSessionLanguage").toString();
 	
-	String itemId="";
+	String itemId=""; String attachNiki="";
 	if(session.getAttribute("itemOriginal") == null){
     	itemId = request.getParameter("itemValidate");
+
 	}
 	else{
     	itemId = session.getAttribute("itemOriginal").toString();
 	}
+attachNiki=  request.getParameter("attachNiki");
 
 %>
 
@@ -176,6 +178,7 @@ String user=session.getAttribute("userInSessionfName").toString();
           //  ngezehe +=" \n ntandiye "+itemId;
     int item_temp_id= Integer.parseInt(itemId);
     String item_commercial_name="";  
+    String item_inn="";
     String category_id=""; 
     String tax_vat="";  
     String item_fabricant=""; 
@@ -206,7 +209,7 @@ String user=session.getAttribute("userInSessionfName").toString();
                                  
                                  
                                     bar_code = rs.getString("codebar");
-                                    item_commercial_name = rs.getString("itemDesc");
+                                    item_commercial_name = rs.getString("itemDesc").toUpperCase();
                                     category_id = rs.getString("subcategory_id");
                                     bus_category_id = rs.getString("busin_category_id");
                                     String status = rs.getString("status");
@@ -238,10 +241,30 @@ String user=session.getAttribute("userInSessionfName").toString();
                                 }
                                 
                           i++;
+                            } 
+                           
+
+                            if(attachNiki!=null && !attachNiki.equals(""))
+                            {  
+                              ST = conn.createStatement();
+                              rs = ST.executeQuery("SELECT * FROM niki_items"
+            + " where niki_code='"+attachNiki+"'"); 
+                            while (rs.next()) { 	
+                                 
+                                    item_inn = rs.getString("item_inn");
+                                    category_id = rs.getString("subcategory_id");
+                                    bus_category_id = rs.getString("busin_category_id");
+                                    item_fabricant = rs.getString("item_fabricant");
+                                    tax_vat = rs.getString("tax_rate");
+                                    hs_code = rs.getString("hs_code"); 
+                                    item_key_words= rs.getString("item_key_words");
+                            } 
+                            
+                             conn.close();
+                            
                             }
-
-                            conn.close();
-
+                            
+                            
 
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -263,7 +286,8 @@ String user=session.getAttribute("userInSessionfName").toString();
                     </td>
                     <td>
                         <input type="text" name="bar_code" value="<%=bar_code%>" size="15"/> 
-                      <input type="text" name="item_temp_id" value="<%= item_temp_id %>" hidden="true" size="1"/>
+                     <input type="text" name="item_temp_id" value="<%= item_temp_id %>" hidden="true" size="1"/>
+                     
                         
                     </td>
                     
@@ -275,7 +299,7 @@ String user=session.getAttribute("userInSessionfName").toString();
 Connection conn = ConnectionClass.getConnection(); 
  PreparedStatement st = conn.prepareStatement(
  "SELECT niki_authority_code,niki_authority_name FROM niki.niki_authority_items where"
-         + " niki_authority_id='HS' ORDER BY niki_authority_name limit 10");
+         + " niki_authority_id='HS'   ORDER BY niki_authority_name ");
  ResultSet rs = st.executeQuery();
  while (rs.next()) {  String niki_authority_code = rs.getString("niki_authority_code");
                       String niki_authority_name = rs.getString("niki_authority_name"); %>
@@ -304,11 +328,11 @@ Connection conn = ConnectionClass.getConnection();
                 </tr>
                   <tr>  <td> item molecular   </td>
                     <td>  <input type="text" name="item_inn" 
-                                 value="<%=item_commercial_name%>" required=true size="25" >
+                                 value="<%=item_inn%>" required=true size="25" >
                     </td>  </tr> 
                   <tr>  <td>  item key word   </td>
                     <td>
-                        <input type="text" name="item_key_words" value="<%=item_commercial_name%>" required=true size="15" >
+                        <input type="text" name="item_key_words" value="<%=item_key_words%>" required=true size="15" >
                     </td>   </tr>
               <tr>  <td>   item form  </td>
  <td  bordercolor="#ff0000" > <select name="item_form" required="required">
@@ -362,15 +386,15 @@ Connection conn = ConnectionClass.getConnection();
  </td>  </tr>              
                 
                  <tr>  
-                    <td width="25%"> longeur  </td>
+                    <td width="25%"> longeur MM </td>
                     <td  >  <input type="text" name="item_longeur_mm" value="<%=item_longeur_mm%>"
                                  required=true size="10" >
                     </td>  </tr> 
-                  <tr> <td width="25%"> largeur  </td>
+                  <tr> <td width="25%"> largeur MM </td>
                     <td  >  <input type="text" name="item_largeur_mm" value="<%=item_largeur_mm%>"
                                  required=true size="10" >
                     </td>  </tr> 
-                  <tr>    <td width="25%"> hauteur </td>
+                  <tr>    <td width="25%"> hauteur MM </td>
                     <td  >  <input type="text" name="item_hauteur_mm" value="<%=item_hauteur_mm%>"
                                  required=true size="10" >
                     </td>
@@ -378,13 +402,13 @@ Connection conn = ConnectionClass.getConnection();
  
    
     
-                <tr>  <td> item poids   </td>
+                <tr>  <td> item poids GR  </td>
                     <td>  <input type="text" name="item_poids_gr" value="<%=item_poids_gr%>" required=true size="15" >
                     </td>  </tr>
                
                 <tr>   <td> shipment type   </td>
                  <td> <select name="shipment_type" required="required">
- <option value="NORMAL"> </option>  
+ <option value="NORMAL"> NORMAL </option>  
  <option value="COOL"> COOL </option> 
  <option value="FRIGO"> FRIGO </option> 
  <option value="HOT"> HOT </option>  

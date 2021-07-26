@@ -4,6 +4,7 @@ package niki;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -357,26 +358,27 @@ public class Item_Temp {
             return false;
         }
         
-    }
+    } 
     
-    
-   
     /*
      * this function changes the status of an item to "rejected"
      * returns true if it is successful and false otherwise
      */
     public boolean rejectItem() {
 
-        try {
-            PreparedStatement pst = conn.prepareStatement("update niki_items_temp set status = ?  where item_id=?");
+        try { 
+    String sql =   "update niki_items_temp set status = 'REJECTED',"
+            + "niki_code ='"+niki_code+"'  where item_id=" +item_id ;   
+           
+Statement state =conn.createStatement();  
 
-  
-            pst.setInt(2, item_id);
-            pst.setString(1, "REJECTED");
+state.execute(sql) ;
 
-            pst.execute();
             conn.close(); 
-            insertMsg="Successfully rejected";
+           // insertMsg="Successfully rejected "+sql;
+            
+            insertMsg=itemDescription+" Successfully rejected "+niki_code;
+            
             return true;
             
             

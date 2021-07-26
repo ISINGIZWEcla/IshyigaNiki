@@ -85,7 +85,7 @@
 		        	</form> 
 		        </div>
                        <div style="float: left;margin-right:20px">
-		        	<form action="temporariesPage.jsp">
+		        	<form action="Manufacture.jsp">
 		        		<input type="submit" style="font-weight:bold; width: 15em; height: 12em;color: black; background-color: gray;" value="MANUFACTURE"/>
 		        	</form> 
 		        </div>

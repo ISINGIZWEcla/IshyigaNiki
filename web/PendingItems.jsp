@@ -153,12 +153,11 @@ String userLanguage = session.getAttribute("userInSessionLanguage").toString();
                                         
                             <th > Description </th>              
                             <th> Category </th>
-                            <th> BusinCCateg </th> 
+                            <th> Busines Categ </th> 
                             <th> Status </th>
                         	<th> Manufacture </th>
                         	
-                        	<th> Validate </th>
-                        	<th> Reject </th> 
+                        	<th> Validate </th> 
                            
                         </tr>
                         
@@ -167,13 +166,12 @@ String userLanguage = session.getAttribute("userInSessionLanguage").toString();
                         <%
                         String categName="";
                         String bus_categName="";
-
+String sql ="SELECT * FROM niki_items_temp where status='PENDING' AND company_id='"+company+"'";
                             try {
 
                                 Connection con = ConnectionClass.getConnection();
                                 Statement ST = con.createStatement();
-                                ResultSet rs = ST.executeQuery
-        ("SELECT * FROM niki_items_temp where status='PENDING' AND company_id='"+company+"'");
+                                ResultSet rs = ST.executeQuery(sql);
                                 int i = 0;
                                 while (rs.next()) {
        
@@ -196,7 +194,7 @@ String userLanguage = session.getAttribute("userInSessionLanguage").toString();
                                     String company_id = rs.getString("company_id");
                                     
                                     Statement ST1 = con.createStatement();
-                                    ResultSet rs1 = ST1.executeQuery("SELECT subcategory_descr FROM niki_subcategories where subcategory_id='"+ subcategory_id + "'");
+                                    ResultSet rs1 = ST1.executeQuery("SELECT category_descr FROM niki_categories where category_id='"+ subcategory_id + "'");
                                     
                                     while(rs1.next()){
                                     	categName = rs1.getString(1);
@@ -220,7 +218,6 @@ String userLanguage = session.getAttribute("userInSessionLanguage").toString();
                             <td> <%= status%></td>
                             <td> <%= fabricant%></td>
                             <td> <a href="ItemValidationReal.jsp?itemValidate=<%=item_id%>&action=validate" class="btn btn-primary disabled" data-toggle="modal" data-target="#basicModal" > Validate </a></td>
-                            
                             <td> <a href="ItemRejectSleepResponse.jsp?itemRejectSleep=<%=item_id%>&action=rejectTemp" class="btn btn-primary disabled">Reject </a></td>
                             
                             
@@ -239,7 +236,6 @@ String userLanguage = session.getAttribute("userInSessionLanguage").toString();
                             <td> <%= status%></td>
                             <td> <%= fabricant%></td>
                             <td> <a href="ItemValidationReal.jsp?itemValidate=<%=item_id%>&action=validate" class="btn btn-primary" data-toggle="modal" data-target="#basicModal" > Validate </a></td>
-                            
                             <td> <a href="ItemRejectSleepResponse.jsp?itemRejectSleep=<%=item_id%>&itemDesc=<%=itemDesc%>&action=rejectTemp" class="btn btn-primary">Reject </a></td>
                             
                             
@@ -256,10 +252,8 @@ String userLanguage = session.getAttribute("userInSessionLanguage").toString();
                             <td> <%= bus_categName%></td> 
                             <td> <%= status%></td>
                             <td> <%= fabricant%></td>
-                            <td> <a href="ItemValidationReal.jsp?itemValidate=<%=item_id%>&action=validate" class="btn btn-primary" data-toggle="modal" data-target="#basicModal" > Validate </a></td>
-                            
-                            <td> <a href="ItemRejectSleepResponse.jsp?itemRejectSleep=<%=item_id%>&itemDesc=<%=itemDesc%>&action=rejectTemp" class="btn btn-primary">Reject </a></td>
-                            
+                            <td> <a href="Item.jsp?itemValidate=<%=item_id%>&itemDesc=<%=itemDesc%>&action=validate" class="btn btn-primary" data-toggle="modal" data-target="#basicModal" > Validate </a></td>
+                              
                             
                         </tr>
                         
@@ -271,10 +265,11 @@ String userLanguage = session.getAttribute("userInSessionLanguage").toString();
 
                          } catch (Exception e) {
                              e.printStackTrace();
-
+sql +="dddd "+e;
                          }
                         %>
                     </tbody>
+                    
                 </table> 
 
             </div>

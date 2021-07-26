@@ -81,7 +81,7 @@ String []bsncatN = request.getParameterValues("bus_category_id");
     */
     //getting subcategory abbreviation to be used in niki_code structuring
     it_sub_cat.setSubcategory_id(category_id);
-    String subCategoryAbbrev = it_sub_cat.findSubcategoryAbbrev(); //TODO: have to check for the case it returns null
+    String subCategoryAbbrev = it_sub_cat.getCategory_id().substring(0, 3); //TODO: have to check for the case it returns null
     
     //count current number of items of the same subcategory in the Final items table
     Integer countItemsInSubcategory = itf.countItemsInSubcategory(subCategoryAbbrev); // TODO: have to check for the case when it returns 0
