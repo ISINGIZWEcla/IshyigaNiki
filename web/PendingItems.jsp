@@ -25,9 +25,9 @@
 <%@ page import="java.sql.*" %>
 <%@ page import="niki.ConnectionClass" %>
 
-<%
+<% 
 String user=session.getAttribute("userInSessionfName").toString(); 
-
+String company = session.getAttribute("userInSessionCompany").toString(); 
 String userLanguage = session.getAttribute("userInSessionLanguage").toString();
 
 //setting the original item id to be validated to null
@@ -38,7 +38,7 @@ String userLanguage = session.getAttribute("userInSessionLanguage").toString();
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Pending Items</title>
+  <title>Pending Items of  <%=company  %> </title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
@@ -137,10 +137,8 @@ String userLanguage = session.getAttribute("userInSessionLanguage").toString();
     
     <div class="col-sm-8 text-left" >
 		<div class="page-header">
-			<h1 style="text-align: center; text-shadow: maroon;">Temporary Items</h1>
-		</div>         
-            
-
+			<h1 style="text-align: center; text-shadow: maroon;">Temporary Items of <%=company  %></h1>
+		</div>      
         <div id="w">
             <h3>${itf.insertMsg}</h3>
                 <h4>${itf.error} </h4>
@@ -150,133 +148,94 @@ String userLanguage = session.getAttribute("userInSessionLanguage").toString();
                 <table  id="example" class="table table-striped table-bordered" cellspacing="0" width="100%" >
                     <thead> 
                         <tr>
-                        	<th style="width: 1em"> Id </th>
-                        	<th style="width: 2em"> ExternalId </th>
-                            <th style="width: 2em"> Codebar </th>               
-                            <th> Description </th>              
+                              <th > Item ID </th>          
+                            <th > Description </th>              
                             <th> Category </th>
-                            <th> BusinCCateg </th>
-                            <th> language </th>
-                        	<th> username </th>
-                        	<th> time </th>
-                        	<th> nikiCode </th>
-                        	<th> Status </th>
-                        	<th> Validate </th>
-                        	<th> Reject </th>
+                            <th> Busines Categ </th> 
+                            <th> Status </th>
+                        	<th> Manufacture </th>
                         	
+                        	<th> Validate </th> 
                            
                         </tr>
                         
-                        </thead>
-                        <tfoot>
-                        <tr>
-
-                            <th style="width: 1em"> Id </th>
-                        	<th style="width: 1em"> ExternalId </th>
-                            <th style="width: 2em"> Codebar </th>               
-                            <th> Description </th>              
-                            <th> Category </th>
-                            <th> BusinCCateg </th>
-                            <th> language </th>
-                        	<th> username </th>
-                        	<th> time </th>
-                        	<th> nikiCode </th>
-                        	<th> Status </th>
-                        	<th> Validate </th>
-                        	<th> Reject </th>
-                        
-                           
-
-                        </tr>
-                        </tfoot>
+                        </thead> 
                         <tbody>
                         <%
                         String categName="";
                         String bus_categName="";
-
+String sql ="SELECT * FROM niki_items_temp where status='PENDING' AND company_id='"+company+"'";
                             try {
 
                                 Connection con = ConnectionClass.getConnection();
                                 Statement ST = con.createStatement();
-                                ResultSet rs = ST.executeQuery("SELECT * FROM niki_items_temp");
+                                ResultSet rs = ST.executeQuery(sql);
                                 int i = 0;
                                 while (rs.next()) {
-
-                                    String bb = rs.getString(1);
-                                    String cc = rs.getString(2);
-                                    String dd = rs.getString(3);
-                                    String ee = rs.getString(4);
-                                    String ff = rs.getString(5);
-                                    String gg = rs.getString(6);
-                                    String hh = rs.getString(7);
-                                    String ii = rs.getString(8);
-                                    String jj = rs.getString(9);
-                                    String kk = rs.getString(10);
-                                    String ll = rs.getString(11);
-
-                                    
-                                    // This is for getting the item category and nusiness category name and display them for the user
-                                    //instead of displaying the ids for them
-                                    
+       
+                                    int item_id = rs.getInt("item_id");
+                                    String codebar = rs.getString("codebar");
+                                    String itemDesc = rs.getString("itemDesc");
+                                    String subcategory_id = rs.getString("subcategory_id");
+                                    String busin_category_id = rs.getString("busin_category_id");
+                                    String status = rs.getString("status");
+                                    String langue = rs.getString("langue");
+                                    String user_name = rs.getString("user_name");
+                                    double packet = rs.getDouble("packet");
+                                    int hauteur = rs.getInt("hauteur");
+                                    int longeur = rs.getInt("longeur");
+                                    int largeur = rs.getInt("largeur");
+                                    double poids = rs.getDouble("poids"); 
+                                    String fabricant = rs.getString("fabricant");
+                                    String tax_rate = rs.getString("tax_rate");
+                                    String hs_code = rs.getString("hs_code");
+                                    String company_id = rs.getString("company_id");
                                     
                                     Statement ST1 = con.createStatement();
-                                    ResultSet rs1 = ST1.executeQuery("SELECT subcategory_descr FROM niki_subcategories where subcategory_id='"+ ff + "'");
+                                    ResultSet rs1 = ST1.executeQuery("SELECT category_descr FROM niki_categories where category_id='"+ subcategory_id + "'");
                                     
                                     while(rs1.next()){
                                     	categName = rs1.getString(1);
                                     }
                                     
                                     Statement ST2 = con.createStatement();
-                                    ResultSet rs2 = ST2.executeQuery("SELECT busin_category_descr FROM niki_business_categories where busin_category_id = '"+ gg+"' ");
+                                    ResultSet rs2 = ST2.executeQuery("SELECT busin_category_descr FROM niki_business_categories where busin_category_id = '"+ busin_category_id+"' ");
                                     
                                     while(rs2.next()){
                                     	bus_categName = rs2.getString(1);
                                     }
 
                                  
-                        if(hh.equals("TRANSFORMED")){
+                        if(status.equals("TRANSFORMED")){
                         %>  
                         <tr style="background: green;"> 
-
-                            <td><%=bb%>  </td>
-                            <td> <%= cc%></td>
-                            <td><%=dd%>  </td>
-                            <td> <%= ee%></td>
+ 
+                            <td> <%= item_id%></td>
+                            <td> <%= itemDesc%></td>
                             <td> <%= categName%></td>
-                            <td> <%= bus_categName%></td>
-                            <td><%=ii%>  </td>
-                            <td> <%= jj%></td>
-                            <td><%=kk%>  </td>
-                            <td> <%= ll%></td>
-                            <td> <%= hh%></td>
-                            <td> <a href="ItemValidationReal.jsp?itemValidate=<%=bb%>&action=validate" class="btn btn-primary disabled" data-toggle="modal" data-target="#basicModal" > Validate </a></td>
-                            
-                            <td> <a href="ItemRejectSleepResponse.jsp?itemRejectSleep=<%=bb%>&action=rejectTemp" class="btn btn-primary disabled">Reject </a></td>
+                            <td> <%= bus_categName%></td> 
+                            <td> <%= status%></td>
+                            <td> <%= fabricant%></td>
+                            <td> <a href="ItemValidationReal.jsp?itemValidate=<%=item_id%>&action=validate" class="btn btn-primary disabled" data-toggle="modal" data-target="#basicModal" > Validate </a></td>
+                            <td> <a href="ItemRejectSleepResponse.jsp?itemRejectSleep=<%=item_id%>&action=rejectTemp" class="btn btn-primary disabled">Reject </a></td>
                             
                             
                         </tr>
                         
                         <%
 						}
-						else if(hh.equals("REJECTED")){
+						else if(status.equals("REJECTED")){
 	                    %>
                         
                         <tr style="background:red;"> 
-
-                            <td><%=bb%>  </td>
-                            <td> <%= cc%></td>
-                            <td><%=dd%>  </td>
-                            <td> <%= ee%></td>
+ 
+                           <td> <%= itemDesc%></td>
                             <td> <%= categName%></td>
-                            <td> <%= bus_categName%></td>
-                            <td><%=ii%>  </td>
-                            <td> <%= jj%></td>
-                            <td><%=kk%>  </td>
-                            <td> <%= ll%></td>
-                            <td> <%= hh%></td>
-                            <td> <a href="ItemValidationReal.jsp?itemValidate=<%=bb%>&action=validate" class="btn btn-primary" data-toggle="modal" data-target="#basicModal" > Validate </a></td>
-                            
-                            <td> <a href="ItemRejectSleepResponse.jsp?itemRejectSleep=<%=bb%>&itemDesc=<%=ee%>&action=rejectTemp" class="btn btn-primary">Reject </a></td>
+                            <td> <%= bus_categName%></td> 
+                            <td> <%= status%></td>
+                            <td> <%= fabricant%></td>
+                            <td> <a href="ItemValidationReal.jsp?itemValidate=<%=item_id%>&action=validate" class="btn btn-primary" data-toggle="modal" data-target="#basicModal" > Validate </a></td>
+                            <td> <a href="ItemRejectSleepResponse.jsp?itemRejectSleep=<%=item_id%>&itemDesc=<%=itemDesc%>&action=rejectTemp" class="btn btn-primary">Reject </a></td>
                             
                             
                         </tr>
@@ -286,22 +245,14 @@ String userLanguage = session.getAttribute("userInSessionLanguage").toString();
 						else{
 	                        %> 
                         <tr> 
-
-                            <td><%=bb%>  </td>
-                            <td> <%= cc%></td>
-                            <td><%=dd%>  </td>
-                            <td> <%= ee%></td>
+                            <td> <%= item_id%></td>
+                            <td> <%= itemDesc%></td>
                             <td> <%= categName%></td>
-                            <td> <%= bus_categName%></td>
-                            <td><%=ii%>  </td>
-                            <td> <%= jj%></td>
-                            <td><%=kk%>  </td>
-                            <td> <%= ll%></td>
-                            <td> <%= hh%></td>
-                            <td> <a href="ItemValidationReal.jsp?itemValidate=<%=bb%>&action=validate" class="btn btn-primary" data-toggle="modal" data-target="#basicModal" > Validate </a></td>
-                            
-                            <td> <a href="ItemRejectSleepResponse.jsp?itemRejectSleep=<%=bb%>&itemDesc=<%=ee%>&action=rejectTemp" class="btn btn-primary">Reject </a></td>
-                            
+                            <td> <%= bus_categName%></td> 
+                            <td> <%= status%></td>
+                            <td> <%= fabricant%></td>
+                            <td> <a href="Item.jsp?itemValidate=<%=item_id%>&itemDesc=<%=itemDesc%>&action=validate" class="btn btn-primary" data-toggle="modal" data-target="#basicModal" > Validate </a></td>
+                              
                             
                         </tr>
                         
@@ -313,10 +264,11 @@ String userLanguage = session.getAttribute("userInSessionLanguage").toString();
 
                          } catch (Exception e) {
                              e.printStackTrace();
-
+sql +="dddd "+e;
                          }
                         %>
                     </tbody>
+                    
                 </table> 
 
             </div>

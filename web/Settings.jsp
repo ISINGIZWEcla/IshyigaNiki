@@ -1,3 +1,8 @@
+<%-- 
+    Document   : Settings
+    Created on : Jul 21, 2021, 7:34:16 AM
+    Author     : Administrator
+--%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -54,52 +59,38 @@
 	        <div style=" margin-left:25%; margin-top:5%;">  
 	        
 		        <div style="float: left;margin-right:20px">
-		        	<form action="temporariesPage.jsp">
-		        		<input type="submit" style="font-weight:bold;width: 15em; height: 12em;color: black;font-size: 100; background-color:  powderblue;" value="TRANSFORM"/>
+		        	<form action="Category.jsp">
+		        		<input type="submit" style="font-weight:bold;width: 15em; height: 12em;color: black;font-size: 100; background-color:  powderblue;" value="CATEGORIES"/>
 		        	</form> 
 		        </div>
 		        <div style="float: left;margin-right:20px">
-		        	<form action="Item.jsp">
-		        		<input type="submit" style="font-weight:bold; background: pink; width: 15em; height: 12em;color: black;" value="NIKI LIST"/>
+		        	<form action="Emballage.jsp">
+		        		<input type="submit" style="font-weight:bold; background: pink; width: 15em; height: 12em;color: black;" value="EMBALLAGE"/>
 		        	</form> 
 		        </div>
 		        <div style="margin-right:20px;margin-bottom:20px;">
                             <a href="../build/web/settings.jsp"></a>
-		        	<form action="Business_Category.jsp">
-		        		<input type="submit" style="font-weight:bold; width: 15em; height: 12em;color: black ; background: red;" value="BUSINESS SECTOR"/>
+		        	<form action="Form.jsp">
+		        		<input type="submit" style="font-weight:bold; width: 15em; height: 12em;color: black ; background: red;" value="FORM"/>
 		        	</form> 
 		        </div>
 		        <div style="float: left;margin-right:20px">
-		        	<form action="Promotions.jsp">
-		        		<input type="submit" style="font-weight:bold; width: 15em; height: 12em;color: black; background-color: orange;" value="PROMOTION"/>
+		        	<form action="taxPage.jsp">
+		        		<input type="submit" style="font-weight:bold; width: 15em; height: 12em;color: black; background-color: orange;" value="TAXES"/>
 		        	</form> 
 		        </div>
 		        <div style="float: left;margin-right:20px">
-		        	<form action="Category.jsp">
-		        		<input type="submit" style="font-weight:bold; width: 15em; height: 
-                                               12em;color: black; background-color:  lightgreen; " value="CATEGORIES"/>
+		        	<form action="taxPage.jsp">
+		        		<input type="submit" style="font-weight:bold; width: 15em; height: 12em;color: black; background-color:  lightgreen; " value="AUTHORITIES"/>
 		        	</form> 
 		        </div>
 		        <div style="margin-right:20px;margin-bottom:20px;">
-		        	<form action="itemExport.jsp">
-		        		<input type="submit" style="font-weight:bold; width: 15em; height: 12em;color: black;background-color: yellow; " value="EXPORT EXCEL"/>
+		        	<form action="Business_Category.jsp">
+		        		<input type="submit" style="font-weight:bold; width: 15em; height: 12em;color: black;background-color: yellow; " value="BUSINESSES"/>
 		        	</form> 
 		        </div>
-                       <div style="float: left;margin-right:20px">
-		        	<form action="Manufacture.jsp">
-		        		<input type="submit" style="font-weight:bold; width: 15em; height: 12em;color: black; background-color: gray;" value="MANUFACTURE"/>
-		        	</form> 
-		        </div>
-		        <div style="float: left;margin-right:20px">
-		        	<form action="Company.jsp">
-		        		<input type="submit" style="font-weight:bold; width: 15em; height: 12em;color: black; background-color:  mediumvioletred; " value="COMPANIES"/>
-		        	</form> 
-		        </div>
-		        <div style="margin-right:20px">
-		        	<form action="Settings.jsp">
-		        		<input type="submit" style="font-weight:bold; width: 15em; height: 12em;color: black;background-color: lightskyblue; " value="SETTINGS"/>
-		        	</form> 
-		        </div>
+                    <a href="../build/web/Settings.jsp"></a>
+                     
 	        </div>
 
 <!--         <div><a href="testDesign.jsp">Design</a></div> -->
@@ -113,4 +104,5 @@
 		
 
 </html>
+
 

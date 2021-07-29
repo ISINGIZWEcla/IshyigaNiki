@@ -4,6 +4,7 @@ package niki;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -23,7 +24,7 @@ public class Item_Temp {
 	/*
 	 * attributes
 	 */
-	private String item_id;
+	private int item_id;
 	private String item_external_id;
     private String codebar;
     private String itemDescription;
@@ -48,7 +49,7 @@ public class Item_Temp {
     }
 
     
-    public Item_Temp(String item_id, String item_external_id, String codebar, String itemDescription,
+    public Item_Temp(int item_id, String item_external_id, String codebar, String itemDescription,
 			String subcategory_id, String busin_category_id, String status, String language, String username,
 			String niki_code) {
 		super();
@@ -69,11 +70,11 @@ public class Item_Temp {
     getters and setters
     */
     
-    public String getItem_id() {
+    public int getItem_id() {
 		return item_id;
 	}
 
-	public void setItem_id(String item_id) {
+	public void setItem_id(int item_id) {
 		this.item_id = item_id;
 	}
 
@@ -250,8 +251,7 @@ public class Item_Temp {
             PreparedStatement pst2 = conn.prepareStatement("select itemDesc,status from niki_items_temp where itemDesc = ? ");
             PreparedStatement pst3 = conn.prepareStatement("select niki_code,itemDesc_ENGL from niki_items where itemDesc_ENGL = ? or itemDesc_KINYA = ? or itemDesc_FRENCH = ? or itemDesc_SWAHILI = ? ");
             PreparedStatement pst4 = conn.prepareStatement("select itemDesc,status from niki_items_temp where codebar = ? and (codebar NOT IN ('','null') AND codebar IS NOT NULL) ");
-            PreparedStatement pst5 = conn.prepareStatement("select itemDesc_ENGL from niki_items where codebar = ? and (codebar NOT IN ('','null') AND codebar IS NOT NULL) ");
-
+         
             /*
              * setting the preparedstatement parameters
              */
@@ -263,9 +263,7 @@ public class Item_Temp {
             pst3.setString(4, itemDescription);
             
             pst4.setString(1, codebar);
-            
-            pst5.setString(1, codebar);
-            
+             
             
             
             /*
@@ -274,8 +272,7 @@ public class Item_Temp {
             ResultSet rs = pst2.executeQuery();
             ResultSet rs1 = pst3.executeQuery();
             ResultSet rs2 = pst4.executeQuery();
-            ResultSet rs3 = pst5.executeQuery();
-            
+             
             
             /*if(rs.next())
             {
@@ -308,17 +305,7 @@ public class Item_Temp {
                 
                 return false;
             }
-            else if(rs3.next())
-            {
-                //there is another item with the same codebar in the final items
-
-            	String itmdesc = rs3.getString(1);
-
-                insertMsg="that barcode belongs to an existing item named: "+itmdesc;
-                
-                return false;
-            }
-            else
+                else
             {
             	if(rs1.next())
                 {
@@ -357,26 +344,26 @@ public class Item_Temp {
             return false;
         }
         
-    }
+    } 
     
-    
-   
     /*
      * this function changes the status of an item to "rejected"
      * returns true if it is successful and false otherwise
      */
     public boolean rejectItem() {
 
-        try {
-            PreparedStatement pst = conn.prepareStatement("update niki_items_temp set status = ?  where item_id=?");
+        try { 
+    String sql =   "update niki_items_temp set status = 'REJECTED',"
+            + "niki_code ='"+niki_code+"'  where item_id=" +item_id ;   
+           
+Statement state =conn.createStatement();   
+state.execute(sql) ;
 
-  
-            pst.setString(2, item_id);
-            pst.setString(1, "REJECTED");
-
-            pst.execute();
             conn.close(); 
-            insertMsg="Successfully rejected";
+           // insertMsg="Successfully rejected "+sql;
+            
+            insertMsg=item_id+" Successfully rejected "+niki_code;
+            
             return true;
             
             
@@ -398,7 +385,7 @@ public class Item_Temp {
             PreparedStatement pst = conn.prepareStatement("update niki_items_temp set status = ?  where item_id=?");
 
   
-            pst.setString(2, item_id);
+            pst.setInt(2, item_id);
             pst.setString(1, "TRANSFORMED");
 
             pst.execute();
@@ -425,7 +412,7 @@ public class Item_Temp {
             PreparedStatement pst = conn.prepareStatement("update niki_items_temp set niki_code = ?  where item_id=?");
 
   
-            pst.setString(2, item_id);
+            pst.setInt(2, item_id);
             pst.setString(1, niki_code);
 
             pst.execute();

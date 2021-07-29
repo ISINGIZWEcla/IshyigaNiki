@@ -21,6 +21,7 @@ if(session.getAttribute("fromChooseCompany")!=null){
 	from=session.getAttribute("fromChooseCompany").toString();
 }
 
+cat.setInsertMsg(action+" action update is the action !!");
 if(action!=null && action.equals("update")){
 	cat.setInsertMsg("update is the action !!");
 	
@@ -32,6 +33,9 @@ if(action!=null && action.equals("update")){
 		session.setAttribute("category", category);	//keeping category_id in a session for later use
 		
 	    String category_descr = request.getParameter("catDesc").toUpperCase().replaceAll("'", " ");
+String parent = request.getParameter("parent").toUpperCase().replaceAll("'", " ");
+ String french = request.getParameter("french").toUpperCase().replaceAll("'", " ");
+ String kinya = request.getParameter("kinya").toUpperCase().replaceAll("'", " ");
 
 	    
 		/*
@@ -39,13 +43,15 @@ if(action!=null && action.equals("update")){
 		*/
 		cat.setCategory_id(category);
 		cat.setCategory_descr(category_descr);
-	    	    
+	    	 cat.setCategory_parent(parent);
+    cat.setCategory_french(french);
+    cat.setCategory_kinya(kinya);    
 	    
 	    /*
 	    checking the inputs and calling the method to update
 	    */
 	    if (cat.isValid()) {
-	        if (cat.updateCategory()) {
+	        if (cat.updateCategory2()!=null) {
 	        	
 
 	        	cat.setInsertMsg("Successfuly updated");
@@ -82,21 +88,24 @@ else if(action!=null && action.equals("catSleep")){
 }
 else{
 
-    String catDesc = request.getParameter("ctd").toUpperCase().replaceAll("'", " ");
-    
+    String catDesc = request.getParameter("ctd").toUpperCase().replaceAll("'", " "); 
     String catN = request.getParameter("ctn").toUpperCase().replaceAll("'", " ");
+String parent = request.getParameter("parent").toUpperCase().replaceAll("'", " ");
+ String french = request.getParameter("french").toUpperCase().replaceAll("'", " ");
+ String kinya = request.getParameter("kinya").toUpperCase().replaceAll("'", " ");
 
-    
-    
-    cat.setCategory_descr(catDesc);
+cat.setCategory_descr(catDesc);
     cat.setCategory_id(catN);
-
+	    	 cat.setCategory_parent(parent);
+    cat.setCategory_french(french);
+    cat.setCategory_kinya(kinya);    
+String user = (String)session.getAttribute("userInSessionfName");
     if (cat.isValid()) {
-        if (cat.insertCategory()) {
-            //us.setInsertMsg("Successfuly Inserted");
+        if (cat.insertCategory(user)) {
+            cat.setInsertMsg("Successfuly Inserted");
             
             
-                out.print("successfully inserted");
+             //   out.print("successfully inserted");
             
 
         } else {

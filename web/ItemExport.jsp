@@ -30,54 +30,40 @@
 
 <%
 String user=session.getAttribute("userInSessionfName").toString(); 
- boolean ndimuritransformation=false;
- String item_temp_id = request.getParameter("itemValidate");
- 
- if(item_temp_id!=null && !item_temp_id.equals("")) {ndimuritransformation=true;}
- 
-    String codeb = request.getParameter("cdb");
-    String itmDesc = request.getParameter("itmd");
+ boolean ndimuritransformation=false; 
+  
+    String business = request.getParameter("business");
     String itmcatN = request.getParameter("itcat"); 
-    String fabricant = request.getParameter("fabricant") ;
-    String username = session.getAttribute("userInSessionUsername").toString().toUpperCase();
+    String fabricant = request.getParameter("fabricant") ; 
     String itemDescr =  request.getParameter("itemDesc");
     
 String searchingfor="";
 boolean searchON = false;
 String sqlToAdd="";
-if(codeb!=null && !codeb.equals("")) 
-{ searchingfor +="Code:"+codeb; searchON = true;
-
-codeb=codeb.toUpperCase().replaceAll("'", " ");
-  sqlToAdd += " (hs_code LIKE '%"+codeb+"%' OR bar_code LIKE '%"+codeb+"%' ) ";
-}
-if(itmDesc!=null && !itmDesc.equals("")){
-    searchingfor +=", desc: "+itmDesc; 
+ 
+if(business!=null && !business.equals("")){
+    searchingfor +=", business "+business; 
     String and="";
-    if(searchON){ and =" AND ";}
-    itmDesc=itmDesc.toUpperCase().replaceAll("'", " ");
-    sqlToAdd += and+" (item_commercial_name LIKE '%"+itmDesc+"%' "
-            + "OR item_inn LIKE '%"+itmDesc+"%' "
-            + "OR item_key_words LIKE '%"+itmDesc+"%' ) ";
+    if(searchON){ and =",niki_item_business_category WHERE  ";}
+    business=business.toUpperCase().replaceAll("'", " ");
+    sqlToAdd += and+" (busin_category_id = '"+business+"' and "
+            + " `niki_items`.`niki_code`=`niki_item_business_category`.`niki_code`) ";
     searchON = true;}
+
 if(itmcatN!=null && !itmcatN.equals("")) {searchingfor +=","+itmcatN; 
 String and="";
-    if(searchON){ and =" AND ";}
+    if(searchON){ and =" AND ";} else { and =" WHERE ";}
     
     sqlToAdd += and+" (category_id = '"+itmcatN+"') ";
     searchON = true;}
 if(fabricant!=null && !fabricant.equals("")){searchingfor +=","+fabricant; 
 String and="";
-    if(searchON){ and =" AND ";}
+    if(searchON){ and =" AND ";} else { and =" WHERE ";}
     
     sqlToAdd += and+" (item_fabricant = '"+fabricant+"') ";
     searchON = true;}
 
-
-if(searchON)
-{sqlToAdd = " WHERE "+sqlToAdd;} 
-if(ndimuritransformation)
-{searchingfor +=" Transforming : "+item_temp_id+" | "+itemDescr;} 
+  
 
 
 %>
@@ -177,7 +163,7 @@ if(ndimuritransformation)
     <div class="col-sm-8 text-left" >
 		<div class="page-header">
 			<h1 style="text-align: center; text-shadow: maroon;">
-                            Item super search form </h1>
+                            Item EXPORT search form </h1>
 		</div>         
                     
         <h3>${it_tmp.insertMsg}</h3>
@@ -197,12 +183,28 @@ if(ndimuritransformation)
 	                it_tmp.setItemDescription(description);
                 }
                 %>
-                    <td bgcolor="pink">
-                     descr,molecular,key word
-                    </td>
                     <td>
-                        <input type="text" name="itmd" value="${it_tmp.itemDescription}"  size="35" onchange="upperMe()" >
-                    </td>
+                        <select  name="business">
+                            <option value=""></option> 
+                            <%
+                                try {
+                                    //connection instance
+                                    Connection conn = ConnectionClass.getConnection(); 
+                                    PreparedStatement st = conn.prepareStatement
+        ("Select busin_category_id,busin_category_descr from niki_business_categories order by busin_category_descr");
+                                    ResultSet rs = st.executeQuery();
+                                    while (rs.next()) {
+                                        // Integer ip = rs.getInt("univId");
+                                        String catId = rs.getString("busin_category_id");
+                                        String catNme = rs.getString("busin_category_descr");
+                                     %>
+                                    
+                                    <option value="<%=catId%>"><%=catNme%></option>
+                            <%  } } catch (Exception e) {
+                                    out.print(e); }
+                            %>
+                        </select><br/>
+                    </td> 
                     <td>
                        manufacture: 
                     </td>
@@ -234,12 +236,10 @@ if(ndimuritransformation)
                 
                 <tr>
                     <td>
-                       barcode,HS code 
+                      
                     </td>
                     <td>
-                        <input type="text" name="cdb" value="${it_tmp.codebar}" size="35"/> 
-                        <input type="text" name="itemValidate" value="<%= item_temp_id %>" hidden="true" size="1"/>
-                    
+                       
                     </td>
                     <td>
                        category: 
@@ -290,9 +290,7 @@ if(ndimuritransformation)
                         
         <div id="w">
                 <h3 style="background-color:buttonface">NIKI Items List  <%=searchingfor%>
-                <% if (ndimuritransformation) {%>
-                <td> <a href="ItemValidationReal.jsp?itemValidate=<%=item_temp_id%>&action=validate" class="btn btn-primary" data-toggle="modal" data-target="#basicModal" > DIRECT ADD </a></td>
-                <%  } %>         
+                      
                 </h3>
                 
                 
@@ -306,13 +304,7 @@ if(ndimuritransformation)
                             <th> Category </th>
                             <th> Manufacture </th> 
                             <th> Tax-rate </th>
-                            
-                             <% if(!ndimuritransformation){ %>
-                             <th> Status </th> 
-                               <% } else { %>
-                             <th> INN </th>
-                             <th> EXIST </th>
-                             <% } %>
+                             
                         </tr>
                         
                         </thead>
@@ -348,13 +340,7 @@ String sqll="SELECT * FROM niki_items "+sqlToAdd;
                             <td> <%= item_packet%></td>
                             <td> <%= category_id%></td>
                             <td> <%= item_fabricant%></td>
-                             <td> <%= tax_vat%></td> 
-                             <% if(!ndimuritransformation){ %>
-                             <td> <%=status %></td>  
-                               <% } else { %>
-                             <td> <a href="ItemValidationReal.jsp?itemValidate=<%=item_temp_id%>&action=validate&attachNiki=<%=niki_code%>" class="btn btn-primary enable " data-toggle="modal" data-target="#basicModal" > ATTACH </a></td>
-                             <td> <a href="ItemRejectSleepResponse.jsp?itemRejectSleep=<%=item_temp_id%>&action=sleepFinal&attachNiki=<%=niki_code%>" class="btn btn-primary enable"> SAME </a></td>
-                              <% } %>
+                             <td> <%= tax_vat%></td>  
                             
                         </tr>
                         

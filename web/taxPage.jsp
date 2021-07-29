@@ -138,7 +138,7 @@
 
 
 <footer class="container-fluid text-center">
-  <p><strong> Copyright &#169; 2016 Algorithm,Inc.</strong></p>
+  <p><strong> Copyright &#169; 2021 Algorithm,Inc.</strong></p>
 </footer>
 
 

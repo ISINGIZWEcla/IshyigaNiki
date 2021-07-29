@@ -35,31 +35,19 @@
 	String itmDescription = request.getParameter("itemDesc");
 	session.setAttribute("actionInSession", action);
 
-    if(action.equals("rejectTemp"))
+    if(action.equals("sleepFinal"))
     {
         // the action to be performed is rejecting item
     
         String itmReject = request.getParameter("itemRejectSleep");
-
-		session.setAttribute("itemReject", itmReject);
-        it_tmp.setItem_id(itmReject);
-   
-        if (it_tmp.isValid()) {//TODO: why checking if it is valid
-            //the data is valid
-
-			//call the method to reject the item
-            it_tmp.rejectItem();
-            %>
-            <jsp:forward page="finalItemsRejectionLinking.jsp">
-            	<jsp:param name="itemRej" value="<%=itmReject %>"/>
-            	<jsp:param name="itemDesc" value="<%=itmDescription %>"/>
-            </jsp:forward>
-            <%
-            
-            
-
-
-        } else {
+        String attachNiki = request.getParameter("attachNiki");
+        session.setAttribute("itemReject", itmReject);
+         
+        it_tmp.setNiki_code(attachNiki);  
+        it_tmp.setItem_id(Integer.parseInt(itmReject));
+        if (it_tmp.isValid()) {  it_tmp.rejectItem(); 
+        }
+        else {
             //the data is not valid
             it_tmp.setInsertMsg("Invalid data");
 
@@ -71,29 +59,7 @@
         <%
     
     }
-    else if(action.equals("sleepFinal")){
-        // the action to be performed is sleep
-        String itmDel = request.getParameter("itemRejectSleep");
-       
-       
-        itf.setNiki_code(itmDel);
-   
-        if (itf.isValid()) {
-            //the data is valid
-			
-            //call a method to sleep or make live an item
-            itf.sleepItem();
-            
-
-        } else {
-            //the data is not valid
-            itf.setInsertMsg("Invalid data");
-        }
-        %>
-        <jsp:forward page="FinalItems.jsp"/>
-        <%
-        
-    }
+     
     else if(action.equals("rejectExcel")){
     	
     	// the action to be performed is rejecting item

@@ -8,6 +8,7 @@ package niki;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 
 /**
  *
@@ -19,6 +20,10 @@ public class Category {
     private String status="LIVE";
     private String insertMsg,selectMsg,updateMsg,error;
     private boolean valid=true;
+    
+    private String category_parent;
+    private String category_french;
+    private String category_kinya; 
     
     //connection instance
     Connection conn = ConnectionClass.getConnection();
@@ -51,6 +56,18 @@ public class Category {
     public void setCategory_descr(String category_descr) {
         this.category_descr = category_descr;
     }
+     public void setCategory_parent(String category_parent) {
+        this.category_parent = category_parent;
+    }
+      public void setCategory_french(String category_french) {
+        this.category_french = category_french;
+    }
+       public void setCategory_kinya(String category_kinya) {
+        this.category_kinya = category_kinya;
+    }
+    
+    
+    
     
 
     public String getStatus() {
@@ -113,17 +130,19 @@ public class Category {
     */
     
     
-    public boolean insertCategory()
+    public boolean insertCategory(String user)
     {
         
         try 
         {
 
-        	String insert = "insert into niki_categories values(?,?,?)";
+           String insert = "insert into niki_categories "
+                   + "(`category_id`,`category_descr`,`status`,`parent_category`,"
+                   + "`french_catagory_name`,`kinya_catagory_name`,`global_id`)"
+                   + " values(?,?,?,?,?,?,?)";
             PreparedStatement pst = conn.prepareStatement(insert);
             PreparedStatement pst2 = conn.prepareStatement("select category_descr from niki_categories where category_descr = '"+category_descr +"'");
-
-            
+   
             ResultSet rs = pst2.executeQuery();
             
             if(rs.next())
@@ -137,7 +156,10 @@ public class Category {
                 pst.setString(1, category_id); 
                 pst.setString(2, category_descr);
                 pst.setString(3, status);
-                
+                pst.setString(4, category_parent); 
+                pst.setString(5, category_french);
+                pst.setString(6, category_kinya);
+                pst.setString(7, user);
                 pst.executeUpdate();
                 conn.close(); 
                 insertMsg="Successfully inserted";
@@ -196,64 +218,31 @@ public class Category {
         
     }
     
-    /*
-     * this method allow to update a category
-     * returns true if it updates successfully and false otherwise
-     */
-    public boolean updateCategory() {
+  
+     public String updateCategory2() {
 
+          String sql="update niki_categories "
+                    + " set category_descr='"+category_descr+"' ,"
+                        + " parent_category='"+category_parent+"',"
+                        + " french_catagory_name='"+category_french+"',"
+                    +   "kinya_catagory_name='"+category_kinya+"' where "
+                        + " category_id='"+category_id+"' ";
+          
+      //    out.print("sql  "+sql);
+        
         try {
-            PreparedStatement pst = conn.prepareStatement("update niki_categories set category_descr=? where category_id=? ");
-
-
-            /*
-             * checking if no other category has the same description as the  updated ones
-             */
-            PreparedStatement pst2 = conn.prepareStatement("select category_descr from niki_categories where category_descr = ?  and category_id!=? ");
-
- 
-            /*
-             * setting the preparedstatement parameters
-             */
-                                    
-            pst2.setString(1, category_descr);
-            pst2.setString(2, category_id);
-
             
-            /*
-            resultsets of the select statements
-            */
-            ResultSet rs = pst2.executeQuery();
-            
-                        
-            if(rs.next())
-            {
-            	//there is another category with the same description
-            	String cat = rs.getString(1);
-
-                insertMsg="that item category already exists as: "+cat;
-                
-                return false;
-            }
-           
-            else
-            {
-
-                pst.setString(1, category_descr);
-                pst.setString(2, category_id);              
-             
-                                
-                pst.execute(); //updating the category
-                                
+            Statement state = conn.createStatement(); 
+                state.execute(sql);
                 conn.close(); 
-                insertMsg="Successfully updated";
-                return true;
-            }
+                insertMsg="Successfully updated hey 2 "+sql;
+                return sql;
+            
             
         } catch (Exception e) {
             setError(e.getMessage());
             insertMsg="Not Inserted";
-            return false;
+            return null;
 
         }
     }

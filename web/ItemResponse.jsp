@@ -14,7 +14,7 @@
 
 <%
 
-	String itmNum = request.getParameter("itm_num").toUpperCase().replaceAll("'", " ");
+    String itmNum = request.getParameter("itm_num").toUpperCase().replaceAll("'", " ");
     String codeb = request.getParameter("cdb").toUpperCase().replaceAll("'", " ");
     String itmDesc = request.getParameter("itmd").toUpperCase().replaceAll("'", " ");
     String itmcatN = request.getParameter("itcat").toUpperCase().replaceAll("'", " ");

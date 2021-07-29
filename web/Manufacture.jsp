@@ -135,28 +135,28 @@ session.setAttribute("category",null);
     </div>
     <div class="col-sm-8 text-left" >
 		<div class="page-header">
-			<h1 style="text-align: center; text-shadow: maroon;">Category</h1>
+			<h1 style="text-align: center; text-shadow: maroon;">MANUFACTURE</h1>
 		</div>         
             
             
-         <div><h1>Category Entry Form</h1> </div>
+         <div><h1>Manufacture Entry Form</h1> </div>
         
         <h3>${cat.insertMsg}</h3>
         <h4>${cat.error} </h4>
         
 
         
-        <form name="inputCat" action="CategoryResponse.jsp" method="POST"> 
+        <form name="inputCat" action="ManufactuResponse.jsp" method="POST"> 
             <table> 
-            <tr>  <td> category code  </td>
-            <td> <input type="text" name="ctn" value="" required=true size="35"/></td>
+            <tr>  <td> Manufacture ID  </td>
+            <td> <input type="text" name="id" value="" required=true size="35"/></td>
             </tr> 
-            <tr>  <td> category description: </td>
-            <td> <input type="text" name="ctd" value="" required=true size="35" >
+            <tr>  <td> Manufacture NAME : </td>
+            <td> <input type="text" name="name" value="" required=true size="35" >
             </td> </tr>
-            <tr>  <td> Parent </td>
+            <tr>  <td> Counrty </td>
             <td> 
-                  <select  name="parent">
+                  <select  name="country">
                             <option value=""></option>
 
                             <%
@@ -164,18 +164,19 @@ session.setAttribute("category",null);
                                     //connection instance
                                     Connection conn = ConnectionClass.getConnection();
 
-                                    PreparedStatement st = conn.prepareStatement("SELECT distinct(category_id) FROM niki.niki_categories order by  category_id");
+                                    PreparedStatement st = conn.prepareStatement
+        ("SELECT niki_country_id,niki_country_name FROM niki.niki_country_code order by  niki_country_name");
 
                                     ResultSet rs = st.executeQuery();
 
                                     while (rs.next()) {
                                         // Integer ip = rs.getInt("univId");
-                                        String category_id = rs.getString(1); 
-
+                                        String niki_country_id = rs.getString(1); 
+String niki_country_name = rs.getString(2); 
 
                             %>
                                     
-                                    <option value="<%=category_id%>"><%=category_id%></option>
+                                    <option value="<%=niki_country_id%>"><%=niki_country_name%></option>
                             <%
 
                                     }
@@ -185,16 +186,9 @@ session.setAttribute("category",null);
                                     out.print(e);
                                 }
                             %>
-                        </select><br/>
-                
-                 
+                        </select><br/> 
             </td> </tr>
-            <tr>  <td> French description: </td>
-            <td> <input type="text" name="french" value="" required=true size="35" >
-            </td> </tr>
-            <tr>  <td> Kinya description: </td>
-            <td> <input type="text" name="kinya" value="" required=true size="35" >
-            </td> </tr>
+            
             <tr>  <td> </td>
                   <td> <input value="save" type="submit"/>  </td>
              </tr> 
@@ -207,37 +201,18 @@ session.setAttribute("category",null);
                 <h3>${cat.insertMsg}</h3>
                 <h4>${cat.error} </h4>
                  
-                <h3 style="background-color:buttonface">Categories List</h3>
+                <h3 style="background-color:buttonface">Manufacture List</h3>
                 
                 <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%" >
                     <thead> 
                         <tr>
-                            <th> Category Id</th>               
-                            <th> Category Desc</th>   
-                            <th> Status </th>                            
-                            <th> Parent</th>               
-                            <th> French</th>   
-                            <th> Kinya</th>
-                            <th> Edit </th>
-                            <th> Sleep </th>
+                            <th> Manufacture id</th>               
+                            <th> Manufacture name</th>   
+                            <th> Country </th>   
                         </tr>
                         
                         </thead>
-                        <tfoot>
-                        <tr>
-
-                            <th> Category Id</th>               
-                            <th> Category Desc</th>   
-                            <th> Status </th>
-                            <th> Parent</th>               
-                            <th> French</th>   
-                            <th> Kinya</th>
-                            <th> Edit </th>
-                            <th> Sleep </th>
-                           
-
-                        </tr>
-                        </tfoot>
+                       
                         <tbody>
                         <%
 
@@ -245,31 +220,22 @@ session.setAttribute("category",null);
 
                                 Connection con = ConnectionClass.getConnection();
                                 Statement ST = con.createStatement();
-                                ResultSet rs = ST.executeQuery("SELECT * FROM niki_categories");
+                                ResultSet rs = ST.executeQuery("SELECT * FROM niki_fabricant order by niki_fabricant_name");
                                 int i = 0;
                                 while (rs.next()) {
 
-                                    String bb = rs.getString(1);
-                                    String cc = rs.getString(2);
-                                    String dd = rs.getString(3);
-                                    String vv = rs.getString(4);
-                                    String kk = rs.getString(5);
-                                    String oo = rs.getString(6);
+                                    String id = rs.getString(1);
+                                    String niki_fabricant_name = rs.getString(2);
+                                    String country = rs.getString(3); 
 
                                  
 
                         %>  
                         <tr> 
 
-                            <td><%=bb%>  </td>
-                            <td> <%= cc%></td>
-                            <td> <%=dd %></td>
-                            <td><%=vv%>  </td>
-                            <td> <%= kk%></td>
-                            <td> <%=oo %></td>
-                            <td> <a href="CategoryUpdate.jsp?catEdit=<%=bb%>&catDesc=<%=cc%>&action=update"> Edit </a></td>
-                            <td> <a href="CategoryResponse.jsp?catRejectSleep=<%=bb%>&action=catSleep">Sleep </a></td>
-                            
+                            <td><%=id%>  </td>
+                            <td> <%= niki_fabricant_name%></td>
+                            <td> <%=country %></td> 
                             
                         </tr>
                         

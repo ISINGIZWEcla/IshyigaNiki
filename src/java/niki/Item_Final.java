@@ -17,15 +17,36 @@ import java.sql.*;
  * @author vakaniwabo
  */
 public class Item_Final {
+    
+    
     private String niki_code;
-    private String codebar;
-    private String itemDescriptionENGL;
-    private String itemDescriptionKINYA;
-    private String itemDescriptionFRENCH;
-    private String itemDescriptionSWAHILI;
-    private String subcategory_id;
-    private String taxRate, taxRateMessage;
-    private String busin_category_id;
+    private String codebar; 
+    private String category_id;
+    private String taxRate, taxRateMessage; 
+    private int item_temp_id;
+   private String item_commercial_name; 
+    private String item_form; 
+   private  String item_emballage; 
+   private String item_inn;  
+   private String tax_vat; 
+   private String tax_excise; 
+   private String tax_duty;  
+   private String updated_time; 
+   private String item_fabricant; 
+   private double item_packet; 
+   private int item_longeur_mm; 
+   private int item_largeur_mm; 
+   private int item_hauteur_mm; 
+   private double item_poids_gr; 
+   private double item_dosage; 
+   private String shipment_type; 
+   private String item_key_words; 
+   private String hs_code; 
+   private String gtin_code; 
+   private String bar_code; 
+   private String created; 
+   private String global_id; 
+   private String bus_category_id;  
     private String status="LIVE";
     private String insertMsg,selectMsg,updateMsg,error;
     private boolean valid = true;
@@ -38,39 +59,47 @@ public class Item_Final {
     /*
     constructors
     */
+public Item_Final(){}
 
-    public Item_Final() {
-    }
-
-    public Item_Final(String niki_code, String codebar, String itemDescriptionENGL, String itemDescriptionKINYA,
-			String itemDescriptionFRENCH, String itemDescriptionSWAHILI, String subcategory_id, String taxRate,
-			String taxRateMessage, String busin_category_id, String status) {
-		super();
-		this.niki_code = niki_code;
-		this.codebar = codebar;
-		this.itemDescriptionENGL = itemDescriptionENGL;
-		this.itemDescriptionKINYA = itemDescriptionKINYA;
-		this.itemDescriptionFRENCH = itemDescriptionFRENCH;
-		this.itemDescriptionSWAHILI = itemDescriptionSWAHILI;
-		this.subcategory_id = subcategory_id;
-		this.taxRate = taxRate;
-		this.taxRateMessage = taxRateMessage;
-		this.busin_category_id = busin_category_id;
-		this.status = status;
+    public void setItem_Final(String niki_code, String codebar, String category_id,  
+            int item_temp_id, String item_commercial_name, String item_form, 
+            String item_emballage, String item_inn, String tax_vat, String tax_excise, 
+            String tax_duty,  String item_fabricant, 
+            double item_packet, int item_longeur_mm, int item_largeur_mm, 
+            int item_hauteur_mm, double item_poids_gr, double item_dosage, 
+            String shipment_type, String item_key_words, String hs_code, 
+            String gtin_code, String bar_code, String global_id, 
+            String bus_category_id ) {
+        this.niki_code = niki_code;
+        this.codebar = codebar;
+        this.category_id = category_id;  
+        this.item_temp_id = item_temp_id;
+        this.item_commercial_name = item_commercial_name;
+        this.item_form = item_form;
+        this.item_emballage = item_emballage;
+        this.item_inn = item_inn;
+        this.tax_vat = tax_vat;
+        this.tax_excise = tax_excise;
+        this.tax_duty = tax_duty; 
+        this.item_fabricant = item_fabricant;
+        this.item_packet = item_packet;
+        this.item_longeur_mm = item_longeur_mm;
+        this.item_largeur_mm = item_largeur_mm;
+        this.item_hauteur_mm = item_hauteur_mm;
+        this.item_poids_gr = item_poids_gr;
+        this.item_dosage = item_dosage;
+        this.shipment_type = shipment_type;
+        this.item_key_words = item_key_words;
+        this.hs_code = hs_code;
+        this.gtin_code = gtin_code;
+        this.bar_code = bar_code; 
+        this.global_id = global_id;
+        this.bus_category_id = bus_category_id; 
 	}
-    
 
-    
-    
-
-    /*
-    getters and setters
-    */
-    
-    
     public String getNiki_code() {
-		return niki_code;
-	}
+        return niki_code;
+    }
 
 	public void setNiki_code(String niki_code) {
 		this.niki_code = niki_code;
@@ -83,55 +112,8 @@ public class Item_Final {
 	public void setCodebar(String codebar) {
         this.codebar = codebar;
     }
-
-    public String getItemDescriptionENGL() {
-        return itemDescriptionENGL;
-    }
-
-    public void setItemDescriptionENGL(String itemDescriptionENGL) {
-        this.itemDescriptionENGL = itemDescriptionENGL;
-    }
-
-    public String getItemDescriptionKINYA() {
-        return itemDescriptionKINYA;
-    }
-
-    public void setItemDescriptionKINYA(String itemDescriptionKINYA) {
-        this.itemDescriptionKINYA = itemDescriptionKINYA;
-    }
-
-    public String getItemDescriptionFRENCH() {
-        return itemDescriptionFRENCH;
-    }
-
-    public void setItemDescriptionFRENCH(String itemDescriptionFRENCH) {
-        this.itemDescriptionFRENCH = itemDescriptionFRENCH;
-    }
-
-    public String getItemDescriptionSWAHILI() {
-        return itemDescriptionSWAHILI;
-    }
-
-    public void setItemDescriptionSWAHILI(String itemDescriptionSWAHILI) {
-        this.itemDescriptionSWAHILI = itemDescriptionSWAHILI;
-    }
-
-    public String getSubcategory_id() {
-        return subcategory_id;
-    }
-
-    public void setSubcategory_id(String subcategory_id) {
-        this.subcategory_id = subcategory_id;
-    }
-
-    public String getBusin_category_id() {
-        return busin_category_id;
-    }
-
-    public void setBusin_category_id(String busin_category_id) {
-        this.busin_category_id = busin_category_id;
-    }
-
+ 
+ 
  
     public String getTaxRate() {
         return taxRate; 
@@ -252,70 +234,97 @@ public class Item_Final {
     {
         
         try 
-        {
-
-            PreparedStatement pst = conn.prepareStatement("insert into niki_items values(?,?,?,?,?,?,?,?,?,now())");
-            
-            /*
-             * checking from the database for some conditions before we can insert items
-             */
-            PreparedStatement pst3 = conn.prepareStatement("select itemDesc_ENGL from niki_items where itemDesc_ENGL = ? or itemDesc_KINYA = ? or itemDesc_FRENCH = ? or itemDesc_SWAHILI = ? ");
-            PreparedStatement pst5 = conn.prepareStatement("select itemDesc_ENGL from niki_items where codebar = ? and (codebar NOT IN ('','null') AND codebar IS NOT NULL) ");
-
-            /*
-             * setting the preparedstatement parameters
-             */
-            
-            pst3.setString(1, itemDescriptionENGL);
-            pst3.setString(2, itemDescriptionKINYA);
-            pst3.setString(3, itemDescriptionFRENCH);
-            pst3.setString(4, itemDescriptionSWAHILI);
+        { 
             
             
-            pst5.setString(1, codebar);            
+String sqlInsert = 
+"INSERT INTO `niki`.`niki_items` "
+        + " (`niki_code`," +
+"`item_commercial_name`," +
+"`item_form`," +
+"`item_emballage`," +
+"`item_inn`," +
+"`category_id`," +
+"`tax_vat`," +
+"`tax_excise`," +
+"`tax_duty`," +
+"`status`," +
+"`item_temp_id`," +
+"`item_fabricant`," +
+"`item_packet`," +
+"`item_longeur_mm`," +
+"`item_largeur_mm`," +
+"`item_hauteur_mm`," +
+"`item_poids_gr`," +
+"`item_dosage`," +
+"`shipment_type`," +
+"`item_key_words`," +
+"`hs_code`," +
+"`gtin_code`," +
+"`bar_code`," + 
+"`global_id`)"
+                    + " values (?,?,?,?"
+        + ",?,?,?,?"
+        + ",?,?,?,?"
+        + ",?,?,?,?"
+        + ",?,?,?,?"
+        + ",?,?,?,?)";
             
             
-            /*
-            resultsets of the select statements
-            */
+             
+            
+            PreparedStatement pst3 = conn.prepareStatement("select item_commercial_name from niki_items where item_commercial_name = ? ");
+            PreparedStatement pst5 = conn.prepareStatement("select item_commercial_name from niki_items where bar_code = ? and (bar_code NOT IN ('','null') AND bar_code IS NOT NULL) ");
+ 
+            pst3.setString(1, item_commercial_name);  
+            pst5.setString(1, codebar);     
             ResultSet rs1 = pst3.executeQuery();
-            ResultSet rs3 = pst5.executeQuery();
-            
-            
+            ResultSet rs3 = pst5.executeQuery(); 
  
             if(rs1.next())
             {
                 //there is another item with the same description in the final items
-            	String itmdesc = rs1.getString(1);
-
-                insertMsg="that item already exists in final items list as: "+itmdesc;
-                
+            	String itmdesc = rs1.getString(1); 
+                insertMsg="that item already exists in final items list as: "+itmdesc; 
                 return false;
             }
             else if(rs3.next())
-            {
-                //there is another item with the same codebar in the final items
-
-            	String itmdesc = rs3.getString(1);
-
-                insertMsg="that barcode belongs to an existing item named: "+itmdesc;
-                
+            { 
+            	String itmdesc = rs3.getString(1); 
+                insertMsg="that barcode belongs to an existing item named: "+itmdesc; 
                 return false;
             }
             else
             {
+                PreparedStatement pst = conn.prepareStatement(sqlInsert);
             	pst.setString(1, niki_code);
-                pst.setString(2, codebar);
-                pst.setString(3, itemDescriptionENGL);
-                pst.setString(4, itemDescriptionKINYA);
-                pst.setString(5, itemDescriptionFRENCH);
-                pst.setString(6, itemDescriptionSWAHILI);
-                pst.setString(7, subcategory_id);
-                pst.setString(8, taxRate);
-                pst.setString(9, status);
+                pst.setString(2, item_commercial_name);
+                pst.setString(3, item_form);
+                pst.setString(4, item_emballage);
+                pst.setString(5, item_inn);
+                pst.setString(6, category_id);
+                pst.setString(7, tax_vat);
+                pst.setString(8, tax_excise);
+                pst.setString(9, tax_duty);  
+                pst.setString(10, status);
+   
+                pst.setInt(11, item_temp_id);
+                pst.setString(12, item_fabricant);
+                pst.setDouble(13, item_packet);
+                pst.setInt(14, item_longeur_mm);
+                pst.setInt(15, item_largeur_mm);
+                pst.setInt(16, item_hauteur_mm);
+                pst.setDouble(17, item_poids_gr);
+                pst.setDouble(18, item_dosage);
+                pst.setString(19, shipment_type);
+                pst.setString(20, item_key_words);
+                pst.setString(21, hs_code);
+                pst.setString(22, gtin_code);
+                pst.setString(23, bar_code);
+                pst.setString(24, global_id); 
                 
                 pst.execute();
-                insertMsg="Successfully validated";
+                insertMsg= " Successfully validated";
                 conn.close(); 
                 return true;
             }
@@ -333,7 +342,7 @@ public class Item_Final {
      * returns true if it does it successfully and false otherwise
      */
     public boolean sleepItem() {
-    	String statusFrmDb="";
+    	String statusFrmDb;
         try {
         	PreparedStatement ps = conn.prepareStatement("select status from niki_items where niki_code=?");
  
@@ -352,11 +361,11 @@ public class Item_Final {
   
             pst.setString(2, niki_code);
             pst.setString(1, "SLEEPING");
-            if(statusFrmDb.equals("LIVE")){
+            if(status.equals("LIVE")){
             	pst.setString(1, "SLEEPING");
             	insertMsg="Successfully slept";
             }
-            else if(statusFrmDb.equals("SLEEPING")){
+            else if(status.equals("SLEEPING")){
             	pst.setString(1, "LIVE");
             	insertMsg="Successfully made LIVE";
             }
@@ -382,7 +391,7 @@ public class Item_Final {
     public boolean updateItem() {
 
         try {
-            PreparedStatement pst = conn.prepareStatement("update niki_items set codebar=?,itemDesc_ENGL = ?,itemDesc_FRENCH=?, itemDesc_KINYA=?, itemDesc_SWAHILI=?, subcategory_id=?, taxLabel = ?  where niki_code=? ");
+            PreparedStatement pst = conn.prepareStatement("update niki_items set bar_code=?,itemDesc_ENGL = ?,itemDesc_FRENCH=?, itemDesc_KINYA=?, itemDesc_SWAHILI=?, subcategory_id=?, taxLabel = ?  where niki_code=? ");
 
 
             
@@ -391,32 +400,20 @@ public class Item_Final {
              */
             PreparedStatement pst2 = conn.prepareStatement("select itemDesc_ENGL from niki_items where (itemDesc_ENGL = ? or itemDesc_FRENCH=? OR itemDesc_KINYA=? OR itemDesc_SWAHILI=?) and niki_code!=? ");
 
-            PreparedStatement pst3 = conn.prepareStatement("select itemDesc_ENGL from niki_items where codebar = ? and (codebar NOT IN ('','null') AND codebar IS NOT NULL) and niki_code!=?");
+            PreparedStatement pst3 = conn.prepareStatement("select itemDesc_ENGL from niki_items where bar_code = ? and (bar_code NOT IN ('','null') AND bar_code IS NOT NULL) and niki_code!=?");
 
             /*
              * deleting from niki_item_business_category table all business categories corresponding to the item to be updated,
              *  because new business categories will be specified
              */
-            PreparedStatement pst4 = conn.prepareStatement("delete from niki_item_business_category where niki_code=?");
-
-            
-            
-            
+           
             /*
              * setting the preparedstatement parameters
              */
-                                    
-            pst2.setString(1, itemDescriptionENGL);
-            pst2.setString(2, itemDescriptionFRENCH);
-            pst2.setString(3, itemDescriptionKINYA);
-            pst2.setString(4, itemDescriptionSWAHILI);
-            pst2.setString(5, niki_code);
-            
+              
             pst3.setString(1, codebar);  
             pst3.setString(2, niki_code);  
-
-            pst4.setString(1, niki_code);  
-
+ 
             
             /*
             resultsets of the select statements
@@ -444,26 +441,7 @@ public class Item_Final {
                 insertMsg="that barcode belongs to an existing item named: "+itmdesc;
                 
                 return false;
-            }
-            else
-            {
-                pst4.execute();//delete business categories related to the item to be updated
-
-                pst.setString(1, codebar);
-                pst.setString(2, itemDescriptionENGL);
-                pst.setString(3, itemDescriptionKINYA);
-                pst.setString(4, itemDescriptionFRENCH);
-                pst.setString(5, itemDescriptionSWAHILI);
-                pst.setString(6, subcategory_id);
-                pst.setString(7, taxRate);
-                pst.setString(8, niki_code);
-                                
-                pst.execute(); //updating the item
-                                
-                conn.close(); 
-                insertMsg="Successfully updated";
-                return true;
-            }
+            } 
             
         } catch (Exception e) {
             setError(e.getMessage());
@@ -471,6 +449,7 @@ public class Item_Final {
             return false;
 
         }
+        return false;
     }
     
     

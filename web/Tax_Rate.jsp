@@ -153,7 +153,15 @@ session.setAttribute("taxrate",null);
             
             <table id="inputTax" >
                 
-                
+                  <tr>
+                    <td>
+                       Tax Class 
+                    </td>
+                    <td>
+                        <input type="text" name="taxClass" value="" required=true size="35"/> 
+                    </td>
+                    
+                </tr> 
                 <tr>
                     <td>
                        Tax Label: 
@@ -200,6 +208,7 @@ session.setAttribute("taxrate",null);
                         <tr>
                             <th> Tax label</th>               
                             <th> Tax value</th>   
+                            <th> Tax Class</th>   
                             <th> Status </th>
                             <th> Edit </th>
                             <th> Sleep </th>
@@ -210,7 +219,8 @@ session.setAttribute("taxrate",null);
                         <tr>
 
                             <th> Tax label</th>               
-                            <th> Tax value</th>   
+                            <th> Tax value</th>  
+                            <th> Tax Class</th> 
                             <th> Status </th>
                             <th> Edit </th>
                             <th> Sleep </th>
@@ -232,6 +242,7 @@ session.setAttribute("taxrate",null);
                                     String bb = rs.getString(1);
                                     String cc = rs.getString(2);
                                     String dd = rs.getString(3);
+                                    String kk = rs.getString(4);
                                     
 
                                  
@@ -242,6 +253,7 @@ session.setAttribute("taxrate",null);
                             <td><%=bb%>  </td>
                             <td> <%= cc%></td>
                             <td> <%= dd%></td>
+                            <td> <%= kk%></td>
                            
                             <td> <a href="TaxRateUpdate.jsp?taxEdit=<%=bb%>&action=update" class="btn btn-primary"> Edit </a></td>
                             <td> <a href="Tax_RateResponse.jsp?taxRejectSleep=<%=bb%>&action=taxSleep" class="btn btn-primary">Sleep </a></td>
@@ -273,7 +285,7 @@ session.setAttribute("taxrate",null);
 
 
 <footer class="container-fluid text-center">
-  <p><strong> Copyright &#169; 2016 Algorithm,Inc.</strong></p>
+  <p><strong> Copyright &#169; 2021 Algorithm,Inc.</strong></p>
 </footer>
 
 
