@@ -128,22 +128,22 @@ String []bsncatN = request.getParameterValues("bus_category_id");
     checking if the inputs are valid
     */
     else if (itf.isValid()) {
-    	//the inputs are valid
-    	itf.setInsertMsg("it is valid");
+     
+        itf.setInsertMsg("it is valid ");
     	//inserting to the itemfinal
-        if (itf.insertItem()) {
+        if (itf.insertItem( )) {  //
         	//item is inserted in itemfinal successfully
             
         	boolean inserted=true; //variable to help to check if business categories are  inserted successfully
         	
         	//Matching an item to the selected business categories
-          /*  for (String bscat:bsncatN){ 
+            for (String bscat:bsncatN){ 
             	//for each selected business category
                 it_bus_cat.setBusin_category_id(bscat.toUpperCase()); //setting the business category for the item
-                inserted=it_bus_cat.insertItemBusinCategory();//inserting the business category
+                inserted=it_bus_cat.insertItemBusinCategory(global_id);//inserting the business category
                             	
             }
-*/
+
             if(inserted){
             	//the item is matched with the business category successfully
                 
@@ -176,6 +176,6 @@ String []bsncatN = request.getParameterValues("bus_category_id");
     it_bus_cat.getConn().close();//closing the connection of item business category
     itf.getConn().close();//closing the connection of item final
 %>
-<jsp:forward page="PendingItems.jsp"/>
+<jsp:forward page="PendingItems.jsp?bus_category_id=<%=bus_category_id%>"/>
  
 

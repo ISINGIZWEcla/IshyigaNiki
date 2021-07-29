@@ -16,7 +16,7 @@ import java.sql.ResultSet;
 public class Item_Business_Category {
     private String niki_code;
     private String busin_category_id;
-    private String insertMsg,selectMsg,updateMsg,error;
+    public String insertMsg,selectMsg,updateMsg,error;
     
     //connection instance
     Connection conn = ConnectionClass.getConnection();
@@ -77,14 +77,23 @@ public class Item_Business_Category {
 		this.conn = conn;
 	}
 
-	public boolean insertItemBusinCategory(){
+	public boolean insertItemBusinCategory(String global_id){
         try
         {
-            PreparedStatement pst = conn.prepareStatement("insert into niki_item_business_category values(?,?)");
+            
+        String sql="INSERT INTO `niki`.`niki_item_business_category` "
+        + " (`niki_code`," +
+"`busin_category_id`,`global_id`)"
+                + ""
+                + "values(?,?,?)";    
+            
+            
+            
+            PreparedStatement pst = conn.prepareStatement(sql);
             
                 pst.setString(1, niki_code); 
                 pst.setString(2, busin_category_id);
-                
+                pst.setString(3, global_id);
                 pst.execute();
                 
                 insertMsg="item business categ successfully inserted";
@@ -96,7 +105,7 @@ public class Item_Business_Category {
         catch(Exception e){
             setError(e.getMessage());
             
-            insertMsg="item categ not inserted";
+            insertMsg="item categ not inserted "+e;
 
             return false;
         }

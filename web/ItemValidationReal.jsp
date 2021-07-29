@@ -312,7 +312,7 @@ Connection conn = ConnectionClass.getConnection();
                  
                  
                 <tr>  <td bgcolor="green"> item gtin code   </td>
-                    <td>  <input type="text" name="gtin_code" value="" required=true size="15" >
+                    <td>  <input type="text" name="gtin_code" value="" required=false size="15" >
                     </td>  </tr>  
                 <tr>
                 
@@ -491,7 +491,8 @@ Connection conn = ConnectionClass.getConnection();
                                     //connection instance
                                     Connection conn = ConnectionClass.getConnection();
 
-                                    PreparedStatement st = conn.prepareStatement("Select busin_category_id,busin_category_descr from niki_business_categories where status='LIVE'");
+                                    PreparedStatement st = conn.prepareStatement
+        ("Select busin_category_id,busin_category_descr from niki_business_categories where status='LIVE' order by busin_category_descr");
 
                                     ResultSet rs = st.executeQuery();
 

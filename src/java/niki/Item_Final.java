@@ -270,7 +270,7 @@ String sqlInsert =
         + ",?,?,?,?"
         + ",?,?,?,?)";
             
-            PreparedStatement pst = conn.prepareStatement(sqlInsert);
+            
              
             
             PreparedStatement pst3 = conn.prepareStatement("select item_commercial_name from niki_items where item_commercial_name = ? ");
@@ -296,6 +296,7 @@ String sqlInsert =
             }
             else
             {
+                PreparedStatement pst = conn.prepareStatement(sqlInsert);
             	pst.setString(1, niki_code);
                 pst.setString(2, item_commercial_name);
                 pst.setString(3, item_form);
@@ -323,7 +324,7 @@ String sqlInsert =
                 pst.setString(24, global_id); 
                 
                 pst.execute();
-                insertMsg="Successfully validated";
+                insertMsg= " Successfully validated";
                 conn.close(); 
                 return true;
             }

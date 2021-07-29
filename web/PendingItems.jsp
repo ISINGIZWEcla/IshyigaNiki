@@ -137,10 +137,8 @@ String userLanguage = session.getAttribute("userInSessionLanguage").toString();
     
     <div class="col-sm-8 text-left" >
 		<div class="page-header">
-			<h1 style="text-align: center; text-shadow: maroon;">Temporary Items</h1>
-		</div>         
-            
-
+			<h1 style="text-align: center; text-shadow: maroon;">Temporary Items of <%=company  %></h1>
+		</div>      
         <div id="w">
             <h3>${itf.insertMsg}</h3>
                 <h4>${itf.error} </h4>
@@ -150,7 +148,7 @@ String userLanguage = session.getAttribute("userInSessionLanguage").toString();
                 <table  id="example" class="table table-striped table-bordered" cellspacing="0" width="100%" >
                     <thead> 
                         <tr>
-                                        
+                              <th > Item ID </th>          
                             <th > Description </th>              
                             <th> Category </th>
                             <th> Busines Categ </th> 
@@ -212,6 +210,7 @@ String sql ="SELECT * FROM niki_items_temp where status='PENDING' AND company_id
                         %>  
                         <tr style="background: green;"> 
  
+                            <td> <%= item_id%></td>
                             <td> <%= itemDesc%></td>
                             <td> <%= categName%></td>
                             <td> <%= bus_categName%></td> 
@@ -246,7 +245,7 @@ String sql ="SELECT * FROM niki_items_temp where status='PENDING' AND company_id
 						else{
 	                        %> 
                         <tr> 
- 
+                            <td> <%= item_id%></td>
                             <td> <%= itemDesc%></td>
                             <td> <%= categName%></td>
                             <td> <%= bus_categName%></td> 

@@ -13,23 +13,26 @@ public class Business_Category {
 	
 	private String busin_category_id;
     private String busin_category_descr;
-    private String status="LIVE";
+   
+    String french_business_name; 
+    String kinya_business_name;
+    String global_id;
     private String insertMsg,selectMsg,updateMsg,error;
     private boolean valid=true;
-    
+     private String status="LIVE";
     //connection instance
     Connection conn = ConnectionClass.getConnection();
 
- 
-    public Business_Category(String busin_category_id, String busin_category_descr) {
+    public void setBusiness_Category(String busin_category_id, String busin_category_descr,
+            String french_business_name, String kinya_business_name, String global_id) {
         this.busin_category_id = busin_category_id;
         this.busin_category_descr = busin_category_descr;
+        this.french_business_name = french_business_name;
+        this.kinya_business_name = kinya_business_name;
+        this.global_id = global_id;
     }
-    
-    
-    /*
-    getters and setters
-    */
+
+   
 
     public String getBusin_category_id() {
         return busin_category_id;
@@ -119,8 +122,18 @@ public class Business_Category {
         try 
         {
 
-            PreparedStatement pst = conn.prepareStatement("insert into niki_business_categories values(?,?,?)");
-            PreparedStatement pst2 = conn.prepareStatement("select busin_category_descr from niki_business_categories where busin_category_descr = '"+busin_category_descr +"'");
+String sql="INSERT INTO `niki`.`niki_business_categories` " +
+"(`busin_category_id`, " +
+"`busin_category_descr`, " +
+"`status`, " +
+"`french_business_name`, " +
+"`kinya_business_name`, " +
+"`global_id`)"
+        + ""
+        + "values(?,?,?,?,?,?)";
+ PreparedStatement pst = conn.prepareStatement (sql);
+ 
+ PreparedStatement pst2 = conn.prepareStatement("select busin_category_descr from niki_business_categories where busin_category_descr = '"+busin_category_descr +"'");
 
             
             ResultSet rs = pst2.executeQuery();
@@ -136,6 +149,9 @@ public class Business_Category {
                 pst.setString(1, busin_category_id); 
                 pst.setString(2, busin_category_descr);
                 pst.setString(3, status);
+                pst.setString(4, french_business_name); 
+                pst.setString(5, kinya_business_name);
+                pst.setString(6, global_id);
                 
                 pst.execute();
                 conn.close(); 

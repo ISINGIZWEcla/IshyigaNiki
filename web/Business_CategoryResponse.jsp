@@ -82,14 +82,14 @@ else if(action!=null && action.equals("busCatSleep")){
 }
 else{
 
-    String catDesc = request.getParameter("ctd").toUpperCase().replaceAll("'", " ");
-    
-    String catN = request.getParameter("ctn").toUpperCase().replaceAll("'", " ");
-
-    
-    
-    busin_cat.setBusin_category_descr(catDesc);
-    busin_cat.setBusin_category_id(catN);
+    String busin_category_id = request.getParameter("busin_category_id").toUpperCase().replaceAll("'", " "); 
+    String busin_category_descr = request.getParameter("busin_category_descr").toUpperCase().replaceAll("'", " ");
+    String french_business_name = request.getParameter("french_business_name").toUpperCase().replaceAll("'", " "); 
+    String kinya_business_name = request.getParameter("kinya_business_name").toUpperCase().replaceAll("'", " ");
+    String global_id= (String)session.getAttribute("userInSessionfName") ;
+     
+    busin_cat.setBusiness_Category(  busin_category_id,  busin_category_descr,
+              french_business_name,   kinya_business_name,  global_id); 
 
     if (busin_cat.isValid()) {
         if (busin_cat.insertBusinCategory()) {

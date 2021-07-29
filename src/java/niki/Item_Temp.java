@@ -251,8 +251,7 @@ public class Item_Temp {
             PreparedStatement pst2 = conn.prepareStatement("select itemDesc,status from niki_items_temp where itemDesc = ? ");
             PreparedStatement pst3 = conn.prepareStatement("select niki_code,itemDesc_ENGL from niki_items where itemDesc_ENGL = ? or itemDesc_KINYA = ? or itemDesc_FRENCH = ? or itemDesc_SWAHILI = ? ");
             PreparedStatement pst4 = conn.prepareStatement("select itemDesc,status from niki_items_temp where codebar = ? and (codebar NOT IN ('','null') AND codebar IS NOT NULL) ");
-            PreparedStatement pst5 = conn.prepareStatement("select itemDesc_ENGL from niki_items where codebar = ? and (codebar NOT IN ('','null') AND codebar IS NOT NULL) ");
-
+         
             /*
              * setting the preparedstatement parameters
              */
@@ -264,9 +263,7 @@ public class Item_Temp {
             pst3.setString(4, itemDescription);
             
             pst4.setString(1, codebar);
-            
-            pst5.setString(1, codebar);
-            
+             
             
             
             /*
@@ -275,8 +272,7 @@ public class Item_Temp {
             ResultSet rs = pst2.executeQuery();
             ResultSet rs1 = pst3.executeQuery();
             ResultSet rs2 = pst4.executeQuery();
-            ResultSet rs3 = pst5.executeQuery();
-            
+             
             
             /*if(rs.next())
             {
@@ -309,17 +305,7 @@ public class Item_Temp {
                 
                 return false;
             }
-            else if(rs3.next())
-            {
-                //there is another item with the same codebar in the final items
-
-            	String itmdesc = rs3.getString(1);
-
-                insertMsg="that barcode belongs to an existing item named: "+itmdesc;
-                
-                return false;
-            }
-            else
+                else
             {
             	if(rs1.next())
                 {
@@ -370,14 +356,13 @@ public class Item_Temp {
     String sql =   "update niki_items_temp set status = 'REJECTED',"
             + "niki_code ='"+niki_code+"'  where item_id=" +item_id ;   
            
-Statement state =conn.createStatement();  
-
+Statement state =conn.createStatement();   
 state.execute(sql) ;
 
             conn.close(); 
            // insertMsg="Successfully rejected "+sql;
             
-            insertMsg=itemDescription+" Successfully rejected "+niki_code;
+            insertMsg=item_id+" Successfully rejected "+niki_code;
             
             return true;
             

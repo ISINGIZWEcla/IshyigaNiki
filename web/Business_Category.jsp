@@ -134,43 +134,27 @@
         <h3>${busin_cat.insertMsg}</h3>
         <h4>${busin_cat.error} </h4>
         
-
+       
         
         <form name="inputCateg" action="Business_CategoryResponse.jsp" method="POST">
             
             
-            <table id="inputCateg" >
-                
-               
-                <tr>
-                    <td>
-                       Business category Id: 
-                    </td>
-                    <td>
-                        <input type="text" name="ctn" value="${busin_cat.busin_category_id}" required=true size="35"/> 
-                    </td>
-                    
-                </tr> 
-                <tr>
-                    <td>
-                        Business category description:
-                    </td>
-                    <td>
-                        <input type="text" name="ctd" value="${busin_cat.busin_category_descr}" required=true size="35" >
-                    </td>
-                    
-                </tr>
-                
-                
-                <tr>
-                    <td>
-                        
-                    </td>
-                    <td>
+            <table id="inputCateg" > 
+                <tr> <td>  Business category Id:   </td> <td>
+                        <input type="text" name="busin_category_id" value="${busin_cat.busin_category_id}" required=true size="35"/> 
+                    </td>  </tr> 
+                <tr>  <td>  Business category description:  </td>  <td>
+                        <input type="text" name="busin_category_descr" value="${busin_cat.busin_category_descr}" required=true size="35" >
+                    </td>  </tr>
+                 <tr> <td>  French:   </td> <td>
+                        <input type="text" name="french_business_name" value="${busin_cat.busin_category_id}" required=true size="35"/> 
+                    </td>  </tr> 
+                <tr>  <td>  Kinyarwanda:  </td>  <td>
+                        <input type="text" name="kinya_business_name" value="${busin_cat.busin_category_descr}" required=true size="35" >
+                    </td>  </tr>
+                 <tr>  <td>  </td> <td>
                         <input value="save" type="submit"/>
-                    </td>
-                    
-                </tr>
+                    </td>  </tr>
                 
             </table>
 

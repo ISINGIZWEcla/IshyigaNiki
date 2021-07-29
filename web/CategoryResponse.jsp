@@ -88,8 +88,7 @@ else if(action!=null && action.equals("catSleep")){
 }
 else{
 
-    String catDesc = request.getParameter("ctd").toUpperCase().replaceAll("'", " ");
-    
+    String catDesc = request.getParameter("ctd").toUpperCase().replaceAll("'", " "); 
     String catN = request.getParameter("ctn").toUpperCase().replaceAll("'", " ");
 String parent = request.getParameter("parent").toUpperCase().replaceAll("'", " ");
  String french = request.getParameter("french").toUpperCase().replaceAll("'", " ");
