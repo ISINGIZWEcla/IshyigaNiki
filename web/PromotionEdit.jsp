@@ -104,7 +104,7 @@
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
         <li class="active"><a href="index.html">Home</a></li>
-        <li><a href="categoriesPage.jsp">Categories</a></li>
+        <li><a href="Promotions.jsp">Promotions</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
       	<li><i class="glyphicon glyphicon-user" style="color: white;font-size: 2em;"> <%=user%></i></li>
@@ -163,14 +163,14 @@ if(session.getAttribute("fromChooseCompany")!=null){
      maximum_qty=rs.getInt("maximum_qty");
   }
  
-    
+ conn.close();     
 %>        
         
        
         
         <form name="inputCateg" action="PromotionsEDITResponse.jsp" method="POST">
                 
-            <table id="inputCateg" > 
+            <table > 
                 <tr> <td>  promo name:   </td> <td>
                         <input type="text" name="promo_name" value="<%=promo_name%>" required=true size="35"/> 
                     </td>  </tr> 
@@ -252,11 +252,11 @@ if(session.getAttribute("fromChooseCompany")!=null){
                 <h3 style="background-color:buttonface">NIKI Items List </h3>
                 
                 
-                <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%"  >
+                <table>
                     <thead> 
                         <tr>
                             <th> Niki code </th>
-                            <th width="30%"> Item_Commercial_Description</th>               
+                            <th > Item_Commercial_Description</th>               
                             <th> Molecular </th>
                             <th> Packet </th>
                             <th> Category </th>
@@ -334,6 +334,25 @@ String sqll="SELECT * FROM niki_items ";  //bus_cat_id
 <footer class="container-fluid text-center">
   <p><strong> Copyright &#169; 2016 Algorithm,Inc.</strong></p>
 </footer>
+
+
+<div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    		<div class="modal-dialog">
+        		<div class="modal-content">
+            		<div class="modal-header">
+            			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&amp;times;</button>
+            			<h4 class="modal-title" id="myModalLabel">Validate Item</h4>
+            		</div>
+            		<div class="modal-body">
+                		<h3>waiting.....</h3>
+            		</div>
+            		<div class="modal-footer">
+                		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                		<button type="button" class="btn btn-primary">Save changes</button>
+        			</div>
+    			</div>
+  			</div>
+		</div>
 
 
 </body>

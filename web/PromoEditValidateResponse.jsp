@@ -25,10 +25,13 @@ String type= request.getParameter("type") ;
 
 id_list.setPromotions_list(  promo_code,   niki_promotions_qte,
               niki_promotions_discount,   niki_code,   type, 
-              niki_promotions_amount,"");
+              niki_promotions_amount);
 id_list.insertPromoList();
 
 %>
 <%=id_list.getInsertMsg() %>
- 
+ %>
+<jsp:forward page="PromotionEdit.jsp?promo_code=<%=promo_code %>&action=update"/>
+<% %>
+
 

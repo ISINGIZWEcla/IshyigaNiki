@@ -180,7 +180,7 @@ session.setAttribute("category",null);
 
                                     }
 
-
+conn.close();
                                 } catch (Exception e) {
                                     out.print(e);
                                 }

@@ -46,9 +46,8 @@ String userLanguage = session.getAttribute("userInSessionLanguage").toString();
 	<script src="assets/js/jquery.min.js"></script> -->
 <!--   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
 
-		<link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css"> 
- 		<link href="assets/css/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css">
- 		 
+	<link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css"> 
+ 	<link href="assets/css/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css"> 
         <script src="assets/js/jquery-1.12.3.js"></script>
         <script src="assets/js/jquery.min.js"></script>
         
@@ -234,9 +233,9 @@ String sql ="SELECT * FROM niki_items_temp where status='PENDING' AND company_id
                             <td> <%= bus_categName%></td> 
                             <td> <%= status%></td>
                             <td> <%= fabricant%></td>
-                            <td> <a href="ItemValidationReal.jsp?itemValidate=<%=item_id%>&action=validate" class="btn btn-primary" data-toggle="modal" data-target="#basicModal" > Validate </a></td>
-                            <td> <a href="ItemRejectSleepResponse.jsp?itemRejectSleep=<%=item_id%>&itemDesc=<%=itemDesc%>&action=rejectTemp" class="btn btn-primary">Reject </a></td>
-                            
+                                <td> <a href="ItemValidationReal.jsp?itemValidate=<%=item_id%>&action=validate" class="btn btn-primary" data-toggle="modal" data-target="#basicModal" > Validate </a></td>
+                                <td> <a href="ItemRejectSleepResponse.jsp?itemRejectSleep=<%=item_id%>&itemDesc=<%=itemDesc%>&action=rejectTemp" class="btn btn-primary">Reject </a></td>
+
                             
                         </tr>
                         
@@ -251,7 +250,7 @@ String sql ="SELECT * FROM niki_items_temp where status='PENDING' AND company_id
                             <td> <%= bus_categName%></td> 
                             <td> <%= status%></td>
                             <td> <%= fabricant%></td>
-                            <td> <a href="Item.jsp?itemValidate=<%=item_id%>&itemDesc=<%=itemDesc%>&action=validate" class="btn btn-primary" data-toggle="modal" data-target="#basicModal" > Validate </a></td>
+                            <td> <a href="Item.jsp?itemValidate=<%=item_id%>&itemDesc=<%=itemDesc%>&action=validate" > Validate </a></td>
                               
                             
                         </tr>

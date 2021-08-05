@@ -285,13 +285,15 @@ String sqlInsert =
             {
                 //there is another item with the same description in the final items
             	String itmdesc = rs1.getString(1); 
-                insertMsg="that item already exists in final items list as: "+itmdesc; 
+                insertMsg="that item already exists in final items list as: "+itmdesc;
+                 conn.close(); 
                 return false;
             }
             else if(rs3.next())
             { 
             	String itmdesc = rs3.getString(1); 
                 insertMsg="that barcode belongs to an existing item named: "+itmdesc; 
+                 conn.close(); 
                 return false;
             }
             else
@@ -331,6 +333,7 @@ String sqlInsert =
         } catch (Exception e) {
             insertMsg="Not validated";
             setError(e.getMessage());
+            
             return false;
         }
         

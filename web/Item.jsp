@@ -51,7 +51,7 @@ if(codeb!=null && !codeb.equals(""))
 codeb=codeb.toUpperCase().replaceAll("'", " ");
   sqlToAdd += " (hs_code LIKE '%"+codeb+"%' OR bar_code LIKE '%"+codeb+"%' ) ";
 }
-if(itmDesc!=null && !itmDesc.equals("")){
+if(itmDesc!=null && !itmDesc.equals("")&& !itmDesc.equals("null")){
     searchingfor +=", desc: "+itmDesc; 
     String and="";
     if(searchON){ and =" AND ";}
@@ -222,7 +222,9 @@ if(ndimuritransformation)
                                      %>
                                     
                                     <option value="<%=catId%>"><%=catNme%></option>
-                            <%  } } catch (Exception e) {
+                            <%  } 
+
+conn.close();} catch (Exception e) {
                                     out.print(e); }
                             %>
                         </select><br/>
@@ -269,7 +271,7 @@ if(ndimuritransformation)
                             <%
 
                                     }
-
+conn.close();
 
                                 } catch (Exception e) {
                                     out.print(e);
@@ -291,7 +293,7 @@ if(ndimuritransformation)
         <div id="w">
                 <h3 style="background-color:buttonface">NIKI Items List  <%=searchingfor%>
                 <% if (ndimuritransformation) {%>
-                <td> <a href="ItemValidationReal.jsp?itemValidate=<%=item_temp_id%>&action=validate" class="btn btn-primary" data-toggle="modal" data-target="#basicModal" > DIRECT ADD </a></td>
+                <td> <a href="ItemValidationReal.jsp?itemValidate=<%=item_temp_id%>&action=validate"  > DIRECT ADD </a></td>
                 <%  } %>         
                 </h3>
                 

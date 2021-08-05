@@ -305,7 +305,7 @@ Connection conn = ConnectionClass.getConnection();
                       String niki_authority_name = rs.getString("niki_authority_name"); %>
                       <option value="<%=niki_authority_code%>">
                           <%=niki_authority_name.substring(0,Math.min(20, niki_authority_name.length()) )  %> </option> <% }  
- } catch (Exception e) {  out.print(e); }  %>  </select>
+ conn.close(); } catch (Exception e) {  out.print(e); }  %>  </select>
  </td>  
   
   </tr>                 
@@ -343,7 +343,7 @@ Connection conn = ConnectionClass.getConnection();
  ResultSet rs = st.executeQuery();
  while (rs.next()) {  String niki_form_id = rs.getString("niki_form_id");
                       String niki_form_name = rs.getString("niki_form_name"); %>
- <option value="<%=niki_form_id%>"><%=niki_form_name%> </option> <% }  
+ <option value="<%=niki_form_id%>"><%=niki_form_name%> </option> <% }  conn.close();
  } catch (Exception e) {  out.print(e); }  %>  </select>
  </td>  </tr> 
               
@@ -359,7 +359,7 @@ Connection conn = ConnectionClass.getConnection();
  ResultSet rs = st.executeQuery();
  while (rs.next()) {  String niki_emballage_id = rs.getString("niki_emballage_id");
                       String niki_emballage_name = rs.getString("niki_emballage_name"); %>
- <option value="<%=niki_emballage_id%>"><%=niki_emballage_name%> </option> <% }  
+ <option value="<%=niki_emballage_id%>"><%=niki_emballage_name%> </option> <% }  conn.close();
  } catch (Exception e) {  out.print(e); }  %>  </select>
  </td>  </tr>
  
@@ -381,7 +381,7 @@ Connection conn = ConnectionClass.getConnection();
  ResultSet rs = st.executeQuery();
  while (rs.next()) {  String fabricant_id = rs.getString("fabricant_id");
                       String niki_fabricant_name = rs.getString("niki_fabricant_name"); %>
- <option value="<%=fabricant_id%>"><%=niki_fabricant_name%> </option> <% }  
+ <option value="<%=fabricant_id%>"><%=niki_fabricant_name%> </option> <% }  conn.close();
  } catch (Exception e) {  out.print(e); }  %>  </select>
  </td>  </tr>              
                 
@@ -448,7 +448,7 @@ Connection conn = ConnectionClass.getConnection();
 
                                     }
 
-
+conn.close();
                                 } catch (Exception e) {
                                     out.print(e);
                                 }
@@ -471,7 +471,7 @@ Connection conn = ConnectionClass.getConnection();
  ResultSet rs = st.executeQuery();
  while (rs.next()) {  String taxL = rs.getString("taxLabel");
                       String taxV = rs.getString("taxValue"); %>
- <option value="<%=taxL%>"><%=taxV%> (<%=taxL%>)</option> <% }  
+ <option value="<%=taxL%>"><%=taxV%> (<%=taxL%>)</option> <% } conn.close();  
  } catch (Exception e) {  out.print(e); }  %>  </select>
  </td>  </tr>
                 
@@ -509,7 +509,7 @@ Connection conn = ConnectionClass.getConnection();
 
                                     }
 
-
+conn.close();
                                 } catch (Exception e) {
                                     out.print(e);
                                 }

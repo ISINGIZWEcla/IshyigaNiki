@@ -196,7 +196,7 @@ session.setAttribute("fromChooseCompany", from);
 
                                     }
 
-
+conn.close();
                                 } catch (Exception e) {
                                     out.print(e);
                                 }

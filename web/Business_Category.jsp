@@ -36,8 +36,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css"> 
- 		<link href="assets/css/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css">
+	<link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css"> 
+ 	<link href="assets/css/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css">
  		 
         <script src="assets/js/jquery-1.12.3.js"></script>
         <script src="assets/js/jquery.min.js"></script>
@@ -128,15 +128,42 @@
 			<h1 style="text-align: center; text-shadow: maroon;">Business Category</h1>
 		</div>         
             
-            
-          <div><h1>Business Category Entry Form</h1> </div>
+        <div class="row">
+                <h3>${busin_cat.insertMsg}</h3>
+                <h4>${busin_cat.error} </h4>
+                <form name="inputCateg"  action="Business_CategoryResponse.jsp" method="POST">
+                   
+                    <div class="col-sm-10">
+                       <div class="col-sm-6">
+                            <input type="text" class="form-control" placeholder="Business category Id" name="busin_category_id" value="${busin_cat.busin_category_id}"required>
+                        </div>
+                        <div class="col-sm-6">
+                             <input type="text" class="form-control" placeholder="Business category description" name="busin_category_descr" value="${busin_cat.busin_category_descr}" required >
+                        </div>
+                    </div>
+                        <br/><br/><br/>
+                    <div class="col-sm-10">
+                       <div class="col-sm-6">
+                           <input type="text" class="form-control" placeholder="French" name="french_business_name" value="${busin_cat.busin_category_id}" required/>
+                        </div>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" placeholder="Kinyarwanda" name="kinya_business_name" value="${busin_cat.busin_category_descr}" required=true size="35" >
+                        </div>
+                    </div>
+                        <br/><br/>
+                        <div class="col-sm-4">
+                            <input style="margin-left:10px" type="submit" id="submit" value="Save" name="submit" class="btn btn-primary">
+                        </div>
+                </form>
+        </div>
+          <!--<div ><h1>Business Category Entry Form</h1> </div>-->
         
-        <h3>${busin_cat.insertMsg}</h3>
-        <h4>${busin_cat.error} </h4>
+<!--        <h3>${busin_cat.insertMsg}</h3>
+        <h4>${busin_cat.error} </h4>-->
         
        
         
-        <form name="inputCateg" action="Business_CategoryResponse.jsp" method="POST">
+<!--        <form name="inputCateg" action="Business_CategoryResponse.jsp" method="POST">
             
             
             <table id="inputCateg" > 
@@ -159,15 +186,14 @@
             </table>
 
             
-        </form>
+        </form>-->
                     
                     
         <div>
                 <h3>${itf.insertMsg}</h3>
                 <h4>${itf.error} </h4>
                  
-                <h3 style="background-color:buttonface">Business Categories List</h3>
-                
+                <h3>Business Categories List</h3>
                 <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
                     <thead> 
                         <tr>
