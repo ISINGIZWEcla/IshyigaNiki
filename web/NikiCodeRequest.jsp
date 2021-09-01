@@ -38,8 +38,11 @@ else {
     if (nikI != null) {
         try {
             String sql = "SELECT item_id,niki_code,status FROM niki.niki_items_temp "
-                    + " where item_external_id='" + nikI.item_external_id + "' and "
-                    + " company_id='" + nikI.id_company + "'";
+                    + " where (item_external_id='" + nikI.item_external_id + "' and "
+                    + " company_id='" + nikI.id_company + "') "
+                    + "OR (itemDesc='" + nikI.itemDesc + "' and "
+                    + " busin_category_id='" + nikI.busin_category_id + "') "; 
+
 %>
 <%=sql%> <%
     Connection conn = ConnectionClass.getConnection();
@@ -54,7 +57,7 @@ else {
         String resultat = nikI.getXml();
         irimo = true;
 %>
-<%=resultat%> <% }
+<%=resultat%> <%   }
 
     if (!irimo) {
           String  irimow = nikI.addNikiRequest(conn);
@@ -86,11 +89,10 @@ String resultat = nikI.getXml();
         irimo2 = true;
 %>
 <%=resultat%> <% }
-
+conn.close();
     } catch (Exception e) {
         out.print(e);
     }
   } else {%> <%=line%> nameneste <% }
 }
 %>
-

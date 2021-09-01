@@ -21,9 +21,9 @@ public class Niki_request {
     public String item_external_id;
     public String id_company;
     String codebar;
-    String itemDesc;
+    public String itemDesc,itemInn;
     String subcategory_id;
-    String busin_category_id;
+    public String busin_category_id;
     public String status;
     String langue;
     String user_name;
@@ -87,7 +87,8 @@ public class Niki_request {
                 + "<poids>" + poids + "</poids>"
                 + "<fabricant>" + fabricant + "</fabricant>"
                 + "<tax_rate>" + tax_rate + "</tax_rate>"
-                + "<hs_codeString>" + hs_codeString + "</hs_codeString>";
+                + "<hs_codeString>" + hs_codeString + "</hs_codeString>"
+                + "<itemInn>" + itemInn + "</itemInn>";
 
     }
 
@@ -114,9 +115,9 @@ public class Niki_request {
                     + "fabricant,"
                     + "tax_rate,"
                     + "hs_code,"
-                    + "company_id )"
+                    + "company_id,molecular_name )"
                     + " values(?,?,?,?,?,?,?,?"
-                           + ",?,?,?,?,?,?,?,?,?)");
+                           + ",?,?,?,?,?,?,?,?,?,?)");
             
             
             pst.setString(1, item_external_id);
@@ -136,6 +137,8 @@ public class Niki_request {
             pst.setString(15, tax_rate);
             pst.setString(16, hs_codeString);
             pst.setString(17, id_company);
+            pst.setString(18, itemInn);
+            
             pst.execute(); 
                     return "WELL INSERTED";
                     } catch (SQLException ex) {
@@ -149,7 +152,9 @@ public class Niki_request {
     public Niki_request(String xml) {
 
         //   System.out.println("+++++++++++++++++++++     " + xml);
-        this.item_id = Integer.parseInt(getTagValue("item_id", xml));
+        
+        this.itemInn =  getTagValue("itemInn", xml);
+        this.item_id = 0;//Integer.parseInt(getTagValue("item_id", xml));
         this.item_external_id = getTagValue("item_external_id", xml);
         this.codebar = getTagValue("codebar", xml);
         this.itemDesc = getTagValue("itemDesc", xml);
@@ -201,5 +206,8 @@ public class Niki_request {
         }
 
     }
+    
+    
+    
 
 }

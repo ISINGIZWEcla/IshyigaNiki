@@ -10,13 +10,7 @@
 
 
 <%    
-} else if (!checkUserPrivileges.toString().contains("TAXRATE")) {
-    session.setAttribute("errorLogin","you don't have the right to handle taxes");
-
-%>
-<jsp:forward page="Login.jsp"/>
-
-<%    } else {
+} else {
 	String userLanguage = session.getAttribute("userInSessionLanguage").toString();
 
 %>
@@ -36,7 +30,7 @@ session.setAttribute("taxrate",null);
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>TaxRate</title>
+  <title>HS CODE</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
@@ -136,129 +130,46 @@ session.setAttribute("taxrate",null);
       
     </div>
     <div class="col-sm-8 text-left" >
-	 
-        <div><h1>Tax_Rate Entry Form</h1> </div>
-        
-        <h3>${txr.insertMsg}</h3>
-        <h4>${txr.error} </h4>
-        
-
-        
-        <form name="inputCat" action="Tax_RateResponse.jsp" method="POST">
-            
-            
-            <table id="inputTax" >
-                
-                  <tr>
-                    <td>
-                       Tax Class 
-                    </td>
-                    <td>
-                        <input type="text" name="taxClass" value="" required=true size="35"/> 
-                    </td>
-                    
-                </tr> 
-                <tr>
-                    <td>
-                       Tax Label: 
-                    </td>
-                    <td>
-                        <input type="text" name="txlbl" value="" required=true size="35"/> 
-                    </td>
-                    
-                </tr>
-                <tr>
-                    <td>
-                        Tax Value:
-                    </td>
-                    <td>
-                        <input type="text" name="txvl" value="" required=true size="35" >
-                    </td>
-                    
-                </tr>
-                
-                
-                <tr>
-                    <td>
-                        
-                    </td>
-                    <td>
-                        <input value="save" type="submit"/>
-                    </td>
-                    
-                </tr>
-                
-            </table>
-
-            
-        </form>
-        
+	        
+ 
         <div>
                 <h3>${txr.insertMsg}</h3>
                 <h4>${txr.error} </h4>
                  
-                <h3 style="background-color:buttonface">Tax Rates List</h3>
+                <h3 style="background-color:buttonface">HS CODE item List</h3>
                 
                 <table  id="example" class="table table-striped table-bordered" cellspacing="0" width="100%" >
                     <thead> 
                         <tr>
-                            <th> Tax label</th>               
-                            <th> Tax value</th>   
-                            <th> Tax Class</th>   
-                            <th> Status </th>
-                            <th> Edit </th>
-                            <th> Sleep </th>
+                            <th> HS CODE </th>               
+                            <th> HS NAME </th>   
                         </tr>
                         
-                        </thead>
-                        <tfoot>
-                        <tr>
-
-                            <th> Tax label</th>               
-                            <th> Tax value</th>  
-                            <th> Tax Class</th> 
-                            <th> Status </th>
-                            <th> Edit </th>
-                            <th> Sleep </th>
-                           
-
-                        </tr>
-                        </tfoot>
+                        </thead> 
                         <tbody>
                         <%
 
                             try {
 
-                                Connection con = ConnectionClass.getConnection();
-                                Statement ST = con.createStatement();
-                                ResultSet rs = ST.executeQuery("SELECT * FROM niki_tax_rates");
-                                int i = 0;
+                                Connection con = ConnectionClass.getConnection(); 
+                                PreparedStatement st = con.prepareStatement(
+                                                        "SELECT niki_authority_code,niki_authority_name FROM niki.niki_authority_items where"
+                                                        + " niki_authority_id='HS'   ORDER BY niki_authority_name ");
+                                                ResultSet rs = st.executeQuery();
                                 while (rs.next()) {
 
                                     String bb = rs.getString(1);
-                                    String cc = rs.getString(2);
-                                    String dd = rs.getString(3);
-                                    String kk = rs.getString(4);
-                                    
-
-                                 
+                                    String cc = rs.getString(2);  
 
                         %>  
                         <tr> 
 
                             <td><%=bb%>  </td>
-                            <td> <%= cc%></td>
-                            <td> <%= dd%></td>
-                            <td> <%= kk%></td>
-                           
-                            <td> <a href="TaxRateUpdate.jsp?taxEdit=<%=bb%>&action=update" class="btn btn-primary"> Edit </a></td>
-                            <td> <a href="Tax_RateResponse.jsp?taxRejectSleep=<%=bb%>&action=taxSleep" class="btn btn-primary">Sleep </a></td>
-                            
+                            <td> <%= cc%></td> 
                             
                         </tr>
                         
-                        <%
-                                    i++;
+                        <% 
                                 }
 
                                 con.close();

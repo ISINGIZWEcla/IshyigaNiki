@@ -4,6 +4,11 @@
     Object checkUserPrivileges = session.getAttribute("userInSessionPrivileges");
     Object checkfName = session.getAttribute("userInSessionfName");
     Object checkType = session.getAttribute("userInSessionType");
+    boolean ndemerewe =false;
+    
+     if (checkUserPrivileges != null && checkUserPrivileges.toString().contains("EDITITEM")) {
+    ndemerewe=true;
+   }
     if (checkUserPrivileges == null) {
 %>
 <jsp:forward page="Login.jsp"/>
@@ -17,7 +22,8 @@
 <jsp:forward page="Login.jsp"/>
 
 
-<%    } else {
+<%    } 
+else {
 
 %>
 
@@ -310,7 +316,8 @@ conn.close();
                             <th> Tax-rate </th>
                             
                              <% if(!ndimuritransformation){ %>
-                             <th> Status </th> 
+                             <th> creator </th> 
+                             <th> Edit </th> 
                                <% } else { %>
                              <th> INN </th>
                              <th> EXIST </th>
@@ -338,7 +345,7 @@ String sqll="SELECT * FROM niki_items "+sqlToAdd;
                                     String item_inn = rs.getString("item_inn");
                                     double item_packet = rs.getDouble("item_packet");
                                     String item_key_words = rs.getString("item_key_words");
-                                    String created = rs.getString("created");
+                                    String created = rs.getString("global_id");
                                     String category_id = rs.getString("category_id");  
 
                         %>  
@@ -351,22 +358,27 @@ String sqll="SELECT * FROM niki_items "+sqlToAdd;
                             <td> <%= category_id%></td>
                             <td> <%= item_fabricant%></td>
                              <td> <%= tax_vat%></td> 
-                             <% if(!ndimuritransformation){ %>
-                             <td> <%=status %></td>  
-                               <% } else { %>
-                             <td> <a href="ItemValidationReal.jsp?itemValidate=<%=item_temp_id%>&action=validate&attachNiki=<%=niki_code%>" class="btn btn-primary enable " data-toggle="modal" data-target="#basicModal" > ATTACH </a></td>
-                             <td> <a href="ItemRejectSleepResponse.jsp?itemRejectSleep=<%=item_temp_id%>&action=sleepFinal&attachNiki=<%=niki_code%>" class="btn btn-primary enable"> SAME </a></td>
-                              <% } %>
-                            
-                        </tr>
-                        
-                        <%
-                                    i++;
-                                }
+                             <% if(!ndimuritransformation &&ndemerewe){ %>
+                             <td> <%=created %></td>  
+                             <td> <a href="ItemUPDATEReal.jsp?action=update&Niki=<%=niki_code%>" class="btn btn-primary enable " data-toggle="modal" data-target="#basicModal" > EDIT </a></td>
+                               <% }
+                             else if(!ndimuritransformation){ %>
+                                 <td> <%=created %></td>  
+                                 <td>NOT</td>
+                                     <% }else { %>
+                                 <td> <a href="ItemValidationReal.jsp?itemValidate=<%=item_temp_id%>&action=validate&attachNiki=<%=niki_code%>" class="btn btn-primary enable " data-toggle="modal" data-target="#basicModal" > ATTACH </a></td>
+                                 <td> <a href="ItemRejectSleepResponse.jsp?itemRejectSleep=<%=item_temp_id%>&action=sleepFinal&attachNiki=<%=niki_code%>" class="btn btn-primary enable"> SAME </a></td>
+                                  <% } %>
 
-                                con.close();
+                            </tr>
 
-                            } catch (Exception e) {
+                            <%
+                                        i++;
+                                    }
+
+                                    con.close();
+
+                                } catch (Exception e) {
                                 e.printStackTrace();
 
                             }

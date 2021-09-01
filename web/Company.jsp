@@ -107,7 +107,7 @@ session.setAttribute("fromChooseCompany", from);
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="index.html">Home</a></li>
+        <li class="active"><a href="niki.jsp">Home</a></li>
         <li><a href="import&export.jsp">import&export</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -240,24 +240,18 @@ conn.close();
                             <th> Company Desc</th>   
                             <th> Status </th>
                             <th> Busin_Category </th>
+                            <th> Total Items </th>
+                            <th> Temporaires </th>
+                            
+                            <th> on NiKi </th>
                             <th> Edit </th>
                             <th> Sleep </th>
+                            
+                            
                         </tr>
                         
                         </thead>
-                        <tfoot>
-                        <tr>
-
-                            <th> Company Id</th>               
-                            <th> Company Desc</th>   
-                            <th> Status </th>
-                            <th> Busin_Category </th>
-                            <th> Edit </th>
-                            <th> Sleep </th>
-                           
-
-                        </tr>
-                        </tfoot>
+                       
                         <tbody>
                         <%
 
@@ -267,16 +261,11 @@ conn.close();
                                 Statement ST = con.createStatement();
                                 ResultSet rs = ST.executeQuery("SELECT * FROM niki_companies");
                                 int i = 0;
-                                while (rs.next()) {
-
+                                while (rs.next()) { 
                                     String bb = rs.getString(1);
                                     String cc = rs.getString(2);
                                     String dd = rs.getString(3);
-                                    String ee = rs.getString(4);
-                                    
-
-                                 
-
+                                    String ee = rs.getString(4); 
                         %>  
                         <tr> 
 
@@ -284,14 +273,78 @@ conn.close();
                             <td> <%= cc%></td>
                             <td> <%=dd %></td>
                             <td> <%=ee %></td>
-                           
-                            <td> <a href="CompanyUpdate.jsp?compEdit=<%=bb%>&compName=<%=cc%>&action=update"> Edit </a></td>
-                            <td> <a href="CompanyResponse.jsp?compRejectSleep=<%=bb%>&action=compSleep">Sleep </a></td>
+                                                        <% 
                             
+    String sqltotal="SELECT COUNT(item_external_id) FROM niki.niki_items_temp where company_id='"+bb+"'";                        
+                            
+                                    PreparedStatement stto = con.prepareStatement
+                                           (sqltotal);
+
+                                    ResultSet rsot = stto .executeQuery();
+ int countto =0;
+                                    while (rsot.next()) {
+                                        // Integer ip = rs.getInt("univId");
+                                          countto = rsot.getInt(1); 
+
+                            %>
+                               <td> <%=countto %></td> 
+                            <%
+
+                                    }
+                            %>
+                            
+                            <% 
+                            
+    String sqll="SELECT COUNT(item_external_id) FROM niki.niki_items_temp where company_id='"+bb+"' and status ='PENDING'";                        
+                            
+                                    PreparedStatement st = con.prepareStatement
+        (sqll);
+
+                                    ResultSet rso = st.executeQuery();
+ int count =0;
+                                    while (rso.next()) {
+                                        // Integer ip = rs.getInt("univId");
+                                          count = rso.getInt(1); 
+
+                            %>
+                               <td> <%=count %></td> 
+                            <%
+
+                                    }
+                            %>
+                            
+                             <% 
+                            
+    String sqlll="SELECT COUNT(item_external_id) FROM niki.niki_items_temp where company_id='"+bb+"' and status !='PENDING'";                        
+                            
+                                    PreparedStatement sto = con.prepareStatement
+        (sqlll);
+
+                                     rso = sto.executeQuery();
+ int countV =0;
+                                    while (rso.next()) {
+                                        // Integer ip = rs.getInt("univId");
+                                          countV = rso.getInt(1); 
+
+                            %>
+                               <td> <%=countV %></td> 
+                            <%
+
+                                    }
+                            %>
+                        <td> <a href="CompanyUpdate.jsp?compEdit=<%=bb%>&compName=<%=cc%>&action=update"> Edit </a></td>
+                        <td> <a href="CompanyResponse.jsp?compRejectSleep=<%=bb%>&action=compSleep">Sleep </a></td>
                             
                         </tr>
                         
                         <%
+                            
+                            
+                            
+                            
+                            
+                            
+                            
                                     i++;
                                 }
 

@@ -125,7 +125,7 @@ else{
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="index.html">Home</a></li>
+        <li class="active"><a href="niki.jsp">Home</a></li>
         <li><a href="niki.jsp">NIKI</a></li>
         <li><a href="FinalItems.jsp">Final Items</a></li>
       </ul>

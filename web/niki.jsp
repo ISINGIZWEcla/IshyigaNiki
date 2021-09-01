@@ -1,4 +1,8 @@
 
+<%@page import="niki.ConnectionClass"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.Connection"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -43,56 +47,115 @@
     }
   </style>
 </head>
+ <%
+     String tempo="";
+     String niki="";
+     String bus="";
+     String promo="";
+     String cat="";
+     String manu="";
+     String company="";
+
+                            try {
+
+Connection con = ConnectionClass.getConnection();
+Statement ST = con.createStatement();
+ResultSet rs = ST.executeQuery("SELECT count(item_id) FROM niki.niki_items_temp"); 
+   while (rs.next()) {  tempo = "("+rs.getInt(1)+")";}
+   rs = ST.executeQuery("SELECT count(niki_code) FROM niki.niki_items"); 
+   while (rs.next()) {  niki = "("+rs.getInt(1)+")";}
+   rs = ST.executeQuery("SELECT count(busin_category_id) FROM niki.niki_business_categories"); 
+   while (rs.next()) {  bus = "("+rs.getInt(1)+")";}
+   rs = ST.executeQuery("SELECT count(promo_code) FROM niki.niki_promotions"); 
+   while (rs.next()) {  promo = "("+rs.getInt(1)+")";}
+    rs = ST.executeQuery("SELECT count(category_id) FROM niki.niki_categories"); 
+   while (rs.next()) {  cat = "("+rs.getInt(1)+")";}
+   rs = ST.executeQuery("SELECT count(fabricant_id) FROM niki.niki_fabricant"); 
+   while (rs.next()) {  manu = "("+rs.getInt(1)+")";}
+   rs = ST.executeQuery("SELECT count(companyId) FROM niki.niki_companies"); 
+   while (rs.next()) {  company = "("+rs.getInt(1)+")";}  
+   
+   
+                                con.close();
+
+                            } catch (Exception e) {
+                                e.printStackTrace();
+
+                            }
+                        %>
  <meta charset="UTF-8"> 
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
     
     	<div style="background-color: orange; border-style: solid;width:100%;">
-	        <div style="text-align: center; border:medium; "><h1>Welcome To NIKI</h1> </div>         
+	        <div style="text-align: center; border:medium; "><h1>Welcome To NIKI 2.3</h1> </div>         
         </div>
         <div style="background: #CCCCCC; position:absolute;width:100%;height:100%">
 	        <div style=" margin-left:25%; margin-top:5%;">  
 	        
 		        <div style="float: left;margin-right:20px">
-		        <form action="temporariesPage.jsp">
-		        		<input type="submit" style="font-weight:bold; width: 15em; height: 12em;color: black; background-color: powderblue;" value="TRANSFORM"/>
+		        <form action="PendingItems.jsp">
+		        		<input type="submit" style="font-weight:bold; 
+                                               width: 15em; height: 12em;color: black; 
+                                               background-color: powderblue;" 
+                                               value="TRANSFORM <%=tempo%>"/>
 		        		
                             	</form> 
-		        </div>
+		        </div> 
 		        <div style="float: left;margin-right:20px">
 		        	<form action="Item.jsp">
-		        		<input type="submit" style="font-weight:bold; background: pink; width: 15em; height: 12em;color: black;" value="NIKI LIST"/>
+		        		<input type="submit" style="font-weight:bold; background: pink; width: 
+                                               15em; height: 12em;color: black;" 
+                                               value="NIKI LIST <%=niki%>"/>
 		        	</form> 
 		        </div>
 		        <div style="margin-right:20px;margin-bottom:20px;">
                             <a href="../build/web/settings.jsp"></a>
 		        	<form action="Business_Category.jsp">
-		        		<input type="submit" style="font-weight:bold; width: 15em; height: 12em;color: black ; background: red;" value="BUSINESS SECTOR"/>
+		        		<input type="submit" style="font-weight:bold;
+                                               width: 15em; height: 12em;color: black ; 
+                                               background: red;" 
+                                               value="BUSINESS SECTOR <%=bus%>"/>
 		        	</form> 
 		        </div>
 		        <div style="float: left;margin-right:20px">
 		        	<form action="Promotions.jsp">
-		        		<input type="submit" style="font-weight:bold;width: 15em; height: 12em;color: black;font-size: 100; background-color:  orange;" value="PROMOTIONS"/>
+		        		<input type="submit" style="font-weight:bold;
+                                               width: 15em; height: 12em;color: black;
+                                               font-size: 100; background-color:  orange;
+                                               " value="PROMOTIONS <%=promo%>"/>
 		        </form> 
 		        </div>
 		        <div style="float: left;margin-right:20px">
 		        	<form action="Category.jsp">
-		        		<input type="submit" style="font-weight:bold; width: 15em; height: 12em;color: black; background-color:  lightgreen; " value="CATEGORIES"/>
+		        		<input type="submit" style="font-weight:bold; 
+                                               width: 15em; height: 12em;color: black; 
+                                               background-color:  lightgreen; " 
+                                               value="CATEGORIES <%=cat%>"/>
 		        	</form> 
 		        </div>
 		        <div style="margin-right:20px;margin-bottom:20px;">
 		        	<form action="itemExport.jsp">
-		        		<input type="submit" style="font-weight:bold; width: 15em; height: 12em;color: black;background-color: yellow; " value="EXPORT EXCEL"/>
+		        		<input type="submit" style="font-weight:bold; 
+                                               width: 15em; height: 12em;color: black;
+                                               background-color: yellow; " 
+                                               value="EXPORT EXCEL"/>
 		        	</form> 
 		        </div>
                        <div style="float: left;margin-right:20px">
 		        	<form action="Manufacture.jsp">
-		        		<input type="submit" style="font-weight:bold; width: 15em; height: 12em;color: black; background-color: gray;" value="MANUFACTURE"/>
+		        		<input type="submit" style="font-weight:bold; 
+                                               width: 15em; height: 12em;color: black; 
+                                               background-color: gray;" 
+                                               value="MANUFACTURE <%=manu%>"/>
 		        	</form> 
 		        </div>
 		        <div style="float: left;margin-right:20px">
 		        	<form action="Company.jsp">
-		        		<input type="submit" style="font-weight:bold; width: 15em; height: 12em;color: black; background-color:  mediumvioletred; " value="COMPANIES"/>
+		        		<input type="submit" style="font-weight:bold; 
+                                               width: 15em; height: 12em;color: black; 
+                                               background-color:  mediumvioletred; " 
+                                               value="COMPANIES <%=company%>"/>
 		        	</form> 
 		        </div>
 		        <div style="margin-right:20px">

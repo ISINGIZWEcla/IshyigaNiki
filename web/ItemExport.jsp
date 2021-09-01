@@ -10,14 +10,7 @@
 
 
 <%    
-} else if (!checkUserPrivileges.toString().contains("ADDITEM")) {
-    session.setAttribute("errorLogin","you don't have the right to add an item");
-
-%>
-<jsp:forward page="Login.jsp"/>
-
-
-<%    } else {
+} else {
 
 %>
 

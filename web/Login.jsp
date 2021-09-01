@@ -125,8 +125,8 @@
                                 </tr>
                                 <tr>
                                     <td></td>
-                            <td><input class="btn btn-primary" type="submit" value="Login" name="save" />
-                            <input class="btn btn-primary" type="reset" value="cancel" name="cancel" /></td>
+                            <td><input class="btn btn-success" type="submit" value="Login" name="save" />
+                            <input class="btn btn-danger" type="reset" value="cancel" name="cancel" /></td>
                         </tr>
 
                             </tbody>

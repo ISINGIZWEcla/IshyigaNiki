@@ -1,4 +1,5 @@
 
+<%@page import="HTTP_URL.Igicu"%>
 <%
     Object checkUserPrivileges = session.getAttribute("userInSessionPrivileges");
     Object checkfName = session.getAttribute("userInSessionfName");
@@ -66,7 +67,7 @@ String userLanguage = session.getAttribute("userInSessionLanguage").toString();
 		    	
 		    	
 			} );
-		</script>
+       </script>
 
   <style>
     /* Remove the navbar's default margin-bottom and rounded borders */
@@ -117,7 +118,7 @@ String userLanguage = session.getAttribute("userInSessionLanguage").toString();
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="index.html">Home</a></li>
+        <li class="active"><a href="niki.jsp">Home</a></li>
         <li><a href="niki.jsp">NIKI</a></li>
         <li><a href="temporariesPage.jsp">Temporaries</a></li>
       </ul>
@@ -163,7 +164,7 @@ String userLanguage = session.getAttribute("userInSessionLanguage").toString();
                         <%
                         String categName="";
                         String bus_categName="";
-String sql ="SELECT * FROM niki_items_temp where status='PENDING' AND company_id='"+company+"'";
+String sql ="SELECT * FROM niki_items_temp where status='PENDING' AND company_id='"+company+"' order by itemDesc";
                             try {
 
                                 Connection con = ConnectionClass.getConnection();
@@ -190,13 +191,13 @@ String sql ="SELECT * FROM niki_items_temp where status='PENDING' AND company_id
                                     String hs_code = rs.getString("hs_code");
                                     String company_id = rs.getString("company_id");
                                     
-                                    Statement ST1 = con.createStatement();
+                                    /*Statement ST1 = con.createStatement();
                                     ResultSet rs1 = ST1.executeQuery("SELECT category_descr FROM niki_categories where category_id='"+ subcategory_id + "'");
                                     
                                     while(rs1.next()){
                                     	categName = rs1.getString(1);
-                                    }
-                                    
+                                    }*/
+                                    categName =subcategory_id;
                                     Statement ST2 = con.createStatement();
                                     ResultSet rs2 = ST2.executeQuery("SELECT busin_category_descr FROM niki_business_categories where busin_category_id = '"+ busin_category_id+"' ");
                                     
@@ -250,7 +251,7 @@ String sql ="SELECT * FROM niki_items_temp where status='PENDING' AND company_id
                             <td> <%= bus_categName%></td> 
                             <td> <%= status%></td>
                             <td> <%= fabricant%></td>
-                            <td> <a href="Item.jsp?itemValidate=<%=item_id%>&itemDesc=<%=itemDesc%>&action=validate" > Validate </a></td>
+                            <td> <a href="Item.jsp?itemValidate=<%=item_id%>&itemDesc=<%=Igicu.gusukuraInteruro(itemDesc)%>&action=validate" > Validate </a></td>
                               
                             
                         </tr>
