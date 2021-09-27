@@ -190,6 +190,8 @@
                     String lesBus = "";
                     String item_emballage = "";
                     String item_form = "";
+                    String item_dosage_unity = "";
+                    String item_brand = "";
 
                     try {
                         Connection conn = ConnectionClass.getConnection();
@@ -216,6 +218,13 @@
                             item_fabricant = rs.getString("fabricant");
                             tax_vat = rs.getString("tax_rate");
                             hs_code = rs.getString("hs_code");
+                            
+                            item_form = rs.getString("item_form");
+                            item_brand = rs.getString("item_brand");
+                            item_dosage_unity = rs.getString("item_dosage_unity");
+                            item_emballage = rs.getString("item_emballage");
+                            item_dosage = rs.getInt("item_dosage");
+                            
                             String company_id = rs.getString("company_id");
                             item_inn = rs.getString("molecular_name");
                             Statement ST1 = conn.createStatement();
@@ -318,17 +327,17 @@
                                 </td>
                                 <td width="50%">
                                     <input type="text" name="item_commercial_name"
-                                           value="<%=item_commercial_name%>" required=true size="25" >
+                                           value="<%=item_commercial_name%>" required=true size="50" >
                                 </td>
 
                             </tr>
                             <tr>  <td bgcolor="#F7BCFB" > item molecular  </td>
                                 <td>  <input type="text" name="item_inn" 
-                                             value="<%=item_inn%>" required=true size="25" >
+                                             value="<%=item_inn%>" required=true size="50" >
                                 </td>  </tr> 
                             <tr>  <td bgcolor="#F7BCFB" > s item key word  </td>
                                 <td>
-                                    <input type="text" name="item_key_words" value="<%=item_key_words%>" required=true size="15" >
+                                    <input type="text" name="item_key_words" value="<%=item_key_words%>" required=true size="50" >
                                 </td>   </tr>
                             <tr>  <td bgcolor="#BCE6FB">   item form  </td>
                                 <td  bordercolor="#ff0000" > <select name="item_form" required="required">
@@ -357,8 +366,33 @@
                             </tr> 
 
                             <tr>  <td bgcolor="#BCE6FB"  > item dose   </td>
-                                <td  bordercolor="#ff0000">  <input type="text" name="item_dosage" value="<%=doseSmart%>" required=true size="15" >
-                                </td>  </tr>            
+                                <td  bordercolor="#ff0000">  <input type="text" name="item_dosage" value="<%=item_dosage%>" required=true size="15" >
+                                </td>  </tr>  
+                              <tr>  <td bgcolor="#BCE6FB">   item dose unity  </td>
+                                <td  bordercolor="#ff0000" > <select name="item_dose_unity" required="required">
+                                        <% try {
+                                                Connection conn = ConnectionClass.getConnection();
+                                                PreparedStatement st = conn.prepareStatement(
+                                                        "SELECT niki_dose_unity_id,niki_dose_unity_name FROM niki.niki_dose_unity order by niki_dose_unity_name");
+                                                ResultSet rs = st.executeQuery();
+                                                while (rs.next()) {
+                                                    String niki_form_id = rs.getString("niki_dose_unity_id");
+                                                     String niki_form_name = rs.getString("niki_dose_unity_name");
+                                        if(niki_form_id.equals(item_form))
+                                        {  %>
+                                        <option value="<%=niki_form_id%>" selected><%=niki_form_name%> </option> <% }
+                                                    else  
+                                        {  %>
+                                        <option value="<%=niki_form_id%>"><%=niki_form_name%> </option> <% }}
+                                                conn.close();
+                                            } catch (Exception e) { 
+                                                out.print(e);
+                                            }%>  </select>
+                                </td>  <td>
+                                    <!--                     <a href="SubCategory.jsp"><img src="Images\newer.png" height="30" width="30"></a> -->
+                                    <a href="Dosage_unity.jsp?" class="glyphicon glyphicon-plus btn btn-primary">Add Dosage Unity</a>
+                                </td> 
+                            </tr> 
                             <tr>  <td bgcolor="#BCE6FB">   item package  </td>
                                 <td  bordercolor="#ff0000"> <select name="item_emballage" required="required">
                                         <% try {
@@ -601,42 +635,7 @@
         <footer class="container-fluid text-center">
             <p><strong> Copyright &#169; 2016 Algorithm,Inc.</strong></p>
         </footer>
-
-        <!-- <div id="confirm" class="modal hide fade">
-        <div class="modal-dialog">
-                                <div class="modal-content">
-                                <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
-                                        <h4 class="modal-title" id="myModalLabel">Validate Item</h4>
-                                </div>
-          <div class="modal-body">
-            Are you sure?
-          </div>
-          <div class="modal-footer">
-            <button type="button" data-dismiss="modal" class="btn btn-primary" id="delete">Delete</button>
-            <button type="button" data-dismiss="modal" class="btn">Cancel</button>
-          </div>
-        </div>
-        </div>
-        </div> -->
-
-        <div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&amp;times;</button>
-                        <h4 class="modal-title" id="myModalLabel">Validate Item</h4>
-                    </div>
-                    <div class="modal-body">
-                        <h3>waiting.....<%=ngezehe%></h3>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+ 
 
 
     </body>

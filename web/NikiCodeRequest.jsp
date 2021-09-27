@@ -37,7 +37,7 @@ else {
     writer.close();
     if (nikI != null) {
         try {
-            String sql = "SELECT item_id,niki_code,status FROM niki.niki_items_temp "
+            String sql = "SELECT item_id,niki_code,item_external_id,status FROM niki.niki_items_temp "
                     + " where (item_external_id='" + nikI.item_external_id + "' and "
                     + " company_id='" + nikI.id_company + "') "
                     + "OR (itemDesc='" + nikI.itemDesc + "' and "
@@ -54,6 +54,7 @@ else {
         nikI.item_id = rs.getInt("item_id");
         nikI.status = rs.getString("status");
         nikI.niki_code = rs.getString("niki_code");
+        nikI.item_external_id = rs.getString("item_external_id");
         String resultat = nikI.getXml();
         irimo = true;
 %>
@@ -74,6 +75,7 @@ while (rs.next()) {
         nikI.item_id = rs.getInt("item_id");
         nikI.status = rs.getString("status");
         nikI.niki_code = rs.getString("niki_code");
+        nikI.item_external_id = rs.getString("item_external_id");
         String resultat = nikI.getXml();
         irimo2 = true;
 %>

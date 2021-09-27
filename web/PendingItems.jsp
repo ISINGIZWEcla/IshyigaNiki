@@ -30,7 +30,8 @@
 String user=session.getAttribute("userInSessionfName").toString(); 
 String company = session.getAttribute("userInSessionCompany").toString(); 
 String userLanguage = session.getAttribute("userInSessionLanguage").toString();
-
+String sql ="SELECT * FROM niki_items_temp where status='PENDING' AND company_id='"+company+"' order by itemDesc";
+ 
 //setting the original item id to be validated to null
 	session.setAttribute("itemOriginal", null); 
 
@@ -164,8 +165,7 @@ String userLanguage = session.getAttribute("userInSessionLanguage").toString();
                         <%
                         String categName="";
                         String bus_categName="";
-String sql ="SELECT * FROM niki_items_temp where status='PENDING' AND company_id='"+company+"' order by itemDesc";
-                            try {
+                           try {
 
                                 Connection con = ConnectionClass.getConnection();
                                 Statement ST = con.createStatement();
@@ -190,6 +190,8 @@ String sql ="SELECT * FROM niki_items_temp where status='PENDING' AND company_id
                                     String tax_rate = rs.getString("tax_rate");
                                     String hs_code = rs.getString("hs_code");
                                     String company_id = rs.getString("company_id");
+                                    
+                                   
                                     
                                     /*Statement ST1 = con.createStatement();
                                     ResultSet rs1 = ST1.executeQuery("SELECT category_descr FROM niki_categories where category_id='"+ subcategory_id + "'");

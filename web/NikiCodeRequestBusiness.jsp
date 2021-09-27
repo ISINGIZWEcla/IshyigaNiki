@@ -55,6 +55,8 @@ String sql="SELECT * FROM niki.niki_items,niki.niki_item_business_category where
                                     String item_commercial_name = rs.getString("item_commercial_name");
                                     String tax_vat = rs.getString("tax_vat");
                                     String status = rs.getString("status");
+                                    String bar_code = rs.getString("bar_code");
+                                    String hs_code = rs.getString("hs_code");
                                     String item_fabricant = rs.getString("item_fabricant");
                                     String item_inn = rs.getString("item_inn");
                                     double item_packet = rs.getDouble("item_packet");
@@ -78,6 +80,8 @@ String sql="SELECT * FROM niki.niki_items,niki.niki_item_business_category where
                  + "<item_emballage>"+item_emballage+"</item_emballage>"
                  + "<category_id>"+category_id+"</category_id>"
                  + "<item_dosage>"+item_dosage+"</item_dosage>"
+                 + "<item_bar_code>"+bar_code+"</item_bar_code>"
+                 + "<item_hs_code>"+hs_code+"</item_hs_code>"
                  + "</LINE>"; 
          
          

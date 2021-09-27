@@ -19,7 +19,7 @@ import java.sql.*;
 public class Item_Final {
     
     
-    private String niki_code;
+    private String niki_code,item_dose_unity;
     private String codebar; 
     private String category_id;
     private String taxRate, taxRateMessage; 
@@ -69,8 +69,9 @@ public Item_Final(){}
             int item_hauteur_mm, double item_poids_gr, double item_dosage, 
             String shipment_type, String item_key_words, String hs_code, 
             String gtin_code, String bar_code, String global_id, 
-            String bus_category_id ) {
+            String bus_category_id,String item_dose_unity ) {
         this.niki_code = niki_code;
+        this.item_dose_unity=item_dose_unity;
         this.codebar = codebar;
         this.category_id = category_id;  
         this.item_temp_id = item_temp_id;
@@ -232,11 +233,7 @@ public Item_Final(){}
      */
     public boolean insertItem()
     {
-        
-        try 
-        { 
-            
-            
+                 
 String sqlInsert = 
 "INSERT INTO `niki`.`niki_items` "
         + " (`niki_code`," +
@@ -262,21 +259,32 @@ String sqlInsert =
 "`hs_code`," +
 "`gtin_code`," +
 "`bar_code`," + 
-"`global_id`)"
-                    + " values (?,?,?,?"
+"`global_id`,`item_dosage_unity`)" 
+                    + " values (?,?,?,?,?"
         + ",?,?,?,?"
         + ",?,?,?,?"
         + ",?,?,?,?"
         + ",?,?,?,?"
-        + ",?,?,?,?)";
+        + ",?,?,?,?)";  
+        try 
+        { 
+            
+ 
             
             
              
             
-            PreparedStatement pst3 = conn.prepareStatement("select item_commercial_name from niki_items where item_commercial_name = ? ");
+            PreparedStatement pst3 = conn.prepareStatement(
+                    "select item_commercial_name from niki_items where "
+                            + " item_commercial_name = ? "
+             + " AND item_fabricant = ? "
+             + " AND item_packet = ? ");
             PreparedStatement pst5 = conn.prepareStatement("select item_commercial_name from niki_items where bar_code = ? and (bar_code NOT IN ('','null') AND bar_code IS NOT NULL) ");
  
-            pst3.setString(1, item_commercial_name);  
+            pst3.setString(1, item_commercial_name); 
+            pst3.setString(2,item_fabricant );
+            pst3.setDouble(3, item_packet);
+            
             pst5.setString(1, codebar);     
             ResultSet rs1 = pst3.executeQuery();
             ResultSet rs3 = pst5.executeQuery(); 
@@ -324,14 +332,16 @@ String sqlInsert =
                 pst.setString(22, gtin_code);
                 pst.setString(23, bar_code);
                 pst.setString(24, global_id); 
-                
+                 pst.setString(25, item_dose_unity); 
+                 
+                 
                 pst.execute();
                 insertMsg= " Successfully validated";
                 conn.close(); 
                 return true;
             }
         } catch (Exception e) {
-            insertMsg="Not validated";
+            insertMsg="Not validated "+sqlInsert;
             setError(e.getMessage());
             
             return false;
@@ -393,66 +403,80 @@ String sqlInsert =
      */
     public boolean updateItem() {
 
+        String updateSql="";
         try {
-            PreparedStatement pst = conn.prepareStatement("update niki_items set bar_code=?,itemDesc_ENGL = ?,itemDesc_FRENCH=?, itemDesc_KINYA=?, itemDesc_SWAHILI=?, subcategory_id=?, taxLabel = ?  where niki_code=? ");
-
-
-            
-            /*
-             * checking if no other item has the same description as the  updated ones
-             */
-            PreparedStatement pst2 = conn.prepareStatement("select itemDesc_ENGL from niki_items where (itemDesc_ENGL = ? or itemDesc_FRENCH=? OR itemDesc_KINYA=? OR itemDesc_SWAHILI=?) and niki_code!=? ");
-
-            PreparedStatement pst3 = conn.prepareStatement("select itemDesc_ENGL from niki_items where bar_code = ? and (bar_code NOT IN ('','null') AND bar_code IS NOT NULL) and niki_code!=?");
-
-            /*
-             * deleting from niki_item_business_category table all business categories corresponding to the item to be updated,
-             *  because new business categories will be specified
-             */
+            Statement stat = conn.createStatement();
            
-            /*
-             * setting the preparedstatement parameters
-             */
-              
-            pst3.setString(1, codebar);  
-            pst3.setString(2, niki_code);  
+               PreparedStatement pst3 = conn.prepareStatement(
+                    "select item_commercial_name from niki_items where "
+             + " item_commercial_name = ? "
+             + " AND item_fabricant = ? "
+             + " AND niki_code != ? "
+             + " AND item_packet = ? ");
+            PreparedStatement pst5 = conn.prepareStatement("select item_commercial_name from niki_items where bar_code = ? and (bar_code NOT IN ('','null') AND bar_code IS NOT NULL) ");
  
+            pst3.setString(1, item_commercial_name); 
+            pst3.setString(2,item_fabricant );
+            pst3.setString(3,niki_code );
+            pst3.setDouble(4, item_packet);
             
-            /*
-            resultsets of the select statements
-            */
-            ResultSet rs = pst2.executeQuery();
-
-            ResultSet rs2 = pst3.executeQuery();
-            
-                        
-            if(rs.next())
+            pst5.setString(1, codebar);     
+            ResultSet rs1 = pst3.executeQuery();
+            ResultSet rs3 = pst5.executeQuery(); 
+ 
+            if(rs1.next())
             {
-            	//there is another item with the same description in the final items
-            	String itmdesc = rs.getString(1);
-
+                //there is another item with the same description in the final items
+            	String itmdesc = rs1.getString(1); 
                 insertMsg="that item already exists in final items list as: "+itmdesc;
-                
+                 conn.close(); 
                 return false;
             }
-            else if(rs2.next())
+            
+            else
             {
-                //there is another item with the same codebar in the final items
+  updateSql="UPDATE `niki`.`niki_items` " +
+"SET " +  
+"`item_commercial_name` = '"+item_commercial_name+"', " +
+"`item_form` = '"+item_form+"', " +
+"`item_emballage` = '"+item_emballage+"'," +
+"`item_inn` = '"+item_inn+"', " +
+"`category_id` = '"+category_id+"'," +
+"`bus_category_id` = '"+bus_category_id+"', " +
+"`tax_vat` = '"+tax_vat+"', " +
+"`tax_excise` = '"+tax_excise+"', " +
+"`tax_duty` = '"+tax_duty+"', " +
+"`status` = '"+status+"', " +
+"`updated_time` = CURRENT_TIMESTAMP, " +
+"`item_fabricant` = '"+item_fabricant+"', " +
+"`item_packet` = "+item_packet+", " +
+"`item_longeur_mm` = "+item_longeur_mm+", " +
+"`item_largeur_mm` = "+item_largeur_mm+", " +
+"`item_hauteur_mm` = "+item_hauteur_mm+", " +
+"`item_poids_gr` = "+item_poids_gr+", " +
+"`item_dosage` = '"+item_dosage+"', " +
+"`shipment_type` = '"+shipment_type+"', " +
+"`item_key_words` = '"+item_key_words+"', " +
+"`hs_code` = '"+hs_code+"', " +
+"`gtin_code` = '"+gtin_code+"', " +
+"`bar_code` = '"+bar_code+"', " + 
+"`global_id` = '"+global_id+"', " +
+"`item_dosage_unity` = '"+item_dose_unity+"' " +
+"WHERE `niki_code` = '"+niki_code+"'" ;
 
-            	String itmdesc = rs2.getString(1);
+stat.execute(updateSql);
+insertMsg=updateSql;
 
-                insertMsg="that barcode belongs to an existing item named: "+itmdesc;
-                
-                return false;
-            } 
+                return true;
+            }
             
         } catch (Exception e) {
             setError(e.getMessage());
-            insertMsg="Not Inserted";
+            insertMsg=e.getMessage()+"Not Inserted "+updateSql;
             return false;
 
         }
-        return false;
+       // return false;
     }
     
     

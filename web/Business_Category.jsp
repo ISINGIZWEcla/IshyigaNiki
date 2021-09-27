@@ -232,8 +232,21 @@
                                     String cc = rs.getString(2);
                                     String dd = rs.getString(3);
                                     
+  
+                            
+    String sqltotal="SELECT COUNT(niki_code) FROM niki.niki_item_business_category "
+            + "where busin_category_id='"+bb+"'";                        
+                            
+                                    PreparedStatement stto = con.prepareStatement
+                                           (sqltotal);
 
-                                 
+                                    ResultSet rsot = stto .executeQuery();
+ int countto =0;
+                                    while (rsot.next()) {
+                                        // Integer ip = rs.getInt("univId");
+                                          countto = rsot.getInt(1); 
+ }
+                            %>
 
                         %>  
                         <tr> 
@@ -243,7 +256,7 @@
                             <td> <%= dd%></td>
                            
                             <td> <a href="Business_CategoryUpdate.jsp?busCatEdit=<%=bb%>&action=update"> Edit </a></td>
-                            <td> <a href="Business_CategoryResponse.jsp?busCatRejectSleep=<%=bb%>&action=busCatSleep">Sleep </a></td>
+                            <td> <a href="ItemCategory.jsp?item_cat=<%=bb%>&action=busCatSleep"><%=countto %> </a></td>
                             
                             
                         </tr>

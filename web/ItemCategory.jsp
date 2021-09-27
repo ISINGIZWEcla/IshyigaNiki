@@ -39,9 +39,9 @@ else {
 <%
 String user=session.getAttribute("userInSessionfName").toString(); 
  boolean ndimuritransformation=false;
- String item_temp_id = request.getParameter("itemValidate");
+ String item_cat = request.getParameter("item_cat");
  
- if(item_temp_id!=null && !item_temp_id.equals("")) {ndimuritransformation=true;}
+ if(item_cat!=null && !item_cat.equals("")) {ndimuritransformation=false;}
  
     String codeb = request.getParameter("cdb");
     String itmDesc = request.getParameter("itmd");
@@ -85,7 +85,7 @@ String and="";
 if(searchON)
 {sqlToAdd = " WHERE "+sqlToAdd;} 
 if(ndimuritransformation)
-{searchingfor +=" Transforming : "+item_temp_id+" | "+itemDescr;} 
+{searchingfor +=" Transforming : "+0+" | "+itemDescr;} 
 
 
 %>
@@ -185,7 +185,7 @@ if(ndimuritransformation)
     <div class="col-sm-8 text-left" >
 		<div class="page-header">
 			<h1 style="text-align: center; text-shadow: maroon;">
-                            Item super search form </h1>
+                            Item for <%=item_cat%> super search </h1>
 		</div>         
                     
         <h3>${it_tmp.insertMsg}</h3>
@@ -248,8 +248,7 @@ conn.close();} catch (Exception e) {
                     </td>
                     <td>
                         <input type="text" name="cdb" value="${it_tmp.codebar}" size="35"/> 
-                        <input type="text" name="itemValidate" value="<%= item_temp_id %>" hidden="true" size="1"/>
-                    
+                        
                     </td>
                     <td>
                        category: 
@@ -301,8 +300,7 @@ conn.close();
         <div id="w">
                 <h3 style="background-color:buttonface">NIKI Items List  <%=searchingfor%>
                 <% if (ndimuritransformation) {%>
-                <td> <a href="ItemValidationReal.jsp?itemValidate=<%=item_temp_id%>&action=validate"  > DIRECT ADD </a></td>
-                <%  } %>         
+                 <%  } %>         
                 </h3>
                 
                 
@@ -330,7 +328,8 @@ conn.close();
                          
                         <tbody>
                         <%
-String sqll="SELECT * FROM niki_items "+sqlToAdd;
+String sqll="SELECT * FROM niki_items,niki_item_business_category "+sqlToAdd+
+            " WHERE busin_category_id='"+item_cat+"' and niki_items.niki_code=niki_item_business_category.niki_code  ";
                             try {
 
                                 Connection con = ConnectionClass.getConnection();
@@ -339,7 +338,7 @@ String sqll="SELECT * FROM niki_items "+sqlToAdd;
                                 int i = 0;
                                 while (rs.next()) {
 
-                                    String niki_code = rs.getString("niki_code");
+                                    String niki_code = rs.getString(1);
                                     String item_commercial_name = rs.getString("item_commercial_name");
                                     String tax_vat = rs.getString("tax_vat");
                                     String status = rs.getString("status");
@@ -369,8 +368,7 @@ String sqll="SELECT * FROM niki_items "+sqlToAdd;
                                   <td> <a href="ItemUpdate.jsp?action=update&nikicode=<%=niki_code%>" > EDIT </a></td>
                             
                                      <% }else { %>
-                                 <td> <a href="ItemValidationReal.jsp?itemValidate=<%=item_temp_id%>&action=validate&attachNiki=<%=niki_code%>" class="btn btn-primary enable " data-toggle="modal" data-target="#basicModal" > ATTACH </a></td>
-                                 <td> <a href="ItemRejectSleepResponse.jsp?itemRejectSleep=<%=item_temp_id%>&action=sleepFinal&attachNiki=<%=niki_code%>" class="btn btn-primary enable"> SAME </a></td>
+                                 <td>  </td>
                                   <% } %>
 
                             </tr>
