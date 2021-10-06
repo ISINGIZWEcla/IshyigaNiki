@@ -16,7 +16,8 @@ import java.sql.Statement;
  */
 public class Tax_Rate {
     private String taxLabel;
-    private String taxValue,taxClass;
+    private String taxClass;
+    private double taxValue;
     private String status="LIVE";
     private String insertMsg,selectMsg,updateMsg,error;
     private boolean valid=true;
@@ -27,7 +28,8 @@ public class Tax_Rate {
     public Tax_Rate() {
     }
 
-    public Tax_Rate(String taxLabel, String taxValue) {
+    public Tax_Rate(String taxLabel, String taxClass,double taxValue) {
+        this.taxClass = taxClass;
         this.taxLabel = taxLabel;
         this.taxValue = taxValue;
     }
@@ -44,11 +46,11 @@ public class Tax_Rate {
         this.taxLabel = taxLabel;
     }
 
-    public String getTaxValue() {
+    public double getTaxValue() {
         return taxValue;
     }
 
-    public void setTaxValue(String taxValue) {
+    public void setTaxValue(double taxValue) {
         this.taxValue = taxValue;
     }
  public void setTaxClass(String taxClass) {
@@ -98,13 +100,18 @@ public class Tax_Rate {
     end of getters and setters
     */
     
-    public boolean insertTaxRate()
+    public boolean insertTaxRate(String global_id)
     {
         
         try 
         {
 
-            PreparedStatement pst = conn.prepareStatement("insert into niki_tax_rates values(?,?,?)");
+            PreparedStatement pst = conn.prepareStatement("insert into niki_tax_rates "
+                    + " (`taxLabel`," +
+"`taxValue`," +
+"`taxClass`," +
+"`status`,`global_id`)" 
+                    + " values(?,?,?,?,?)"); 
             PreparedStatement pst2 = conn.prepareStatement("select taxValue from niki_tax_rates where taxValue = '"+taxValue +"'");
 
             
@@ -119,8 +126,10 @@ public class Tax_Rate {
             else
             {
                 pst.setString(1, taxLabel); 
-                pst.setString(2, taxValue);
-                pst.setString(3, status);
+                pst.setDouble(2, taxValue);
+                 pst.setString(3, taxClass);
+                pst.setString(4, status);
+                pst.setString(5, global_id);
                 
                 pst.execute();
                 conn.close(); 
@@ -201,14 +210,15 @@ public class Tax_Rate {
             /*
              * checking if no other taxrate has the same value as the  updated ones
              */
-            PreparedStatement pst2 = conn.prepareStatement("select taxValue from niki_tax_rates where taxValue = ?  and taxLabel!=? ");
+            PreparedStatement pst2 = conn.prepareStatement("select taxValue "
+                    + "from niki_tax_rates where taxValue = ?  and taxLabel!=? ");
 
  
             /*
              * setting the preparedstatement parameters
              */
                                     
-            pst2.setString(1, taxValue);
+            pst2.setDouble(1, taxValue);
             pst2.setString(2, taxLabel);
 
             

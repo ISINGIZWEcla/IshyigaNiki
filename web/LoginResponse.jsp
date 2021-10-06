@@ -76,7 +76,7 @@
             session.setAttribute("userInSessionUsername", name);
             session.setAttribute("userInSessionLanguage", languageFromDb);
             session.setAttribute("userInSessionCompany", company_affected);
-            session.setAttribute("formToUse", "index.html");
+            session.setAttribute("formToUse", "niki.jsp");
             String nextForm = session.getAttribute("formToUse").toString();
             response.sendRedirect(nextForm);
 

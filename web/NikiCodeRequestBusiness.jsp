@@ -64,6 +64,8 @@ String sql="SELECT * FROM niki.niki_items,niki.niki_item_business_category where
                                     String item_emballage = rs.getString("item_emballage");
                                     String category_id = rs.getString("category_id"); 
                                     String item_dosage = rs.getString("item_dosage");
+                                    String item_key_word = rs.getString("item_key_words");
+                                    String item_molecular = rs.getString("item_inn");
                                     
                                     
                             
@@ -82,6 +84,8 @@ String sql="SELECT * FROM niki.niki_items,niki.niki_item_business_category where
                  + "<item_dosage>"+item_dosage+"</item_dosage>"
                  + "<item_bar_code>"+bar_code+"</item_bar_code>"
                  + "<item_hs_code>"+hs_code+"</item_hs_code>"
+                 + "<key_word>"+item_key_word+"</key_word>"
+                 + "<item_molecular>"+item_molecular+"</item_molecular>"
                  + "</LINE>"; 
          
          

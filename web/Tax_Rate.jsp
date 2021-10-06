@@ -154,7 +154,11 @@ session.setAttribute("taxrate",null);
                        Tax Class 
                     </td>
                     <td>
-                        <input type="text" name="taxClass" value="" required=true size="35"/> 
+                      <select  name="taxClass">
+                                     <option value="tax_vat">TVA RATE</option> 
+                                     <option value="tax_duty">DUTY RATE</option> 
+                                     <option value="tax_excise">EXCISE RATE</option> 
+                        </select>
                     </td>
                     
                 </tr> 

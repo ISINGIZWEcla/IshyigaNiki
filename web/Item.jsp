@@ -165,7 +165,7 @@ if(ndimuritransformation)
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="index.html">Home</a></li>
+        <li class="active"><a href="niki.jsp">Home</a></li>
         <li><a href="temporariesPage.jsp">Temporaries</a></li>
         <li><a href="ItemLookup.jsp">Add Item</a>
       </ul>

@@ -88,7 +88,7 @@ ResultSet rs = ST.executeQuery("SELECT count(item_id) FROM niki.niki_items_temp"
         
     
     	<div style="background-color: orange; border-style: solid;width:100%;">
-	        <div style="text-align: center; border:medium; "><h1>Welcome To NIKI 2.3</h1> </div>         
+	        <div style="text-align: center; border:medium; "><h1>Welcome To NIKI 2.9</h1> </div>         
         </div>
         <div style="background: #CCCCCC; position:absolute;width:100%;height:100%">
 	        <div style=" margin-left:25%; margin-top:5%;">  
@@ -109,16 +109,40 @@ ResultSet rs = ST.executeQuery("SELECT count(item_id) FROM niki.niki_items_temp"
                                                value="NIKI LIST <%=niki%>"/>
 		        	</form> 
 		        </div>
-		        <div style="margin-right:20px;margin-bottom:20px;">
-                            <a href="../build/web/settings.jsp"></a>
-		        	<form action="Business_Category.jsp">
+		        <div style="margin-right:20px;margin-bottom:20px;"> 
+		        	<form action="Category.jsp">
 		        		<input type="submit" style="font-weight:bold;
                                                width: 15em; height: 12em;color: black ; 
                                                background: red;" 
+                                               value="CATEGORIES <%=cat%>"/>
+		        	</form> 
+		        </div>
+                    <div style="float: left;margin-right:20px">
+		        	<form action="Manufacture.jsp">
+		        		<input type="submit" style="font-weight:bold; 
+                                               width: 15em; height: 12em;color: black; 
+                                               background-color: gray;" 
+                                               value="MANUFACTURE <%=manu%>"/>
+		        	</form> 
+		        </div>
+		        
+		        <div style="float: left;margin-right:20px">
+		        	<form action="Business_Category.jsp">
+		        		<input type="submit" style="font-weight:bold; 
+                                               width: 15em; height: 12em;color: black; 
+                                               background-color:  lightgreen; " 
                                                value="BUSINESS SECTOR <%=bus%>"/>
 		        	</form> 
 		        </div>
-		        <div style="float: left;margin-right:20px">
+		        <div style="margin-right:20px;margin-bottom:20px;">
+		        	<form action="Company.jsp">
+		        		<input type="submit" style="font-weight:bold; 
+                                               width: 15em; height: 12em;color: black;
+                                               background-color: yellow; " 
+                                               value="COMPANIES <%=company%>"/>
+		        	</form> 
+		        </div>
+                       <div style="float: left;margin-right:20px">
 		        	<form action="Promotions.jsp">
 		        		<input type="submit" style="font-weight:bold;
                                                width: 15em; height: 12em;color: black;
@@ -127,40 +151,19 @@ ResultSet rs = ST.executeQuery("SELECT count(item_id) FROM niki.niki_items_temp"
 		        </form> 
 		        </div>
 		        <div style="float: left;margin-right:20px">
-		        	<form action="Category.jsp">
-		        		<input type="submit" style="font-weight:bold; 
-                                               width: 15em; height: 12em;color: black; 
-                                               background-color:  lightgreen; " 
-                                               value="CATEGORIES <%=cat%>"/>
-		        	</form> 
-		        </div>
-		        <div style="margin-right:20px;margin-bottom:20px;">
-		        	<form action="itemExport.jsp">
-		        		<input type="submit" style="font-weight:bold; 
-                                               width: 15em; height: 12em;color: black;
-                                               background-color: yellow; " 
-                                               value="EXPORT EXCEL"/>
-		        	</form> 
-		        </div>
-                       <div style="float: left;margin-right:20px">
-		        	<form action="Manufacture.jsp">
-		        		<input type="submit" style="font-weight:bold; 
-                                               width: 15em; height: 12em;color: black; 
-                                               background-color: gray;" 
-                                               value="MANUFACTURE <%=manu%>"/>
-		        	</form> 
-		        </div>
-		        <div style="float: left;margin-right:20px">
-		        	<form action="Company.jsp">
+		        	<form action="ItemExport.jsp">
 		        		<input type="submit" style="font-weight:bold; 
                                                width: 15em; height: 12em;color: black; 
                                                background-color:  mediumvioletred; " 
-                                               value="COMPANIES <%=company%>"/>
+                                               value="EXPORT EXCEL"/>
 		        	</form> 
 		        </div>
 		        <div style="margin-right:20px">
 		        	<form action="Settings.jsp">
-		        		<input type="submit" style="font-weight:bold; width: 15em; height: 12em;color: black;background-color: lightskyblue; " value="SETTINGS"/>
+		        		<input type="submit" style="font-weight:bold; 
+                                               width: 15em; height: 12em;color: black;
+                                               background-color: lightskyblue; " 
+                                               value="SETTINGS"/>
 		        	</form> 
 		        </div>
 	        </div>

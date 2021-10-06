@@ -155,43 +155,10 @@
                             <input style="margin-left:10px" type="submit" id="submit" value="Save" name="submit" class="btn btn-primary">
                         </div>
                 </form>
-        </div>
-          <!--<div ><h1>Business Category Entry Form</h1> </div>-->
-        
-<!--        <h3>${busin_cat.insertMsg}</h3>
-        <h4>${busin_cat.error} </h4>-->
-        
-       
-        
-<!--        <form name="inputCateg" action="Business_CategoryResponse.jsp" method="POST">
-            
-            
-            <table id="inputCateg" > 
-                <tr> <td>  Business category Id:   </td> <td>
-                        <input type="text" name="busin_category_id" value="${busin_cat.busin_category_id}" required=true size="35"/> 
-                    </td>  </tr> 
-                <tr>  <td>  Business category description:  </td>  <td>
-                        <input type="text" name="busin_category_descr" value="${busin_cat.busin_category_descr}" required=true size="35" >
-                    </td>  </tr>
-                 <tr> <td>  French:   </td> <td>
-                        <input type="text" name="french_business_name" value="${busin_cat.busin_category_id}" required=true size="35"/> 
-                    </td>  </tr> 
-                <tr>  <td>  Kinyarwanda:  </td>  <td>
-                        <input type="text" name="kinya_business_name" value="${busin_cat.busin_category_descr}" required=true size="35" >
-                    </td>  </tr>
-                 <tr>  <td>  </td> <td>
-                        <input value="save" type="submit"/>
-                    </td>  </tr>
-                
-            </table>
-
-            
-        </form>-->
-                    
+        </div>       
                     
         <div>
-                <h3>${itf.insertMsg}</h3>
-                <h4>${itf.error} </h4>
+                
                  
                 <h3>Business Categories List</h3>
                 <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
@@ -204,19 +171,7 @@
                             <th> Sleep </th>
                         </tr>
                         
-                        </thead>
-                        <tfoot>
-                        <tr>
-
-                            <th> Business Category Id</th>               
-                            <th> Business Category Desc</th>   
-                            <th> Status </th>
-                            <th> Edit </th>
-                            <th> Sleep </th>
-                           
-
-                        </tr>
-                        </tfoot>
+                        </thead> 
                         <tbody>
                         <%
 
@@ -248,7 +203,7 @@
  }
                             %>
 
-                        %>  
+                          
                         <tr> 
 
                             <td><%=bb%>  </td>

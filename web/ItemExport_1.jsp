@@ -1,7 +1,9 @@
 
 
 <%
-   
+    Object checkUserPrivileges = session.getAttribute("userInSessionPrivileges");
+    Object checkfName = session.getAttribute("userInSessionfName");
+    Object checkType = session.getAttribute("userInSessionType");
     boolean ndemerewe =false;
   {
 
@@ -14,21 +16,21 @@
 <%@ page import="java.sql.*" %>
 <%@ page import="niki.ConnectionClass" %>
 
-<%  
-    
- String item_cat ="SUPERMARKET";
- String codeb=null;
- String itmDesc = null,itmcat = null ,fabricant = null
-         ,itemDescr = null,itmcatN = null;
+<%
+String user=session.getAttribute("userInSessionfName").toString(); 
+ boolean ndimuritransformation=false; String item_cat ="SUPERMARKET";
+ String item_temp_id = request.getParameter("itemValidate");
  
- if(request!=null)
- {    codeb = request.getParameter("cdb");
-      itmDesc = request.getParameter("itmd");
-      itmcatN = request.getParameter("itcat"); 
+ if(item_temp_id!=null && !item_temp_id.equals("")) {ndimuritransformation=true;}
+ 
+    String codeb = request.getParameter("cdb");
+    String itmDesc = request.getParameter("itmd");
+    String itmcatN = request.getParameter("itcat"); 
      item_cat = request.getParameter("business_cat"); 
-      fabricant = request.getParameter("fabricant") ;
-      itemDescr =  request.getParameter("itemDesc");
- }
+    String fabricant = request.getParameter("fabricant") ;
+    String username = session.getAttribute("userInSessionUsername").toString().toUpperCase();
+    String itemDescr =  request.getParameter("itemDesc");
+    
 String searchingfor="";
 boolean searchON = false;
 String sqlToAdd="";
@@ -63,7 +65,9 @@ String and="";
 
 if(searchON)
 {sqlToAdd = " WHERE "+sqlToAdd;} 
- 
+if(ndimuritransformation)
+{searchingfor +=" Transforming : "+item_temp_id+" | "+itemDescr;} 
+
 
 %>
 
@@ -216,7 +220,8 @@ conn.close();} catch (Exception e) {
                     </td>
                     <td>
                         <input type="text" name="cdb" value="${it_tmp.codebar}" size="35"/> 
-                         
+                        <input type="text" name="itemValidate" value="<%= item_temp_id %>" hidden="true" size="1"/>
+                    
                     </td>
                     <td>
                        category: 
@@ -304,7 +309,9 @@ conn.close();
                         
 
                                         <div id="w">
-                        <h3 style="background-color:buttonface">NIKI Items for <%=item_cat%> List 
+                        <h3 style="background-color:buttonface">NIKI Items for <%=item_cat%> List
+                            <% if (ndimuritransformation) {%>
+                            <%  } %>         
                         </h3>
 
 
@@ -314,32 +321,24 @@ conn.close();
                                     <th> Niki code </th>
                                     <th width="30%"> Item_Commercial_Description</th>               
                                     <th> Molecular </th>
-                                    <th> Key Word </th>
                                     <th> Packet </th>
                                     <th> Category </th>
                                     <th> Manufacture </th> 
-                                    <th> VAT-rate </th>
-                                    <th> DUTY-rate </th>
-                                     <th> EXCISE-rate </th>
-                                    <th> Form </th>               
-                                    <th> Package </th>
-                                    <th> Height </th>
-                                    <th> Width </th>
-                                    <th> Length </th> 
-                                    <th> Weight </th>
-                                    <th> Dosage </th>
-                                    <th> Dosage Unity </th>
-                                    <th> Shipment type </th>
-                                    <th> Hs code </th>
-                                     <th> Bar code </th>
-                                    <th> Created </th>  
+                                    <th> Tax-rate </th>
+
+                                    <% if (!ndimuritransformation) { %>
+                                    <th> creator </th> 
+                                    <th> Edit </th> 
+                                        <% } else { %>
+                                    <th> INN </th>
+                                    <th> EXIST </th>
+                                        <% } %>
                                 </tr>
 
                             </thead>
 
                             <tbody>
                                 <%
-                                     item_cat ="SUPERMARKET";
                                     String sqll = "SELECT * FROM niki_items,niki_item_business_category " + sqlToAdd
                                             + " WHERE busin_category_id='" + item_cat + "' and niki_items.niki_code=niki_item_business_category.niki_code  ";
                                     try {
@@ -350,52 +349,37 @@ conn.close();
                                         int i = 0;
                                         while (rs.next()) {
 
-                                          String niki_code = rs.getString(1);
-String item_commercial_name = rs.getString("item_commercial_name");
-String item_inn = rs.getString("item_inn");
-String item_key_words = rs.getString("item_key_words");
-double item_packet = rs.getDouble("item_packet");
-String category_id = rs.getString("category_id");
-String item_fabricant = rs.getString("item_fabricant");
-String tax_vat = rs.getString("tax_vat");
-String tax_duty = rs.getString("tax_duty");
-String tax_excise = rs.getString("tax_excise");
-String item_form= rs.getString("item_form");
-String item_emballage = rs.getString("item_emballage");
-int item_longeur_mm= rs.getInt("item_longeur_mm");
-int item_largeur_mm= rs.getInt("item_largeur_mm");
-int item_hauteur_mm= rs.getInt("item_hauteur_mm");
-double item_poids_gr= rs.getDouble("item_poids_gr");
-double item_dosage= rs.getDouble("item_dosage");
-String item_dosage_unity= rs.getString("item_dosage_unity");
-String shipment_type= rs.getString("shipment_type");
-String hs_code= rs.getString("hs_code");
-String bar_code = rs.getString("bar_code");
-String created= rs.getString("created"); 
+                                            String niki_code = rs.getString(1);
+                                            String item_commercial_name = rs.getString("item_commercial_name");
+                                            String tax_vat = rs.getString("tax_vat");
+                                            String status = rs.getString("status");
+                                            String item_fabricant = rs.getString("item_fabricant");
+                                            String item_inn = rs.getString("item_inn");
+                                            double item_packet = rs.getDouble("item_packet");
+                                            String item_key_words = rs.getString("item_key_words");
+                                            String created = rs.getString("global_id");
+                                            String category_id = rs.getString("category_id");
+
                                 %>  
                                 <tr>   
- <td> <%=niki_code%>  </td>
-<td width="30%" > <%= item_commercial_name%></td>
-  <td> <%= item_inn%></td>
-  <td> <%= item_key_words%></td>
-  <td> <%= item_packet%></td>
-  <td> <%= category_id%></td>
-  <td> <%= item_fabricant%></td>
-  <td> <%= tax_vat%></td>  
-  <td> <%= tax_duty%></td>
-  <td> <%= tax_excise%></td>
-  <td> <%= item_form%></td>
-  <td> <%= item_emballage%></td>
-  <td> <%= item_longeur_mm%></td> 
-  <td> <%= item_largeur_mm%></td>
-  <td> <%= item_hauteur_mm%></td>
-  <td> <%= item_poids_gr%></td>
-  <td> <%= item_dosage%></td>
-  <td> <%= item_dosage_unity%></td> 
-  <td> <%= shipment_type%></td>
-  <td> <%= hs_code%></td>
-  <td> <%= bar_code%></td>
-  <td> <%= created%></td>  
+
+                                    <td><%=niki_code%>  </td>
+                                    <td width="30%" > <%= item_commercial_name%></td>
+                                    <td> <%= item_inn%></td>
+                                    <td> <%= item_packet%></td>
+                                    <td> <%= category_id%></td>
+                                    <td> <%= item_fabricant%></td>
+                                    <td> <%= tax_vat%></td> 
+                                    <% if (!ndimuritransformation && ndemerewe) {%>
+                                    <td> <%=created%></td>  
+                                    <td> <a href="ItemUpdate.jsp?action=update&nikicode=<%=niki_code%>" class="btn btn-primary enable " data-toggle="modal" data-target="#basicModal" > EDIT </a></td>
+                                    <% } else if (!ndimuritransformation) {%>
+                                    <td> <%=created%></td>  
+                                    <td> <a href="ItemUpdate.jsp?action=update&nikicode=<%=niki_code%>" > EDIT </a></td>
+
+                                    <% } else { %>
+                                    <td>  </td>
+                                    <% } %>
 
                                 </tr>
 
