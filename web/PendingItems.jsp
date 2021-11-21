@@ -57,19 +57,26 @@ String sql ="SELECT * FROM niki_items_temp where status='PENDING' AND company_id
         <script src="assets/js/jquery.dataTables.min.js"></script>
         <script src="assets/js/dataTables.bootstrap.min.js"></script>
         
-        <script>
-			$(document).ready(function() {
-		    	$('#example').DataTable();
-		    	
-		    	$('.modal').on('hidden.bs.modal', function(e)
-					    { 
-					        $(this).removeData();
-					    }) ;
-		    	
-		    	
-			} );
-       </script>
+        <script src="https://cdn.datatables.net/buttons/2.0.1/js/dataTables.buttons.min.js" ></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js" ></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js" ></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js" ></script>
+        <script src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.html5.min.js" ></script>
+        <script src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.print.min.js" ></script>
 
+
+        <script>
+        $(document).ready(function () {
+            $('#exampleTemp').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    'excel'
+                ],
+                exclude: 'ex',
+                proccesing: true
+            });
+        });
+    </script>
   <style>
     /* Remove the navbar's default margin-bottom and rounded borders */
     .navbar {
@@ -146,7 +153,7 @@ String sql ="SELECT * FROM niki_items_temp where status='PENDING' AND company_id
                 <h3>${it_tmp.insertMsg}</h3>
                 <h4>${it_tmp.error} </h4>
                 
-                <table  id="example" class="table table-striped table-bordered" cellspacing="0" width="100%" >
+                <table  id="exampleTemp" class="table table-striped table-bordered" cellspacing="0" width="100%" >
                     <thead> 
                         <tr>
                               <th > Item ID </th>          

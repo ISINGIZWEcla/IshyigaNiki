@@ -89,6 +89,11 @@
 		        		<input type="submit" style="font-weight:bold; width: 15em; height: 12em;color: black;background-color: yellow; " value="BUSINESSES"/>
 		        	</form> 
 		        </div>
+                    <div style="margin-right:20px;margin-bottom:20px;">
+		        	<form action="Niki_Report.jsp">
+                                    <input type="submit" style="font-weight:bold; width: 15em; height: 12em;color: black;" class="bg-info" value="REPORT"/>
+		        	</form> 
+		        </div>
                     <a href="../build/web/Settings.jsp"></a>
                      
 	        </div>
