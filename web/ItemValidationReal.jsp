@@ -182,6 +182,7 @@
                     String hs_code = "";
                     String gtin_code = "";
                     String bar_code = "";
+                    String external_code = "";
                     String created = "";
                     String global_id = "";
                     String bus_category_id = "";
@@ -203,6 +204,7 @@
                             session.setAttribute("itemOriginal", "" + item_temp_id);
 
                             bar_code = rs.getString("codebar");
+                            external_code = rs.getString("item_external_id");
                             item_commercial_name = rs.getString("itemDesc").toUpperCase();
 
                             category_id = rs.getString("subcategory_id");
@@ -227,6 +229,11 @@
                             
                             String company_id = rs.getString("company_id");
                             item_inn = rs.getString("molecular_name");
+                            
+                            if(company_id.equals("RAMA_LTD"))
+                                bar_code=external_code;
+                            
+                            
                             Statement ST1 = conn.createStatement();
                             ResultSet rs1 = ST1.executeQuery("SELECT category_descr FROM niki_categories where category_id='" + category_id + "'");
 
@@ -307,7 +314,9 @@
 
 
                                 </td>
-
+                                <td>
+                                    <a href="Nikimage.jsp?<%= item_temp_id%>" class="glyphicon glyphicon-plus btn btn-primary">Image</a>
+                                </td>
                             </tr>
 
                             <tr>  <td bgcolor="#A7F7BC">  item hs code </td>

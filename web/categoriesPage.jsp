@@ -49,6 +49,8 @@ String user=session.getAttribute("userInSessionfName").toString();
         <script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
         <script src="assets/js/jquery.dataTables.min.js"></script>
         <script src="assets/js/dataTables.bootstrap.min.js"></script>
+        <link rel="stylesheet" href="assets/css/custom.css">
+         <link rel="stylesheet" href="assets/css/respo.css">
         
         <script>
 			$(document).ready(function() {
@@ -94,64 +96,82 @@ String user=session.getAttribute("userInSessionfName").toString();
   </style>
 </head>
 <body>
-
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">Logo</a>
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="index.html">Home</a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-      	<li><i class="glyphicon glyphicon-user" style="color: white;font-size: 2em;"> <%=user%></i></li>
-        <li><a href="Logout.jsp" class="btn btn-info btn-lg" style="color: white;">
-          <span class="glyphicon glyphicon-log-out"></span> Log out
-        </a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
   
-<div class="container-fluid text-center">
-  <div class="row content">
-    
-    <div class="col-sm-8 text-left" >
-		<div class="page-header">
-			<h1 style="text-align: center; text-shadow: maroon;">NIK-I Categories</h1>
-		</div>         
-            
-            
-        <div style="float: left;margin-right:20px">
-        	<form action="Business_Category.jsp">
-        		<input type="submit" style="width: 15em; height: 12em;color: black; background: green; font-weight: bold; " value="BUSINESS CATEGORIES"/>
-        	</form> 
+        <nav class="navbar navbar-inverse nav-niki">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="niki.jsp"><img src="assets/NIKI.png" alt="" width="70"></a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="niki.jsp">Home</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                   <li><a> <span class="glyphicon glyphicon-user"></span> <%=user%></a></li> 
+                    <li><a  href="Logout.jsp">
+                            <span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
+                </ul>
+            </div>
         </div>
-        <div style="float: left;margin-right:20px">
-        	<form action="Category.jsp">
-        		<input type="submit" style="width: 15em; height: 12em;color: black; background: yellow ; font-weight: bold;" value="ITEMS CATEGORIES"/>
-        	</form> 
+    </nav>
+        
+        <div class="container" style="min-height: 85vh">
+        <div class="row">
+            <div class="col-sm-8 col-sm-offset-2"> 
+                <div class="version">
+                    <div>NIK-I Categories</div>
+                </div>
+                
+                
+                <div class="row align-items-center">
+                    <div class="col-sm-6">
+                        <a href="Business_Category.jsp">
+                            <div id="first" class="buttonBox">
+                                <button class="niki_buttons"> <i class="fa fa-exchange" aria-hidden="true" id="icon">&nbsp</i> BUSINESS CATEGORIES
+
+                                </button>
+
+                                <div class="border"></div>
+                                <div class="border"></div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-sm-6">
+                        <a href="Category.jsp">
+                            <div id="first" class="buttonBox">
+                                <button class="niki_buttons"><i class="fa fa-file" aria-hidden="true" id="icon">&nbsp</i>ITEMS CATEGORIES
+                                </button>
+
+                                <div class="border"></div>
+                                <div class="border"></div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <a href="SubCategory.jsp">
+                            <div id="first" class="buttonBox">
+                                <button class="niki_buttons"><i class="fa fa-file" aria-hidden="true" id="icon">&nbsp</i>ITEMS SUB-CATEGORIES
+                                </button>
+
+                                <div class="border"></div>
+                                <div class="border"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                
+            </div>
         </div>
-        <div style="margin-right:20px;margin-bottom:20px">
-        	<form action="SubCategory.jsp">
-        		<input type="submit" style="width: 15em; height: 12em;color: black; background: blue ; font-weight: bold;" value="ITEMS SUB-CATEGORIES"/>
-        	</form> 
         </div>
         
-    </div>
-    
-  </div>
-</div>
-
-
 <footer class="container-fluid text-center">
-  <p><strong> Copyright &#169; 2016 Algorithm,Inc.</strong></p>
+  <p><strong> Copyright &#169; 2021 Algorithm,Inc.</strong></p>
 </footer>
 
 

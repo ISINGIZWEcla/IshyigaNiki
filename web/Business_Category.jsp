@@ -45,6 +45,7 @@
         <script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
         <script src="assets/js/jquery.dataTables.min.js"></script>
         <script src="assets/js/dataTables.bootstrap.min.js"></script>
+        <link rel="stylesheet" href="assets/css/custom.css">
         
         <script>
 			$(document).ready(function() {
@@ -91,7 +92,7 @@
 </head>
 <body>
 
-<nav class="navbar navbar-inverse">
+<nav class="navbar navbar-inverse nav-niki">
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -99,7 +100,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Logo</a>
+      <a class="navbar-brand" href="niki.jsp"><img src="assets/NIKI.png" alt="" width="70"></a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
@@ -107,10 +108,9 @@
         <li><a href="categoriesPage.jsp">Categories</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-      	<li><i class="glyphicon glyphicon-user" style="color: white;font-size: 2em;"> <%=user%></i></li>
-        <li><a href="Logout.jsp" class="btn btn-info btn-lg" style="color: white;">
-          <span class="glyphicon glyphicon-log-out"></span> Log out
-        </a></li>
+      	  <li><a> <span class="glyphicon glyphicon-user"></span> <%=user%></a></li> 
+                    <li><a  href="Logout.jsp">
+                            <span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
       </ul>
     </div>
   </div>
@@ -124,9 +124,9 @@
     </div>
     
     <div class="col-sm-8 text-left" >
-		<div class="page-header">
-			<h1 style="text-align: center; text-shadow: maroon;">Business Category</h1>
-		</div>         
+        <div class="version">
+                <div>Business Category</div>
+        </div>        
             
         <div class="row">
                 <h3>${busin_cat.insertMsg}</h3>
@@ -141,7 +141,7 @@
                              <input type="text" class="form-control" placeholder="Business category description" name="busin_category_descr" value="${busin_cat.busin_category_descr}" required >
                         </div>
                     </div>
-                        <br/><br/><br/>
+                        <br/><br/>
                     <div class="col-sm-10">
                        <div class="col-sm-6">
                            <input type="text" class="form-control" placeholder="French" name="french_business_name" value="${busin_cat.busin_category_id}" required/>
@@ -151,7 +151,7 @@
                         </div>
                     </div>
                         <br/><br/>
-                        <div class="col-sm-4">
+                        <div class="col-sm-3 col-sm-offset-2">
                             <input style="margin-left:10px" type="submit" id="submit" value="Save" name="submit" class="btn btn-primary">
                         </div>
                 </form>
@@ -159,8 +159,9 @@
                     
         <div>
                 
-                 
-                <h3>Business Categories List</h3>
+                 <div class="version">
+                <div>Business Categories List</div>
+        </div>
                 <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
                     <thead> 
                         <tr>
@@ -243,7 +244,7 @@
 
 
 <footer class="container-fluid text-center">
-  <p><strong> Copyright &#169; 2016 Algorithm,Inc.</strong></p>
+  <p><strong> Copyright &#169; 2021 Algorithm,Inc.</strong></p>
 </footer>
 
 

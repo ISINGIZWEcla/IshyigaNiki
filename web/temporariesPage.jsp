@@ -46,7 +46,11 @@ String user=session.getAttribute("userInSessionfName").toString();
         <script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
         <script src="assets/js/jquery.dataTables.min.js"></script>
         <script src="assets/js/dataTables.bootstrap.min.js"></script>
-        
+          <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="assets/css/respo.css">
+        <link rel="stylesheet" href="assets/css/custom.css">
         <script>
 			$(document).ready(function() {
 		    	$('#example').DataTable();
@@ -90,66 +94,72 @@ String user=session.getAttribute("userInSessionfName").toString();
     
   </style>
 </head>
+ 
 <body>
+ <nav class="navbar navbar-inverse nav-niki">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="niki.jsp"><img src="assets/NIKI.png" alt="" width="70"></a>
+                </div>
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="niki.jsp">Home</a></li>
+                        <li><a href="niki.jsp">Niki</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a> <span class="glyphicon glyphicon-user"></span> <%=user%></a></li> 
+                        <li><a  href="Logout.jsp">
+                                <span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
 
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">Logo</a>
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="index.html">Home</a></li>
-        <li><a href="niki.jsp">NIKI</a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-      	<li><i class="glyphicon glyphicon-user" style="color: white;font-size: 2em;"> <%=user%></i></li>
-        <li><a href="Logout.jsp" class="btn btn-info btn-lg" style="color: white;">
-          <span class="glyphicon glyphicon-log-out"></span> Log out
-        </a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
-  
-<div class="container-fluid text-center">
-  <div class="row content">
-    
-    <div class="col-sm-8 text-left" >
-		<div class="page-header">
-			<h1 style="text-align: center; text-shadow: maroon;">Welcome to NIKI</h1>
-		</div>         
-            
+  <div class="container" style="min-height: 82vh">
+            <div class="row">
+                <div class="col-sm-8 col-sm-offset-2"> 
+                    <div class="version">
+                        <div>Welcome to NIKI</div>
+                    </div>
+                    <div class="row align-items-center">
+                        <div class="col-sm-6">
+                            <a href="PendingItems.jsp">
+                                <div id="first" class="buttonBox">
+                                    <button class="niki_buttons"> <i class="fa fa-exchange" aria-hidden="true" id="icon">&nbsp</i> TEMPORARY ITEMS
 
-		<div style="float: left;margin-right:10px" >    
-          
-        <form action="PendingItems.jsp">
-        	<input type="submit"  style=" width: 15em; height: 12em;color: black; font-weight:bold; background: orange; " value="TEMPORARY ITEMS"  />
-        </form> 
-     </div>
-     
-     <div style="float: left;margin-right:10px">
-        <form action="ItemLookup.jsp">
-        	<input type="submit" style=" width: 15em; height: 12em;color: black; font-weight:bold; background: green ;"  value="ADD ITEM" size="100" />
-        </form>                
-      </div> 
-        
-    </div>
-    
-  </div>
-</div>
+                                    </button>
+
+                                    <div class="border"></div>
+                                    <div class="border"></div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-sm-6">
+                            <a href="ItemLookup.jsp">
+                                <div id="first" class="buttonBox">
+                                    <button class="niki_buttons"><i class="fa fa-plus" aria-hidden="true" id="icon">&nbsp</i>ADD ITEM
+                                    </button>
+
+                                    <div class="border"></div>
+                                    <div class="border"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
 
 
-<footer class="container-fluid text-center">
-  <p><strong> Copyright &#169; 2016 Algorithm,Inc.</strong></p>
-</footer>
-
-
+        <footer style="background-color: #405a63;" class="container-fluid text-center">
+            <p style="color: white"><strong> Copyright &#169; 2021 Algorithm,Inc.  </strong></p>
+        </footer>
 
 </body>
 </html>

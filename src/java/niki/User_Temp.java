@@ -18,7 +18,7 @@ import java.util.List;
  */
 public class User_Temp {
     
-    private String username, email, password, fname, lname, sex,  phone,status="PENDING",language;
+    private String username, email, password, fname, lname, sex,  phone,status="PENDING",language,company;
     
     private String msgUser, msgFn, msgLn, msgPswd, msgEm, msgPhone, error;
     private boolean valid = true;
@@ -105,7 +105,9 @@ public class User_Temp {
 	public void setLanguage(String language) {
 		this.language = language;
 	}
-
+        public void setCompany(String company) {
+		this.company = company;
+	}
 	public Connection getConn() {
 		return conn;
 	}
@@ -291,10 +293,60 @@ public class User_Temp {
 
    
 //username, email, password, fname, lname, sex,  phone, user_type, privileges
+  //============================================================================to be reviewed and corrected
+
+      public boolean insertUserFinal() {
+
+        try {
+
+                
+                String insert = "insert into `niki`.`users` "
+                   + "(`user_name`,`email_address`,`password`,`first_name`,`last_name`,`gender`,`phone`,`user_type`,`privileges`"
+                   + ",`status`,`language`,`company_affected`,`global_id`)"
+                   + " values(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                
+                PreparedStatement pst = conn.prepareStatement(insert);
+   PreparedStatement pst2 = conn.prepareStatement("select user_name from users where user_name = '"+username +"'");
+   
+            ResultSet rs = pst2.executeQuery();
+            
+            if(rs.next())
+            {
+                insertMsg="that username already exists";
+                
+                return false;
+            }
+            else
+            {
+            pst.setString(1, username);
+            pst.setString(2, email);
+            pst.setString(3, password);
+            pst.setString(4, fname);
+            pst.setString(5, lname);
+            pst.setString(6, sex);
+            pst.setString(7, phone);
+            pst.setString(8, "GUARDIAN");
+            pst.setString(9, "USERS VALIDATE ITEMS ADDITEM EXCELINPUT ");
+            pst.setString(10, "LIVE");
+            pst.setString(11, language);
+            pst.setString(12, company);
+            pst.setString(13, username);
+
+            pst.execute();
+            conn.close();
+            insertMsg="Successfully insert";  
+            }
+            return true;
+        } catch (Exception e) {
+            insertMsg="Not Inserted F" + e.getMessage();
+            setError("FF"+e.getMessage());
+            return false;
+
+        }
+    }
     public boolean insertUserTemp() {
 
         try {
- 
             PreparedStatement pst = conn.prepareStatement("insert into users_temp values(?,?,?,?,?,?,?,?,?)");
 
             pst.setString(1, username);
@@ -314,13 +366,12 @@ public class User_Temp {
             return true;
         } catch (Exception e) {
             insertMsg="Not Inserted" + e.getMessage();
-            setError(e.getMessage());
+            setError("TT"+e.getMessage());
             return false;
 
         }
     }
-    //============================================================================to be reviewed and corrected
-
+    //
     public boolean updateUserTemp() {
 
         try {

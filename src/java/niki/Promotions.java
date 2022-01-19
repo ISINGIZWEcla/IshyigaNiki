@@ -112,7 +112,36 @@ public final static DateFormat DATEFORMAT = new SimpleDateFormat("yyyy-MM-dd HH:
                 + "<maximum_qty>" + maximum_qty + "</maximum_qty>";
     }  
     
-    
+    public String updatePromotion()
+    {
+        String result="";
+            try {
+            PreparedStatement pst = conn.prepareStatement("update niki.niki_promotions set promo_name=?,start = ?,end=?,bus_cat_id=?,maximum_budget=?,maximum_qty=?,status=?  where promo_code=?");
+            pst.setString(1, promo_name);
+            pst.setString(2, start);
+            pst.setString(3, end);
+            pst.setString(4, bus_cat_id);
+            pst.setDouble(5, maximum_budget);
+            pst.setDouble(5, maximum_qty);
+            pst.setInt(5, promo_code);
+            
+
+            pst.execute();
+            //conn.close(); 
+            insertMsg="niki_code successfully Updated";
+//            return true;
+            
+            
+        } catch (Exception e) {
+            setError(e.getMessage());
+            insertMsg="Not successfully added";
+//            return false;
+
+        }
+        
+        return result;
+        
+    }
     public String insertPromotion()
     {
         

@@ -1,0 +1,58 @@
+
+body{ 
+    background-color: rgb(237, 240, 241);
+    
+}
+.buttonBox{
+    margin: 0 10% 15%;
+    position:relative;
+    max-width: 210px;
+    min-width: 90px;
+ }
+ .buttonBox :hover{
+     background-color: rgb(220, 223, 228);
+     opacity: 2;
+ }
+
+  .links li a:hover{
+    background-color: #e9a72dad; 
+  }
+
+  .navbar-nav li a{
+      color: #fff!important;
+  }
+
+  .inc{
+      color: white;
+      text-align: center;
+      padding-top: .2%;
+      padding-bottom: .5%;
+  }
+  .nav-niki{
+	background-color: #097e86da; 
+}
+
+.info.data{
+ background-color: rgb(241, 194, 194);
+}
+.links a{
+	text-decoration: none;
+	color: #fff;
+}
+.data-reports{
+ width: 80vw;
+}
+.version{
+    margin:1% 0px 4%;
+    font-size: 1.2em;
+    height: 6vh;
+    color: rgb(250, 250, 250);
+    text-align: center;
+    background-color: #e9a72de0; 
+    font-weight:700;
+    padding-top: .7%;
+}
+ .footer2{
+      background-color: #405a63;
+
+  }

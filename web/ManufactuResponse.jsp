@@ -23,7 +23,8 @@ if(session.getAttribute("fromChooseCompany")!=null){
 
  
 
-    String fabricant_id = request.getParameter("id").toUpperCase().replaceAll("'", " "); 
+    String temp = request.getParameter("name").toUpperCase().replaceAll("'", " "); 
+    String fabricant_id = temp.toUpperCase().replaceAll(" ", "_");
     String niki_fabricant_name = request.getParameter("name").toUpperCase().replaceAll("'", " ");
     String niki_fabricant_country = request.getParameter("country").toUpperCase().replaceAll("'", " "); 
 

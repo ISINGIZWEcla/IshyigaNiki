@@ -31,7 +31,8 @@ id_list.insertPromoList();
 %>
 <%=id_list.getInsertMsg() %>
  %>
-<jsp:forward page="PromotionEdit.jsp?promo_code=<%=promo_code %>&action=update"/>
+<%--<jsp:forward page="PromotionEdit.jsp?promo_code=<%=promo_code %>&action=update"/>--%>
+<jsp:forward page="PromotionEditReal.jsp?promo_code=<%=promo_code%>&action=add_item"/>
 <% %>
 
 

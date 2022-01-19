@@ -129,7 +129,10 @@ public class Company {
         try 
         {
 
-        	String insert = "insert into niki_companies values(?,?,?,?)";
+        	 String insert = "insert into `niki`.`niki_companies` "
+                   + "(`companyId`,`companyName`,`status`"
+                   + ",`busin_category_id`,`global_id`)"
+                   + " values(?,?,?,?,?)";
             PreparedStatement pst = conn.prepareStatement(insert);
             
             PreparedStatement pst2 = conn.prepareStatement("select companyName from niki_companies where companyName = '"+company_descr +"'");
@@ -149,6 +152,7 @@ public class Company {
                 pst.setString(2, company_descr);
                 pst.setString(3, status);
                 pst.setString(4, busin_category);
+                pst.setString(5, company_id);
                 
                 pst.executeUpdate();
                 conn.close(); 
@@ -266,7 +270,7 @@ public class Company {
             
         } catch (Exception e) {
             setError(e.getMessage());
-            insertMsg="Not Inserted";
+            insertMsg="Not Inserted v";
             return false;
 
         }

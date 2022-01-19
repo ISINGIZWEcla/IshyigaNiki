@@ -30,17 +30,22 @@ else {
     String income = null; 
     while ((line = br.readLine()) != null) {
         writer.println(line);
-        income = line; 
-
+        income += line;
     }
     writer.close();
     if (income != null) {
         try {
 
-
+//and niki.niki_items.updated_time>'2021-12-08 10:40:30'
+//String sql="SELECT * FROM niki.niki_items,niki.niki_item_business_category where "
+//+ "niki.niki_items.updated_time >'2021-12-12 10:40:30'"
+//+ " and busin_category_id='"+income+"'"; 
+String time_date = niki.Niki_request.getTagValue("timeToPull", income);
+String category =niki.Niki_request.getTagValue("business_categorie", income);
 String sql="SELECT * FROM niki.niki_items,niki.niki_item_business_category where "
 + "niki.niki_items.niki_code= niki.niki_item_business_category.niki_code "
-+ "and busin_category_id='"+income+"'"; 
++ " and niki.niki_items.updated_time >'"+time_date+"'"
++ " and busin_category_id='"+category+"'";
 
 %>
  <%
@@ -59,7 +64,7 @@ String sql="SELECT * FROM niki.niki_items,niki.niki_item_business_category where
                                     String hs_code = rs.getString("hs_code");
                                     String item_fabricant = rs.getString("item_fabricant");
                                     String item_inn = rs.getString("item_inn");
-                                    double item_packet = rs.getDouble("item_packet");
+                                    String item_packet = ""+rs.getDouble("item_packet");
                                     String item_form = rs.getString("item_form");
                                     String item_emballage = rs.getString("item_emballage");
                                     String category_id = rs.getString("category_id"); 
@@ -73,6 +78,7 @@ String sql="SELECT * FROM niki.niki_items,niki.niki_item_business_category where
                                     
          resultat +="<LINE>"
                  + "<niki_code>"+niki_code+"</niki_code>"
+                 + "<busin_category_id>"+category+"</busin_category_id>"
                  + "<item_commercial_name>"+item_commercial_name+"</item_commercial_name>"
                  + "<tax_vat>"+tax_vat+"</tax_vat>"
                  + "<item_fabricant>"+item_fabricant+"</item_fabricant>"

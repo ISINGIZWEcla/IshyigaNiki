@@ -25,5 +25,17 @@ public class ConnectionClass {
 	        }
 	        return conn;
 	    }
+              public static Connection getConnectionNEC() {
+	        Connection conn = null;
+	        try {
+	            Class.forName("com.mysql.jdbc.Driver");
+	            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/nec","root" ,"jRqimHtrbFIZsUtA@2012"); 
+	            
+	        } catch (Exception e) { 
+	            e.printStackTrace();
+
+	        }
+	        return conn;
+	    }
 
 }

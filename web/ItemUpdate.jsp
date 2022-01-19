@@ -241,6 +241,7 @@
                     <h4>${subcat.error} </h4>
                     <h3>${busin_cat.insertMsg}</h3>
                     <h4>${busin_cat.error} </h4>
+                    
                     <form name="validateItem" action="ItemUpdateResponse.jsp" method="POST">
 
 
@@ -577,6 +578,15 @@
 
                 </div>
 
+                <div class="col-sm-4 text-left" >
+                    <div class="page-header">
+                        <h4 style="text-align: center; text-shadow: maroon;"><%=item_commercial_name%> IMAGE</h1>
+                    </div>
+                        <%
+                            String imgg="assets/NIKI_IMAGE/"+nikicode+".jpg";
+                            %>
+                        <img src="<%=imgg %>" alt="NIKI IMAGE" class="img-fluid" style="height: 60vh" /> 
+                </div>
             </div>
         </div>
 
