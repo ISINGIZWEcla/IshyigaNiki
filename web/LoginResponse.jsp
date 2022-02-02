@@ -24,7 +24,7 @@
 
 
    
-    String query = "select user_type,privileges,first_name,status,language,company_affected from users where user_name='" + name + "'";
+    String query = "select user_type,privileges,first_name,status,language,company_affected,company_cat_bus from users where user_name='" + name + "'";
   
     System.out.println("className.methodName()  "+query);
      Connection conn = ConnectionClass.getConnection();
@@ -37,6 +37,7 @@
     String statusFromDb="";
     String languageFromDb="";
     String company_affected="";
+    String bussiness_category="";
     
     if (rs.next()) {
 
@@ -46,6 +47,7 @@
         statusFromDb=rs.getString("status");
         languageFromDb=rs.getString("language");
         company_affected=rs.getString("company_affected");
+        bussiness_category=rs.getString("company_cat_bus");
     }
 
     session.setAttribute("errorLogin", "");
@@ -76,6 +78,7 @@
             session.setAttribute("userInSessionUsername", name);
             session.setAttribute("userInSessionLanguage", languageFromDb);
             session.setAttribute("userInSessionCompany", company_affected);
+            session.setAttribute("bussiness_category", bussiness_category);
             session.setAttribute("formToUse", "niki.jsp");
             String nextForm = session.getAttribute("formToUse").toString();
             response.sendRedirect(nextForm);

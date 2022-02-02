@@ -31,6 +31,7 @@
 <%@ page import="niki.ConnectionClass" %>
 
 <%    String user = session.getAttribute("userInSessionfName").toString();
+    String business_category = session.getAttribute("userInSessionCompany").toString();
     boolean ndimuritransformation = false;
     String item_temp_id = request.getParameter("itemValidate");
 
@@ -273,6 +274,7 @@
 
                                     <% if (!ndimuritransformation) { %>
                                     <th> creator </th> 
+                                    <th> IMAGE </th> 
                                     <th> Edit </th> 
                                         <% } else { %>
                                     <th> INN </th>
@@ -284,7 +286,12 @@
 
                             <tbody>
                                 <%
-                                    String sqll = "SELECT * FROM niki_items " + sqlToAdd;
+                                    String sqll = "SELECT * FROM niki_items ";
+//                                    if(!sqlToAdd.isEmpty()){
+                                    sqll += sqlToAdd;
+//                                    }else{
+//                                     sqll +=" where bus_category_id like '%"+business_category+"%'";   
+//                                    }
                                     try {
 
                                         Connection con = ConnectionClass.getConnection();
@@ -306,6 +313,7 @@
 
                                 %>  
                                 <tr>   
+                                    <%--<%=sqll%>--%>
 
                                     <td><%=niki_code%>  </td>
                                     <td width="30%" > <%= item_commercial_name%></td>
@@ -316,9 +324,23 @@
                                     <td> <%= tax_vat%></td> 
                                     <% if (!ndimuritransformation && ndemerewe) {%>
                                     <td> <%=created%></td>  
+                                    <td> 
+
+                                        <%
+                                            String imgg = "assets/NIKI_IMAGE/" + niki_code + ".jpg";
+                                        %>
+                                        <img src="<%=imgg%>" alt="IMAGE" class="img-fluid" style="height: 65px" /> 
+                                    </td>  
                                     <td> <a href="ItemUpdate.jsp?action=update&nikicode=<%=niki_code%>" class="btn btn-primary enable " data-toggle="modal" data-target="#basicModal" > EDIT </a></td>
                                     <% } else if (!ndimuritransformation) {%>
                                     <td> <%=created%></td>  
+                                    <td> 
+
+                                        <%
+                                            String imgg = "assets/NIKI_IMAGE/" + niki_code + ".jpg";
+                                        %>
+                                        <img src="<%=imgg%>" alt="IMAGE" class="img-fluid" style="height: 65px" /> 
+                                    </td> 
                                     <td> <a href="ItemUpdate.jsp?action=update&nikicode=<%=niki_code%>" > EDIT </a></td>
 
                                     <% } else {%>
@@ -370,9 +392,9 @@
 
             </div>
         </div>
-                            
-      <footer style="background-color: #405a63;" class="container-fluid text-center">
-          <p style="color: white"><strong> Copyright &#169; 2016 Algorithm,Inc.  </strong></p>
+
+        <footer style="background-color: #405a63;" class="container-fluid text-center">
+            <p style="color: white"><strong> Copyright &#169; 2016 Algorithm,Inc.  </strong></p>
         </footer>
 
 

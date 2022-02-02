@@ -9,6 +9,7 @@
     Object checkfName = session.getAttribute("userInSessionfName");
     Object checkType = session.getAttribute("userInSessionType");
     Object company_aff = session.getAttribute("userInSessionCompany");
+    Object bussiness_category = session.getAttribute("bussiness_category");
     String ngezehe = " ndatangiye";
     if (checkUserPrivileges == null) {
 %>
@@ -181,7 +182,8 @@
                                                 //connection instance
                                                 Connection conn = ConnectionClass.getConnection();
 
-                                                PreparedStatement st = conn.prepareStatement("SELECT niki_code,item_commercial_name FROM niki.niki_items where status='LIVE' and bus_category_id='"+company_aff+"' order by  item_commercial_name");
+//                                                and bus_category_id='" + bussiness_category + "'
+                                                PreparedStatement st = conn.prepareStatement("SELECT niki_code,item_commercial_name FROM niki.niki_items where status='LIVE'  order by  item_commercial_name");
 
                                                 ResultSet rs = st.executeQuery();
 
@@ -274,7 +276,8 @@
 
                                     <th> Promotion Price </th>
                                     <th> Promotion Discount </th>
-                                    <!--<th> Action </th>-->
+                                    <th> Update </th>
+                                    <th> Action </th>
                                 </tr>
 
                             </thead> 
@@ -284,7 +287,7 @@
                                         String company = session.getAttribute("userInSessionCompany").toString();
                                         Connection con = ConnectionClass.getConnection();
                                         Statement ST = con.createStatement();
-                                        ResultSet rs2 = ST.executeQuery("SELECT `niki_promotions_list`.`promo_code`,"
+                                        ResultSet rs2 = ST.executeQuery("SELECT `niki_promotions_list`.`niki_code`, `niki_promotions_list`.`promo_code`,"
                                                 + "`niki_items`.`item_commercial_name`,`niki_promotions_list`.`type`,"
                                                 + "`niki_promotions_list`.`niki_promotions_qte`,"
                                                 + " `niki_promotions_list`.`niki_promotions_amount`,"
@@ -292,25 +295,27 @@
                                                 + "FROM `niki`.`niki_promotions_list`,`niki`.`niki_items` where `niki_promotions_list`.`niki_code`=`niki_items`.`niki_code`"
                                                 + "  and `niki_promotions_list`.`promo_code`=" + promo_code);
                                         int i = 0;
+//                                        String niki_code="";
                                         while (rs2.next()) {
-    //                                        String niki_name = rs.getString("1");
-    //                                        String niki_code = rs.getString("niki_code");
-    //                                        String type = rs.getString("type");
-    //                                        String promo_qty = ""+rs.getInt("niki_promotions_qte");
-    //                                        String promo_amount = ""+rs.getDouble("niki_promotions_amount");
-    //                                        String promo_discount = ""+rs.getInt("niki_promotions_discount");
+                                            //                                        String niki_name = rs.getString("1");
+                                            String niki_code = rs2.getString("niki_code");
+                                            //                                        String type = rs.getString("type");
+                                            //                                        String promo_qty = ""+rs.getInt("niki_promotions_qte");
+                                            //                                        String promo_amount = ""+rs.getDouble("niki_promotions_amount");
+                                            //                                        String promo_discount = ""+rs.getInt("niki_promotions_discount");
 
 
                                 %>  
                                 <tr> 
 
-                                    <td> <%= rs2.getString(1)%> </td>
-                                    <td> <%= rs2.getString(2)%></td>
+                                    <td> <%= rs2.getString(2)%> </td>
                                     <td> <%= rs2.getString(3)%></td>
                                     <td> <%= rs2.getString(4)%></td>
                                     <td> <%= rs2.getString(5)%></td>
-                                    <td> <%= rs2.getString(6)%></td> 
-                                        <!--<td> <a class="btn btn-success" href="PromotionEdit.jsp?promo_code=<%=promo_code%>&action=update"> EDIT </a></td>-->
+                                    <td> <%= rs2.getString(6)%></td>
+                                    <td> <%= rs2.getString(7)%></td> 
+                                    <td> <a class="btn btn-success" href="PromotionItemEdit.jsp?promo_code=<%=promo_code%>&niki_code=<%=niki_code%>&action=update"> EDIT </a></td>
+                                    <td> <a class="btn btn-success" href="PromotionItemEdit.jsp?promo_code=<%=promo_code%>&niki_code=<%=niki_code%>&action=REMOVE"> REMOVE </a></td>
 
                                 </tr>
 

@@ -179,6 +179,8 @@
                                 <th> Busin_Category </th>
                                 <th> Total Items </th>
                                 <th> Temporaires </th>
+                                <th> Rejected </th>
+                                <th> Transformed </th>
 
                                 <th> on NiKi </th>
                                 <th> Edit </th>
@@ -242,7 +244,26 @@
                                 %>
                                 <td> <%=count%></td> 
                                 <%
+                                    }
+                                    sqll = "SELECT COUNT(item_external_id) FROM niki.niki_items_temp where company_id='" + bb + "' and status ='REJECTED'";
 
+                                     st = con.prepareStatement(sqll);
+
+                                     rso = st.executeQuery();
+                                    int count_rej = 0; 
+                                    while (rso.next()) {
+                                        // Integer ip = rs.getInt("univId");
+                                        count_rej = rso.getInt(1);
+                                    }
+  sqll = "SELECT COUNT(item_external_id) FROM niki.niki_items_temp where company_id='" + bb + "' and status ='TRANSFORMED'";
+
+                                     st = con.prepareStatement(sqll);
+
+                                     rso = st.executeQuery();
+                                    int count_transf = 0; 
+                                    while (rso.next()) {
+                                        // Integer ip = rs.getInt("univId");
+                                        count_transf = rso.getInt(1);
                                     }
                                 %>
 
@@ -255,14 +276,12 @@
                                     int countV = 0;
                                     while (rso.next()) {
                                         // Integer ip = rs.getInt("univId");
-                                        countV = rso.getInt(1);
-
+                                        countV = rso.getInt(1);}
                                 %>
+                                <td><%=count_rej %></td>
+                                <td><%=count_transf %></td>
                                 <td> <%=countV%></td> 
-                                <%
-
-                                    }
-                                %>
+                            
                                  <td> <a class="btn btn-info" href="CompanyUpdate.jsp?compEdit=<%=bb%>&compName=<%=cc%>&action=update"> Edit </a></td>
                                 <td> <a class="btn btn-warning" href="CompanyResponse.jsp?compRejectSleep=<%=bb%>&action=compSleep">Sleep </a></td>
 

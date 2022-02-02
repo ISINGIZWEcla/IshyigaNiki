@@ -491,7 +491,7 @@
                                             while (rs.next()) {
                                                 // Integer ip = rs.getInt("univId");
                                                 String subcatId = rs.getString("category_id");
-                                                String subcatNme = rs.getString("category_descr");
+                                                String subcatNme = rs.getString("category_id");
 
  if(subcatId.equals(category_id))
                                         {  %>
