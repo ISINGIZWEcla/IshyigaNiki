@@ -50,6 +50,11 @@ session.setAttribute("category",null);
         <script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
         <script src="assets/js/jquery.dataTables.min.js"></script>
         <script src="assets/js/dataTables.bootstrap.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="assets/css/respo.css">
+        <link rel="stylesheet" href="assets/css/custom.css">
         
         <script>
 			$(document).ready(function() {
@@ -101,63 +106,61 @@ session.setAttribute("category",null);
 </head>
 <body>
 
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">Logo</a>
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="index.html">Home</a></li>
-        <li><a href="niki.jsp">NIKI</a></li>
-        <li><a href="categoriesPage.jsp">Categories</a></li>
-        
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-      	<li><i class="glyphicon glyphicon-user" style="color: white;font-size: 2em;"> <%=user%></i></li>
-        <li><a href="Logout.jsp" class="btn btn-info btn-lg" style="color: white;">
-          <span class="glyphicon glyphicon-log-out"></span> Log out
-        </a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
+<nav class="navbar navbar-inverse nav-niki">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="niki.jsp"><img src="assets/NIKI.png" alt="" width="70"></a>
+                </div>
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="niki.jsp">Home</a></li>
+                        <li><a href="categoriesPage.jsp">Categories</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a> <span class="glyphicon glyphicon-user"></span> <%=user%></a></li> 
+                        <li><a  href="Logout.jsp">
+                                <span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
   
-<div class="container-fluid text-center">
-  <div class="row content">
-    <div class="col-sm-2 sidenav">
-      
-    </div>
-    <div class="col-sm-8 text-left" >
-		<div class="page-header">
-			<h1 style="text-align: center; text-shadow: maroon;">MANUFACTURE</h1>
-		</div>         
-            
-            
-         <div><h1>Manufacture Entry Form</h1> </div>
-        
-        <h3>${cat.insertMsg}</h3>
-        <h4>${cat.error} </h4>
-        
+                        <div class="container-fluid" style="min-height: 85vh">                       
+                        <div class="row">             
+                            <div class="col-sm-4 col-md-4">
+                             <div class="row">
+                <div class="col-sm-12"> 
+                    <div class="version">
+                        <div>Manufacture Entry Form</div>
+                    </div>
+                     <h3>${cat.insertMsg}</h3>
+                     <h4>${cat.error} </h4>
 
-        
-        <form name="inputCat" action="ManufactuResponse.jsp" method="POST"> 
-            <table> 
-            <tr>  <td> Manufacture ID  </td>
-            <td> <input type="text" name="id" value="" required=true size="35"/></td>
-            </tr> 
-            <tr>  <td> Manufacture NAME : </td>
-            <td> <input type="text" name="name" value="" required=true size="35" >
-            </td> </tr>
-            <tr>  <td> Counrty </td>
-            <td> 
-                  <select  name="country">
-                            <option value=""></option>
+                    <div class="row">
+                        <form class="form-horizontal" action="ManufactuResponse.jsp" method="POST">
+                            <fieldset>
+
+                                <!-- Text input-->
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="Name">Manufacture NAME</label>  
+                                    <div class="col-md-7">
+                                        <input id="Name" name="name" type="text" size="35" placeholder="Manufacture NAME" class="form-control input-md" required="">
+
+                                    </div>
+                                </div>
+                            
+
+                                <!-- Select Basic -->
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="country">Country</label>
+                                    <div class="col-md-7">
+                                        <select  name="country" class="form-control">
+                            <option value=""> SELECT COUNTRY</option>
 
                             <%
                                 try {
@@ -186,24 +189,34 @@ String niki_country_name = rs.getString(2);
                                     out.print(e);
                                 }
                             %>
-                        </select><br/> 
-            </td> </tr>
-            
-            <tr>  <td> </td>
-                  <td> <input value="save" type="submit"/>  </td>
-             </tr> 
-            </table>
+                        </select>  
+                         
+                                    </div>
+                                </div>
+                                <!-- Button -->
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="submit"></label>
+                                    <div class="col-md-4">
+                                        <input  type="submit" id="submit" name="submit" class="btn btn-success" value="SAVE">
+                                    </div>
+                                </div>
 
-            
-        </form>
-        
-        <div>
-                <h3>${cat.insertMsg}</h3>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>   
+                            </div>             
+                            <div class="col-sm-8 col-md-8">
+                                <div class="row">
+                <div class="col-sm-12"> 
+                    <div class="version">
+                        <div>Manufacture List</div>
+                    </div>
+                    <h3>${cat.insertMsg}</h3>
                 <h4>${cat.error} </h4>
-                 
-                <h3 style="background-color:buttonface">Manufacture List</h3>
-                
-                <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%" >
+                    
+                 <table id="example" class="table table-responsive table-bordered" cellspacing="0" width="100%" >
                     <thead> 
                         <tr>
                             <th> Manufacture id</th>               
@@ -251,22 +264,31 @@ String niki_country_name = rs.getString(2);
                             }
                         %>
                     </tbody>
-                </table>
+                </table>   
+                    
+                </div>
             </div>
-           
-       
- 
-    </div>
-    <div class="col-sm-2 sidenav" >
-      
-    </div>
-  </div>
-</div>
+                            </div>   
+</div>             
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+  </div>                     
+                        
+                        
 
 
-<footer class="container-fluid text-center">
-  <p><strong> Copyright &#169; 2016 Algorithm,Inc.</strong></p>
-</footer>
+
+<footer style="background-color: #405a63;" class="container-fluid text-center">
+          <p style="color: white"><strong> Copyright &#169; 2016 Algorithm,Inc.  </strong></p>
+        </footer>
 
 
 </body>

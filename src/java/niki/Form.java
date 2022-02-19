@@ -67,4 +67,39 @@ public class Form {
             return false;
         }     
 }    
+     public boolean insertDoseUtiy()
+    { 
+        try 
+        { 
+           String insert = "insert into niki_dose_unity "
+                   + "(`niki_dose_unity_id`,`niki_dose_unity_name`,`niki_dose_unity_physique`"
+                   + ",`global_id`)"
+                   + " values(?,?,?,?)";
+            PreparedStatement pst = conn.prepareStatement(insert);
+            PreparedStatement pst2 = conn.prepareStatement("select niki_dose_unity_id from niki_dose_unity where niki_dose_unity_id = '"+niki_form_id +"'");
+   
+            ResultSet rs = pst2.executeQuery();
+            
+            if(rs.next())
+            {
+                insertMsg="that category name already exists";
+                
+                return false;
+            }
+            else
+            {
+                pst.setString(1, niki_form_id); 
+                pst.setString(2, niki_form_name);
+                pst.setString(3, niki_form_physique);
+                pst.setString(4, global_id);  
+                pst.executeUpdate();
+                conn.close(); 
+                insertMsg="Successfully inserted";
+                return true;
+            }
+        } catch (Exception e) {
+            insertMsg="Not Inserted"; 
+            return false;
+        }     
+}    
 }

@@ -59,7 +59,9 @@ String bar_code= request.getParameter("bar_code").toUpperCase().replaceAll("'", 
 String created;
 String global_id=  session.getAttribute("userInSessionfName").toString(); 
 String bus_category_id= request.getParameter("bus_category_id").toUpperCase().replaceAll("'", " ");
-    
+String item_dose_unity= request.getParameter("item_dose_unity");
+
+
     
     
 String []bsncatN = request.getParameterValues("bus_category_id");
@@ -80,7 +82,7 @@ String []bsncatN = request.getParameterValues("bus_category_id");
     STRUCTURING NIKI_CODE, CR (Change Request) March 2018
     */
     //getting subcategory abbreviation to be used in niki_code structuring
-    it_sub_cat.setSubcategory_id(category_id);
+    it_sub_cat.setSubcategory_id(category_id.toUpperCase());
     String subCategoryAbbrev = it_sub_cat.getCategory_id().substring(0, 3); //TODO: have to check for the case it returns null
     
     //count current number of items of the same subcategory in the Final items table
@@ -107,7 +109,7 @@ String []bsncatN = request.getParameterValues("bus_category_id");
               tax_duty,   item_fabricant,  item_packet,   item_longeur_mm,
                 item_largeur_mm, item_hauteur_mm,   item_poids_gr,   item_dosage, 
               shipment_type,   item_key_words,   hs_code, 
-              gtin_code,   bar_code,       global_id,   bus_category_id ); 
+              gtin_code,   bar_code,       global_id,   bus_category_id ,item_dose_unity); 
     
     //identifying the temp item we are validating
     it_tmp.setItem_id(item_temp_id); 

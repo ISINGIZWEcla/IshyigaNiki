@@ -81,7 +81,7 @@ public class Item_Business_Category {
         try
         {
             
-        String sql="INSERT INTO `niki`.`niki_item_business_category` "
+        String sql="INSERT IGNORE INTO `niki`.`niki_item_business_category` "
         + " (`niki_code`," +
 "`busin_category_id`,`global_id`)"
                 + ""

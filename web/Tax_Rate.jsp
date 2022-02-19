@@ -115,7 +115,7 @@ session.setAttribute("taxrate",null);
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="index.html">Home</a></li>
+        <li class="active"><a href="niki.jsp">Home</a></li>
         <li><a href="niki.jsp">NIKI</a></li>
         <li><a href="taxPage.jsp">Tax Page</a></li>
         
@@ -136,11 +136,7 @@ session.setAttribute("taxrate",null);
       
     </div>
     <div class="col-sm-8 text-left" >
-		<div class="page-header">
-			<h1 style="text-align: center; text-shadow: maroon;">Subcategory</h1>
-		</div>         
-            
-           
+	 
         <div><h1>Tax_Rate Entry Form</h1> </div>
         
         <h3>${txr.insertMsg}</h3>
@@ -158,7 +154,11 @@ session.setAttribute("taxrate",null);
                        Tax Class 
                     </td>
                     <td>
-                        <input type="text" name="taxClass" value="" required=true size="35"/> 
+                      <select  name="taxClass">
+                                     <option value="tax_vat">TVA RATE</option> 
+                                     <option value="tax_duty">DUTY RATE</option> 
+                                     <option value="tax_excise">EXCISE RATE</option> 
+                        </select>
                     </td>
                     
                 </tr> 

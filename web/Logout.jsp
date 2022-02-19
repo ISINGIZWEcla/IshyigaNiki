@@ -17,7 +17,7 @@
                 session.removeAttribute("userInSessionfName");
            //session.removeAttribute("password"); 
                 session.invalidate();  
-                response.sendRedirect("index.html");
+                response.sendRedirect("niki.jsp");
         %> 
         <h1>Logout was done successfully.</h1> 
         <% 

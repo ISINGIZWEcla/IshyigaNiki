@@ -78,10 +78,9 @@ else if(action!=null && action.equals("compSleep")){
 }
 else{
 
-    String compDesc = request.getParameter("compD").toUpperCase().replaceAll("'", " ");
-    
-    String compN = request.getParameter("compN").toUpperCase().replaceAll("'", " ");
-    
+    String temp = request.getParameter("compDesc").toUpperCase().replaceAll("'", " ");
+		String compN = temp.replaceAll(" ", "_");
+    String compDesc = request.getParameter("compDesc").toUpperCase().replaceAll("'", " ");
     String busin_categ_id = request.getParameter("bus_ctn").toUpperCase().replaceAll("'", " ");
 
     
@@ -99,7 +98,7 @@ else{
             
 
         } else {
-            out.print("not inserted");
+            out.print("not inserted NN");
         }
 
     }else {

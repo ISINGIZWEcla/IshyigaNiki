@@ -36,8 +36,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css"> 
- 		<link href="assets/css/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css">
+	<link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css"> 
+ 	<link href="assets/css/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css">
  		 
         <script src="assets/js/jquery-1.12.3.js"></script>
         <script src="assets/js/jquery.min.js"></script>
@@ -45,6 +45,7 @@
         <script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
         <script src="assets/js/jquery.dataTables.min.js"></script>
         <script src="assets/js/dataTables.bootstrap.min.js"></script>
+        <link rel="stylesheet" href="assets/css/custom.css">
         
         <script>
 			$(document).ready(function() {
@@ -91,7 +92,7 @@
 </head>
 <body>
 
-<nav class="navbar navbar-inverse">
+<nav class="navbar navbar-inverse nav-niki">
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -99,18 +100,17 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Logo</a>
+      <a class="navbar-brand" href="niki.jsp"><img src="assets/NIKI.png" alt="" width="70"></a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="index.html">Home</a></li>
+        <li class="active"><a href="niki.jsp">Home</a></li>
         <li><a href="categoriesPage.jsp">Categories</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-      	<li><i class="glyphicon glyphicon-user" style="color: white;font-size: 2em;"> <%=user%></i></li>
-        <li><a href="Logout.jsp" class="btn btn-info btn-lg" style="color: white;">
-          <span class="glyphicon glyphicon-log-out"></span> Log out
-        </a></li>
+      	  <li><a> <span class="glyphicon glyphicon-user"></span> <%=user%></a></li> 
+                    <li><a  href="Logout.jsp">
+                            <span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
       </ul>
     </div>
   </div>
@@ -124,50 +124,44 @@
     </div>
     
     <div class="col-sm-8 text-left" >
-		<div class="page-header">
-			<h1 style="text-align: center; text-shadow: maroon;">Business Category</h1>
-		</div>         
+        <div class="version">
+                <div>Business Category</div>
+        </div>        
             
-            
-          <div><h1>Business Category Entry Form</h1> </div>
-        
-        <h3>${busin_cat.insertMsg}</h3>
-        <h4>${busin_cat.error} </h4>
-        
-       
-        
-        <form name="inputCateg" action="Business_CategoryResponse.jsp" method="POST">
-            
-            
-            <table id="inputCateg" > 
-                <tr> <td>  Business category Id:   </td> <td>
-                        <input type="text" name="busin_category_id" value="${busin_cat.busin_category_id}" required=true size="35"/> 
-                    </td>  </tr> 
-                <tr>  <td>  Business category description:  </td>  <td>
-                        <input type="text" name="busin_category_descr" value="${busin_cat.busin_category_descr}" required=true size="35" >
-                    </td>  </tr>
-                 <tr> <td>  French:   </td> <td>
-                        <input type="text" name="french_business_name" value="${busin_cat.busin_category_id}" required=true size="35"/> 
-                    </td>  </tr> 
-                <tr>  <td>  Kinyarwanda:  </td>  <td>
-                        <input type="text" name="kinya_business_name" value="${busin_cat.busin_category_descr}" required=true size="35" >
-                    </td>  </tr>
-                 <tr>  <td>  </td> <td>
-                        <input value="save" type="submit"/>
-                    </td>  </tr>
-                
-            </table>
-
-            
-        </form>
-                    
+        <div class="row">
+                <h3>${busin_cat.insertMsg}</h3>
+                <h4>${busin_cat.error} </h4>
+                <form name="inputCateg"  action="Business_CategoryResponse.jsp" method="POST">
+                   
+                    <div class="col-sm-10">
+                       <div class="col-sm-6">
+                            <input type="text" class="form-control" placeholder="Business category Id" name="busin_category_id" value="${busin_cat.busin_category_id}"required>
+                        </div>
+                        <div class="col-sm-6">
+                             <input type="text" class="form-control" placeholder="Business category description" name="busin_category_descr" value="${busin_cat.busin_category_descr}" required >
+                        </div>
+                    </div>
+                        <br/><br/>
+                    <div class="col-sm-10">
+                       <div class="col-sm-6">
+                           <input type="text" class="form-control" placeholder="French" name="french_business_name" value="${busin_cat.busin_category_id}" required/>
+                        </div>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" placeholder="Kinyarwanda" name="kinya_business_name" value="${busin_cat.busin_category_descr}" required=true size="35" >
+                        </div>
+                    </div>
+                        <br/><br/>
+                        <div class="col-sm-3 col-sm-offset-2">
+                            <input style="margin-left:10px" type="submit" id="submit" value="Save" name="submit" class="btn btn-primary">
+                        </div>
+                </form>
+        </div>       
                     
         <div>
-                <h3>${itf.insertMsg}</h3>
-                <h4>${itf.error} </h4>
-                 
-                <h3 style="background-color:buttonface">Business Categories List</h3>
                 
+                 <div class="version">
+                <div>Business Categories List</div>
+        </div>
                 <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
                     <thead> 
                         <tr>
@@ -178,19 +172,7 @@
                             <th> Sleep </th>
                         </tr>
                         
-                        </thead>
-                        <tfoot>
-                        <tr>
-
-                            <th> Business Category Id</th>               
-                            <th> Business Category Desc</th>   
-                            <th> Status </th>
-                            <th> Edit </th>
-                            <th> Sleep </th>
-                           
-
-                        </tr>
-                        </tfoot>
+                        </thead> 
                         <tbody>
                         <%
 
@@ -206,10 +188,23 @@
                                     String cc = rs.getString(2);
                                     String dd = rs.getString(3);
                                     
+  
+                            
+    String sqltotal="SELECT COUNT(niki_code) FROM niki.niki_item_business_category "
+            + "where busin_category_id='"+bb+"'";                        
+                            
+                                    PreparedStatement stto = con.prepareStatement
+                                           (sqltotal);
 
-                                 
+                                    ResultSet rsot = stto .executeQuery();
+ int countto =0;
+                                    while (rsot.next()) {
+                                        // Integer ip = rs.getInt("univId");
+                                          countto = rsot.getInt(1); 
+ }
+                            %>
 
-                        %>  
+                          
                         <tr> 
 
                             <td><%=bb%>  </td>
@@ -217,7 +212,7 @@
                             <td> <%= dd%></td>
                            
                             <td> <a href="Business_CategoryUpdate.jsp?busCatEdit=<%=bb%>&action=update"> Edit </a></td>
-                            <td> <a href="Business_CategoryResponse.jsp?busCatRejectSleep=<%=bb%>&action=busCatSleep">Sleep </a></td>
+                            <td> <a href="ItemCategory.jsp?item_cat=<%=bb%>&action=busCatSleep"><%=countto %> </a></td>
                             
                             
                         </tr>
@@ -249,7 +244,7 @@
 
 
 <footer class="container-fluid text-center">
-  <p><strong> Copyright &#169; 2016 Algorithm,Inc.</strong></p>
+  <p><strong> Copyright &#169; 2021 Algorithm,Inc.</strong></p>
 </footer>
 
 

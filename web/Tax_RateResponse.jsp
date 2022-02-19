@@ -7,29 +7,18 @@
 <%
 
 String action = request.getParameter("action");
-
+String global_id=  session.getAttribute("userInSessionfName").toString(); 
 
 
 if(action!=null && action.equals("update")){
 	txr.setInsertMsg("update is the action !!");
-	
-	/*
-	getting parameters from update input page
-	*/
-		String taxLabel = request.getParameter("taxL").replaceAll("'", " ");
-
-		session.setAttribute("taxlabelS", taxLabel);	//keeping taxlabel in a session for later use
-		
-	    String taxValue = request.getParameter("taxV").toUpperCase().replaceAll("'", " ");
+ String taxLabel = request.getParameter("taxL").replaceAll("'", " ");
+session.setAttribute("taxlabelS", taxLabel);	//keeping taxlabel in a session for later use
+String taxValue = request.getParameter("taxV").toUpperCase().replaceAll("'", " ");
 String taxClass = request.getParameter("taxClass").toUpperCase().replaceAll("'", " ");
-
-
-	    
-		/*
-		setting the class attributes to be used in updating
-		*/
+ 
 		txr.setTaxLabel(taxLabel);
-		txr.setTaxValue(taxValue);
+		txr.setTaxValue(Double.parseDouble(taxValue));
 		txr.setTaxClass(taxClass);
 	    	    
 	    
@@ -73,17 +62,19 @@ else if(action!=null && action.equals("taxSleep")){
 }
 else{
 
-    String txvl = request.getParameter("txvl").toUpperCase().replaceAll("'", " ");
+String taxLabel = request.getParameter("txlbl").replaceAll("'", " ");
+session.setAttribute("taxlabelS", taxLabel);	//keeping taxlabel in a session for later use
+String taxValue = request.getParameter("txvl").toUpperCase().replaceAll("'", " ");
+String taxClass = request.getParameter("taxClass").toUpperCase().replaceAll("'", " ");
+ 
+		txr.setTaxLabel(taxLabel);
+		txr.setTaxValue(Double.parseDouble(taxValue));
+		txr.setTaxClass(taxClass);
     
-    String txlbl = request.getParameter("txlbl").toUpperCase().replaceAll("'", " ");
-
-    
-    
-    txr.setTaxValue(txvl);
-    txr.setTaxLabel(txlbl);
+     
 
     if (txr.isValid()) {
-        if (txr.insertTaxRate()) {
+        if (txr.insertTaxRate(global_id)) {
             //us.setInsertMsg("Successfuly Inserted");
             
             
