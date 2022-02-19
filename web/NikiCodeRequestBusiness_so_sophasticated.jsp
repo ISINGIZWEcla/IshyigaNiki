@@ -71,6 +71,7 @@ String sql="SELECT * FROM niki.niki_items,"
                                     String item_key_word = rs.getString("item_key_words");
  String item_molecular = rs.getString("item_inn");
            double niki_promotions_amount =  rs.getDouble("niki_promotions_amount");                        
+           double niki_promotions_purchase =  rs.getDouble("niki_promotions_purchase");                        
                                     
                             
                                     
@@ -78,6 +79,7 @@ String sql="SELECT * FROM niki.niki_items,"
          resultat +="<LINE>"
                  + "<niki_code>"+niki_code+"</niki_code>"
                  + "<niki_promotions_amount>"+niki_promotions_amount+"</niki_promotions_amount>"
+                 + "<niki_promotions_purchase>"+niki_promotions_purchase+"</niki_promotions_purchase>"
                  + "<item_commercial_name>"+item_commercial_name+"</item_commercial_name>"
                  + "<tax_vat>"+tax_vat+"</tax_vat>"
                  + "<item_fabricant>"+item_fabricant+"</item_fabricant>"

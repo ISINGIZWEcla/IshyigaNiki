@@ -16,7 +16,7 @@
 
 <%  
     
- String item_cat ="SUPERMARKET";
+ String item_cat ="RETAIL PHARMACY";
  String codeb=null;
  String itmDesc = null,itmcat = null ,fabricant = null
          ,itemDescr = null,itmcatN = null;
@@ -339,7 +339,7 @@ conn.close();
 
                             <tbody>
                                 <%
-                                     item_cat ="SUPERMARKET";
+                                   //  item_cat ="SUPERMARKET";
                                     String sqll = "SELECT * FROM niki_items,niki_item_business_category " + sqlToAdd
                                             + " WHERE busin_category_id='" + item_cat + "' and niki_items.niki_code=niki_item_business_category.niki_code  ";
                                     try {
@@ -373,6 +373,8 @@ String hs_code= rs.getString("hs_code");
 String bar_code = rs.getString("bar_code");
 String created= rs.getString("created"); 
                                 %>  
+                
+                             
                                 <tr>   
  <td> <%=niki_code%>  </td>
 <td width="30%" > <%= item_commercial_name%></td>
@@ -412,7 +414,7 @@ String created= rs.getString("created");
                                 %>
                             </tbody>  
                         </table>
-
+   
                     </div> 
                             
                 </div>

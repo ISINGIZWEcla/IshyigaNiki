@@ -37,12 +37,23 @@ else {
     writer.close();
     if (nikI != null) {
         try {
-            String sql = "SELECT item_id,niki_code,item_external_id,status FROM niki.niki_items_temp "
+String sql="";
+if(nikI.busin_category_id.contains("PHARMACY")){
+ sql = "SELECT item_id,niki_code,item_external_id,status FROM niki.niki_items_temp "
+                    + " where (item_external_id='" + nikI.item_external_id + "' and "
+                    + " company_id='" + nikI.id_company + "') "
+                    + "OR (itemDesc='" + nikI.itemDesc + "' and "
+                    + " busin_category_id like '%PHARMACY%')"; 
+
+}else{
+ sql = "SELECT item_id,niki_code,item_external_id,status FROM niki.niki_items_temp "
                     + " where (item_external_id='" + nikI.item_external_id + "' and "
                     + " company_id='" + nikI.id_company + "') "
                     + "OR (itemDesc='" + nikI.itemDesc + "' and "
                     + " busin_category_id='" + nikI.busin_category_id + "') "; 
 
+}
+           
 %>
 <%=sql%> <%
     Connection conn = ConnectionClass.getConnection();

@@ -216,6 +216,14 @@
                                     <input type="text" name="promo_code" value="<%= promo_code%>" hidden="true" size="1"/>
                                 </div>
                             </div>
+                                       <!-- Text input-->
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="Name">Purchase Prices:</label>  
+                                <div class="col-md-5">
+                                    <input id="Name" name="purchase_price" value="1" type="number" placeholder="purchase price" class="form-control input-md" required="">
+
+                                </div>
+                            </div>
                             <!-- Text input-->
                             <div class="form-group">
                                 <label class="col-md-4 control-label" for="Name">Prices:</label>  
@@ -274,6 +282,7 @@
                                     <th> Type </th>
                                     <th> Promotion QTY </th>
 
+                                    <th> Purchase Price </th>
                                     <th> Promotion Price </th>
                                     <th> Promotion Discount </th>
                                     <th> Update </th>
@@ -291,7 +300,8 @@
                                                 + "`niki_items`.`item_commercial_name`,`niki_promotions_list`.`type`,"
                                                 + "`niki_promotions_list`.`niki_promotions_qte`,"
                                                 + " `niki_promotions_list`.`niki_promotions_amount`,"
-                                                + "    `niki_promotions_list`.`niki_promotions_discount`"
+                                                + "    `niki_promotions_list`.`niki_promotions_discount`,"
+                                                + "    `niki_promotions_list`.`niki_promotions_purchase`"
                                                 + "FROM `niki`.`niki_promotions_list`,`niki`.`niki_items` where `niki_promotions_list`.`niki_code`=`niki_items`.`niki_code`"
                                                 + "  and `niki_promotions_list`.`promo_code`=" + promo_code);
                                         int i = 0;
@@ -312,10 +322,11 @@
                                     <td> <%= rs2.getString(3)%></td>
                                     <td> <%= rs2.getString(4)%></td>
                                     <td> <%= rs2.getString(5)%></td>
+                                    <td> <%= rs2.getString(8)%></td>
                                     <td> <%= rs2.getString(6)%></td>
                                     <td> <%= rs2.getString(7)%></td> 
-                                    <td> <a class="btn btn-success" href="PromotionItemEdit.jsp?promo_code=<%=promo_code%>&niki_code=<%=niki_code%>&action=update"> EDIT </a></td>
-                                    <td> <a class="btn btn-success" href="PromotionItemEdit.jsp?promo_code=<%=promo_code%>&niki_code=<%=niki_code%>&action=REMOVE"> REMOVE </a></td>
+                                    <td> <a class="btn btn-success" href="PromotionEditItem.jsp?promo_code=<%=promo_code%>&attachNiki=<%=niki_code%>&action=update"> EDIT </a></td>
+                                    <td> <a class="btn btn-success" href="PromotionItemEdit.jsp?promo_code=<%=promo_code%>&attachNiki=<%=niki_code%>&action=REMOVE"> REMOVE </a></td>
 
                                 </tr>
 

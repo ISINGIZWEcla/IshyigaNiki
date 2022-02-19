@@ -31,7 +31,8 @@
 <%@ page import="niki.ConnectionClass" %>
 
 <%    String user = session.getAttribute("userInSessionfName").toString();
-    String business_category = session.getAttribute("userInSessionCompany").toString();
+   String business_category = session.getAttribute("bussiness_category").toString(); 
+               
     boolean ndimuritransformation = false;
     String item_temp_id = request.getParameter("itemValidate");
 
@@ -290,6 +291,9 @@
 //                                    if(!sqlToAdd.isEmpty()){
                                     sqll += sqlToAdd;
 //                                    }else{
+//                                        if(business_category.contains("PHARMACY")){
+//                  business_category="PHARMACY" ;
+//               }
 //                                     sqll +=" where bus_category_id like '%"+business_category+"%'";   
 //                                    }
                                     try {

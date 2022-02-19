@@ -30,9 +30,9 @@
 <% 
 String user=session.getAttribute("userInSessionfName").toString(); 
 String company = session.getAttribute("userInSessionCompany").toString(); 
-String userLanguage = session.getAttribute("userInSessionLanguage").toString();
 String business_category = session.getAttribute("bussiness_category").toString(); 
-String sql ="SELECT * FROM niki_items_temp where status='PENDING' AND company_id='"+company+"' order by itemDesc";
+String userLanguage = session.getAttribute("userInSessionLanguage").toString();
+String sql ="SELECT * FROM niki_items_temp where status='PENDING' AND busin_category_id like '%"+business_category+"%' order by itemDesc";
  
 //setting the original item id to be validated to null
 	session.setAttribute("itemOriginal", null); 
@@ -92,7 +92,6 @@ String sql ="SELECT * FROM niki_items_temp where status='PENDING' AND company_id
             <ul class="nav navbar-nav">
                 <li class="active"><a href="niki.jsp">Home</a></li>
                 <li><a href="Item.jsp">Niki List</a></li>
-                <li><a class="btn btn-success" href="PendingItemsCategory.jsp">ALL PENDING ITEMS FROM <%=business_category %> </a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a> <span class="glyphicon glyphicon-user"></span> <%=user%></a></li> 
@@ -105,7 +104,7 @@ String sql ="SELECT * FROM niki_items_temp where status='PENDING' AND company_id
 
    <div class="container data-reports">
         <div class="version">
-            <div>Temporary Items of <%=company  %></div>
+            <div>Temporary Items FROM <%=business_category  %> BUSINESS CATEGORY</div>
         </div>
        
         
@@ -125,6 +124,7 @@ String sql ="SELECT * FROM niki_items_temp where status='PENDING' AND company_id
                               <th > Item ID </th>          
                             <th > Description </th>              
                             <th> Category </th>
+                            <th> Company </th>
                             <th> Busines Categ </th> 
                             <th> Status </th>
                         	<th> Manufacture </th>
@@ -188,6 +188,7 @@ String sql ="SELECT * FROM niki_items_temp where status='PENDING' AND company_id
                             <td> <%= item_id%></td>
                             <td> <%= itemDesc%></td>
                             <td> <%= categName%></td>
+                            <td> <%= company_id%></td>
                             <td> <%= bus_categName%></td> 
                             <td> <%= status%></td>
                             <td> <%= fabricant%></td>
@@ -206,6 +207,7 @@ String sql ="SELECT * FROM niki_items_temp where status='PENDING' AND company_id
  
                            <td> <%= itemDesc%></td>
                             <td> <%= categName%></td>
+                            <td> <%= company_id%></td>
                             <td> <%= bus_categName%></td> 
                             <td> <%= status%></td>
                             <td> <%= fabricant%></td>
@@ -223,6 +225,7 @@ String sql ="SELECT * FROM niki_items_temp where status='PENDING' AND company_id
                             <td> <%= item_id%></td>
                             <td> <%= itemDesc%></td>
                             <td> <%= categName%></td>
+                            <td> <%= company_id%></td>
                             <td> <%= bus_categName%></td> 
                             <td> <%= status%></td>
                             <td> <%= fabricant%></td>

@@ -12,14 +12,14 @@ public class Promotions_list {
 	
 int promo_code,niki_promotions_qte,niki_promotions_discount;
 String niki_code,type;
-double niki_promotions_amount;
+double niki_promotions_amount,purchase_price;
  
-    private String insertMsg,selectMsg,updateMsg,error;
+    public String insertMsg,selectMsg,updateMsg,error;
     private boolean valid=true; 
     //connection instance
     Connection conn = ConnectionClass.getConnection();
 
-    public void setPromotions_list(int promo_code, int niki_promotions_qte,
+    public  void setPromotions_list(int promo_code, int niki_promotions_qte,
             int niki_promotions_discount, String niki_code, String type, 
             double niki_promotions_amount) {
         this.promo_code = promo_code;
@@ -28,7 +28,18 @@ double niki_promotions_amount;
         this.niki_code = niki_code;
         this.type = type;
         this.niki_promotions_amount = niki_promotions_amount;
+//        this.purchase_price=purchase_price;
     } 
+      public  void setPromotions_list2(int promo_code, int niki_promotions_qte,
+            int niki_promotions_discount, String niki_code, 
+            double niki_promotions_amount,double purchase_price) {
+        this.promo_code = promo_code;
+        this.niki_promotions_qte = niki_promotions_qte;
+        this.niki_promotions_discount = niki_promotions_discount;
+        this.niki_code = niki_code;
+        this.niki_promotions_amount = niki_promotions_amount;
+        this.purchase_price=purchase_price;
+    }
 	public String getInsertMsg() {
         return insertMsg;
     }
@@ -92,7 +103,28 @@ double niki_promotions_amount;
                 + "<niki_promotions_discount>" + niki_promotions_discount + "</niki_promotions_discount>" ;
     }
     
-    
+    public boolean updatePromoList(){
+        try {
+            PreparedStatement pst = conn.prepareStatement("update niki_promotions_list set niki_promotions_amount = ?,niki_promotions_purchase=?,niki_promotions_qte=?,niki_promotions_discount=?  where promo_code=? and niki_code=?");
+            pst.setDouble(1, niki_promotions_amount);
+            pst.setDouble(2, purchase_price);
+            pst.setDouble(3,niki_promotions_qte);
+            pst.setDouble(4, niki_promotions_discount);
+            pst.setInt(5, promo_code);
+            pst.setString(6, niki_code);
+            	insertMsg="Successfully Updated";
+
+            pst.execute();
+            conn.close(); 
+            
+            return true;
+                        
+        } catch (Exception e) {
+            setError(e.getMessage());
+            insertMsg="Not Updated";
+            return false;
+        }   
+    }
     public boolean insertPromoList()
     {
         
@@ -105,9 +137,9 @@ String sql="INSERT INTO `niki`.`niki_promotions_list`" +
 "`type`," +
 "`niki_promotions_qte`," +
 "`niki_promotions_amount`," +
-"`niki_promotions_discount`)"
+"`niki_promotions_discount`,`niki_promotions_purchase`)"
         + ""
-        + "values(?,?,?,?,?,?)";
+        + "values(?,?,?,?,?,?,?)";
  PreparedStatement pst = conn.prepareStatement (sql);
  
  PreparedStatement pst2 = conn.prepareStatement
@@ -133,6 +165,7 @@ String sql="INSERT INTO `niki`.`niki_promotions_list`" +
                 pst.setInt(4, niki_promotions_qte); 
                 pst.setDouble(5, niki_promotions_amount);
                 pst.setInt(6, niki_promotions_discount);
+                pst.setDouble(7, purchase_price);
                 
                 pst.execute();
                 conn.close(); 
@@ -146,6 +179,25 @@ String sql="INSERT INTO `niki`.`niki_promotions_list`" +
         }
         
     }
-     
+       public boolean removeItem() {
+
+        try {
+
+            PreparedStatement pst = conn.prepareStatement("delete from niki_promotions_list where promo_code=? and niki_code=?");
+
+            pst.setInt(1, promo_code);
+            pst.setString(2, niki_code);
+
+
+            pst.execute();
+            conn.close();
+            // insertMsg="Successfully insert";
+            return true;
+        } catch (Exception e) {
+            //InsertMsg="Not Inserted u repeat username";
+            return false;
+
+        }
+    }  
 
 }

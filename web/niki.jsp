@@ -44,10 +44,21 @@
             while (rs.next()) {
                 tempo = "(" + rs.getInt(1) + ")";
             }
-            rs = ST.executeQuery("SELECT count(niki_code) FROM niki.niki_items");
+           if (checkUserPrivileges != null) {
+               String business_category = session.getAttribute("bussiness_category").toString(); 
+               if(business_category.contains("PHARMACY")){
+                  business_category="PHARMACY" ;
+               }
+            rs = ST.executeQuery("SELECT count(niki_code) FROM niki.niki_items_temp where busin_category_id like'%"+business_category+"%' AND STATUS ='TRANSFORMED'");
             while (rs.next()) {
                 niki = "(" + rs.getInt(1) + ")";
             }
+           }else{
+              rs = ST.executeQuery("SELECT count(niki_code) FROM niki.niki_items");
+            while (rs.next()) {
+                niki = "(" + rs.getInt(1) + ")";
+            }   
+           }
             rs = ST.executeQuery("SELECT count(busin_category_id) FROM niki.niki_business_categories");
             while (rs.next()) {
                 bus = "(" + rs.getInt(1) + ")";
