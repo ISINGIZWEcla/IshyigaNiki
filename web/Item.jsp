@@ -1,10 +1,25 @@
 
 
+<%@page import="java.util.ArrayList"%>
 <%
     Object checkUserPrivileges = session.getAttribute("userInSessionPrivileges");
     Object checkfName = session.getAttribute("userInSessionfName");
     Object checkType = session.getAttribute("userInSessionType");
     boolean ndemerewe = false;
+    class data {
+
+        public String niki_code;
+        public String item_commercial_name;
+        public String tax_vat;
+        public String status;
+        public String item_fabricant;
+        public String item_inn;
+        public double item_packet;
+        public String item_key_words;
+        public String created;
+        public String category_id;
+
+    };
 
     if (checkUserPrivileges == null) {
 %>
@@ -31,8 +46,8 @@
 <%@ page import="niki.ConnectionClass" %>
 
 <%    String user = session.getAttribute("userInSessionfName").toString();
-   String business_category = session.getAttribute("bussiness_category").toString(); 
-               
+    String business_category = session.getAttribute("bussiness_category").toString();
+
     boolean ndimuritransformation = false;
     String item_temp_id = request.getParameter("itemValidate");
 
@@ -123,7 +138,7 @@
 
         <script>
             $(document).ready(function () {
-                $('#example').DataTable();
+               // $('#example').DataTable();
 
             });
         </script>
@@ -258,8 +273,17 @@
                     <% if (ndimuritransformation) {%>
                     <div class="col-sm-6"><a href="ItemValidationReal.jsp?itemValidate=<%=item_temp_id%>&action=validate"  > DIRECT ADD </a></div>
                     <%  } %>
-                </div>   
-
+                </div>  
+                
+                  <div class="col-sm-8"></div>  
+                <div class="col-xs-4" >
+                
+                    <form action="" method="get" >
+  <input class="form-control" type="text" placeholder="Search here" name="q">
+</form>
+                
+            </div>
+                    
                 <div class="row">
                     <div class="col-sm-12">
                         <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%"  >
@@ -287,86 +311,172 @@
 
                             <tbody>
                                 <%
-                                    String sqll = "SELECT * FROM niki_items ";
+                                    String sqll ;
 //                                    if(!sqlToAdd.isEmpty()){
-                                    sqll += sqlToAdd;
+                                    
 //                                    }else{
 //                                        if(business_category.contains("PHARMACY")){
 //                  business_category="PHARMACY" ;
 //               }
 //                                     sqll +=" where bus_category_id like '%"+business_category+"%'";   
 //                                    }
+int endValue = 0, nItems = 20,totalItems =0 ;
                                     try {
+                                        ArrayList<data> records;
+//                                        if (records == null) {
+                                            records = new ArrayList<>();
+                                            Connection con = ConnectionClass.getConnection();
+                                            Statement ST = con.createStatement();
+                                            String query =request.getParameter("q");
+                                            if(query!=null){
+                                                sqll = "SELECT * FROM niki_items where niki_code like '%"+query+"%' or item_commercial_name like '%"+query+"%' or item_inn like '%"+query+"%' or item_fabricant like '%"+query+"%'";
+                                                
+                                            }
+                                            else{
+                                                sqll ="SELECT * FROM niki_items ";
+                                                sqll += sqlToAdd;
+                                            }
+                                            ResultSet rs = ST.executeQuery(sqll);
+                                            
+                                            while (rs.next()) {
+                                                data singleData = new data();
+                                                singleData.niki_code = rs.getString("niki_code");
+                                                singleData.item_commercial_name = rs.getString("item_commercial_name");
+                                                singleData.tax_vat = rs.getString("tax_vat");
+                                                singleData.status = rs.getString("status");
+                                                singleData.item_fabricant = rs.getString("item_fabricant");
+                                                singleData.item_inn = rs.getString("item_inn");
+                                                singleData.item_packet = rs.getDouble("item_packet");
+                                                singleData.item_key_words = rs.getString("item_key_words");
+                                                singleData.created = rs.getString("global_id");
+                                                singleData.category_id = rs.getString("category_id");
+                                                
+                                                records.add(singleData);
+                                            }
+                                             totalItems =records.size();
+                                            //request.getSession().setAttribute("records", records);
+                                            
+                                            con.close();
+                                        //}
+                                        String n = null;
+                                        try{
+                                            n =request.getParameter("endValue");
+                                            
+                                        }
+                                        catch(Exception e){
+                                            n=null;
+                                        }
+                                        
+                                        int inc = n==null?0:Integer.parseInt(n) ;
+//                                        inc = inc <=0 ? 0:inc;
+                                        if(inc <= 0 ){
+                                            inc = 0;
+                                        }
+                                        else if(inc >= totalItems ){
+                                            inc = totalItems -1-nItems;
+                                        }
+                                        endValue = inc;
+                                        while (inc < endValue+nItems ) {
+                                            if(inc >= totalItems){
+                                                break;
+                                            }
+                                         
+                                            
+                                            data singleData = records.get(inc);
+                                           
 
-                                        Connection con = ConnectionClass.getConnection();
-                                        Statement ST = con.createStatement();
-                                        ResultSet rs = ST.executeQuery(sqll);
-                                        int i = 0;
-                                        while (rs.next()) {
-
-                                            String niki_code = rs.getString("niki_code");
-                                            String item_commercial_name = rs.getString("item_commercial_name");
-                                            String tax_vat = rs.getString("tax_vat");
-                                            String status = rs.getString("status");
-                                            String item_fabricant = rs.getString("item_fabricant");
-                                            String item_inn = rs.getString("item_inn");
-                                            double item_packet = rs.getDouble("item_packet");
-                                            String item_key_words = rs.getString("item_key_words");
-                                            String created = rs.getString("global_id");
-                                            String category_id = rs.getString("category_id");
 
                                 %>  
                                 <tr>   
                                     <%--<%=sqll%>--%>
 
-                                    <td><%=niki_code%>  </td>
-                                    <td width="30%" > <%= item_commercial_name%></td>
-                                    <td> <%= item_inn%></td>
-                                    <td> <%= item_packet%></td>
-                                    <td> <%= category_id%></td>
-                                    <td> <%= item_fabricant%></td>
-                                    <td> <%= tax_vat%></td> 
+                                    <td><%=singleData.niki_code%>  </td>
+                                    <td width="30%" > <%= singleData.item_commercial_name%></td>
+                                    <td> <%= singleData.item_inn%></td>
+                                    <td> <%= singleData.item_packet%></td>
+                                    <td> <%= singleData.category_id%></td>
+                                    <td> <%= singleData.item_fabricant%></td>
+                                    <td> <%= singleData.tax_vat%></td> 
                                     <% if (!ndimuritransformation && ndemerewe) {%>
-                                    <td> <%=created%></td>  
+                                    <td> <%=singleData.created%></td>  
                                     <td> 
 
                                         <%
-                                            String imgg = "assets/NIKI_IMAGE/" + niki_code + ".jpg";
+                                            String imgg = "assets/NIKI_IMAGE/" + singleData.niki_code + ".jpg";
                                         %>
                                         <img src="<%=imgg%>" alt="IMAGE" class="img-fluid" style="height: 65px" /> 
                                     </td>  
-                                    <td> <a href="ItemUpdate.jsp?action=update&nikicode=<%=niki_code%>" class="btn btn-primary enable " data-toggle="modal" data-target="#basicModal" > EDIT </a></td>
+                                    <td> <a href="ItemUpdate.jsp?action=update&nikicode=<%=singleData.niki_code%>" class="btn btn-primary enable " data-toggle="modal" data-target="#basicModal" > EDIT </a></td>
                                     <% } else if (!ndimuritransformation) {%>
-                                    <td> <%=created%></td>  
+                                    <td> <%=singleData.created%></td>  
                                     <td> 
 
                                         <%
-                                            String imgg = "assets/NIKI_IMAGE/" + niki_code + ".jpg";
+                                            String imgg = "assets/NIKI_IMAGE/" + singleData.niki_code + ".jpg";
                                         %>
                                         <img src="<%=imgg%>" alt="IMAGE" class="img-fluid" style="height: 65px" /> 
                                     </td> 
-                                    <td> <a href="ItemUpdate.jsp?action=update&nikicode=<%=niki_code%>" > EDIT </a></td>
+                                    <td> <a href="ItemUpdate.jsp?action=update&nikicode=<%=singleData.niki_code%>" > EDIT </a></td>
 
                                     <% } else {%>
-                                    <td> <a href="ItemValidationReal.jsp?itemValidate=<%=item_temp_id%>&action=validate&attachNiki=<%=niki_code%>" class="btn btn-primary enable " data-toggle="modal" data-target="#basicModal" > ATTACH </a></td>
-                                    <td> <a href="ItemRejectSleepResponse.jsp?itemRejectSleep=<%=item_temp_id%>&action=sleepFinal&attachNiki=<%=niki_code%>" class="btn btn-primary enable"> SAME </a></td>
+                                    <td> <a href="ItemValidationReal.jsp?itemValidate=<%=item_temp_id%>&action=validate&attachNiki=<%=singleData.niki_code%>" class="btn btn-primary enable " data-toggle="modal" data-target="#basicModal" > ATTACH </a></td>
+                                    <td> <a href="ItemRejectSleepResponse.jsp?itemRejectSleep=<%=item_temp_id%>&action=sleepFinal&attachNiki=<%=singleData.niki_code%>" class="btn btn-primary enable"> SAME </a></td>
                                     <% } %>
 
                                 </tr>
 
                                 <%
-                                            i++;
+                                    inc++;
                                         }
 
-                                        con.close();
+                                        
 
                                     } catch (Exception e) {
                                         e.printStackTrace();
 
                                     }
+
                                 %>
                             </tbody>  
                         </table>
+                        <div >
+                            <div class="mb-5 mt-5 container-fluid pt-sm-5 pb-sm-5">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <% if(endValue >= nItems){
+                                    
+                                
+                                    %>
+                                    
+                                    <form action="Item.jsp" class="pb-5">
+                                
+                                <input name="endValue" type="text" hidden value="<%out.print(endValue - nItems); %>"/>
+                                <button class="btn btn-info"   type="submit">prev</button>
+                            </form>
+                                <%}%>
+                                            </div>
+                                            <div class="col-sm-6">
+                                               
+                                                <% if(endValue + nItems < totalItems){
+                                    
+                                
+                                    %>
+                                    <form action="Item.jsp" class="pb-5">
+                                <input name="endValue" type="text" hidden value="<%out.print(endValue + nItems); %>"/>
+                               <button class="btn btn-info" style="" type="submit">next</button>
+                               
+                            </form>
+                               <%}%>
+                                            
+                                            </div>
+                                        </div>
+                                    </div>
+                            
+                                
+                               
+                        </div>
+                               
+                </div>
                     </div>
                 </div>
 

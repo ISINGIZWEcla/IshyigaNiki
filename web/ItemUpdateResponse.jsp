@@ -103,6 +103,7 @@ getting parameters from update input page
 
 <div style="float: left;margin-right:20px">
     <form action="Item.jsp">
+        
         <input type="submit" style="font-weight:bold; background: pink; width: 
                15em; height: 12em;color: black;" 
                value="BACK TO NIKI LIST "/>

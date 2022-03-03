@@ -131,12 +131,12 @@ else{
     </div>
     <div class="col-sm-8 text-left" >
 		<div class="page-header">
-			<h1 style="text-align: center; text-shadow: maroon;">Welcome to NIKI</h1>
+			<h1 style="text-align: center; text-shadow: maroon;color: white;background-color: orange">Welcome to NIKI</h1>
 		</div>         
             
 
-		<div><h1>Company Update Form</h1> </div>
-        </div>
+        <div><h1 style="text-align:center">Company Update Form</h1> </div>
+       
         
         <h3>${comp.insertMsg}</h3>
         <h4>${comp.error} </h4>
@@ -172,39 +172,31 @@ else{
  
                     %>
         
-        <form  action="CompanyResponse.jsp" method="POST">
+        <form class="form-horizontal" action="CompanyResponse.jsp" method="POST">
             
             
-            <table  >
-                
-                 <tr>
-                    <td>
-                       Company Id: 
-                    </td>
-                    <td>
-                        <input type="text" name="comp" value="<%=comp%>" size="35" readonly="readonly"/> 
-                        <input type="text" name="action" value="update" size="35" hidden="" /> 
-                        
-                    </td>
-                    
-                </tr>
-   
-                <tr>
-                    <td>
-                        Company description:
-                    </td>
-                    <td>
-                        <input type="text" name="compDesc" value="<%=compDesc%>" required="required" size="35" >
-                    </td>
-                    
-                </tr>
-                
-                <tr>
-                    <td>
-                       Business category Id: 
-                    </td>
-                    <td>
-                        <select name="bus_ctn">
+        <fieldset>
+
+                            <!-- Text input-->
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="Name">Company Id::</label> 
+                                <div class="col-md-5">
+
+                                    <input   type="text" name="comp" value="<%=comp%>" size="35" readonly="readonly class="form-control input-md" >
+                                    <input type="text" name="action" value="update" size="35" hidden="" /> 
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="Name">Company description:</label> 
+                                <div class="col-md-5">
+                                    <input   type="text" name="compDesc" value="<%=compDesc%>" required="required" size="35" class="form-control input-md" >
+
+                                </div>
+                            </div>
+                                    <div class="form-group">
+                                <label class="col-md-4 control-label" for="Name">Business category Id: </label> 
+                                <div class="col-md-5">
+                                     <select name="bus_ctn" class="form-control">
                             <option value="<%=busin_categ%>"><%=busin_categ%></option>
                             
                             <%
@@ -237,37 +229,30 @@ else{
                                     out.print(e);
                                 }
                             %>
-                        </select> 
-                    </td>
-                    
-                     <td>
-                    <a href="Business_Category.jsp?" class="glyphicon glyphicon-plus btn btn-primary">Add Business Category</a>
- 
-                    </td>
-                    
-                </tr>
-                
- 
-                <tr>
-                    <td>
-                        
-                    </td>
-                    <td>
-                        <input value="update" type="submit"/>
-                    </td>
-                    
-                </tr>
-                
-            </table>
+                        </select> <a href="Business_Category.jsp?" class="glyphicon glyphicon-plus btn btn-primary">Add Business Category</a>
+
+                                </div>
+                            </div>
+                                    
+
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="submit"></label>
+                                <div class="col-md-4">
+                                    <input  type="submit"  class="btn btn-success" value="UPDATE">
+                                </div>
+                            </div>
+
+                        </fieldset>
    
         </form>
-        
-    </div>
+         </div>
+    
     <div class="col-sm-2 sidenav" >
       
     </div>
+                        </div>
   </div>
-</div>
+
 
 
 <footer class="container-fluid text-center">

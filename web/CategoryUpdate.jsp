@@ -75,7 +75,9 @@
             }
 
             /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
-            .row.content {height: 450px}
+            .row.content {
+                height: 450px
+            }
 
             /* Set gray background color and 100% height */
             .sidenav {
@@ -97,7 +99,9 @@
                     height: auto;
                     padding: 15px;
                 }
-                .row.content {height:auto;}
+                .row.content {
+                    height:auto;
+                }
             }
 
         </style>
@@ -138,7 +142,7 @@
                 </div>
                 <div class="col-sm-8 text-left" >
                     <div class="page-header">
-                        <h1 style="text-align: center; text-shadow: maroon;">Category Update</h1>
+                        <h1 style=" text-align: center;background-color:orange;color: white ">Category Update</h1>
                     </div>         
 
 
@@ -147,22 +151,22 @@
 
                     <%
 
-                        String category_descr = "",status = "",
-                                parent_category = "",french_catagory_name = "",
-                                kinya_catagory_name = "",category_id = categId; 
-                        
+                        String category_descr = "", status = "",
+                                parent_category = "", french_catagory_name = "",
+                                kinya_catagory_name = "", category_id = categId;
+
                         try {
                             Connection conn = ConnectionClass.getConnection();
                             Statement ST = conn.createStatement();
                             ResultSet rs = ST.executeQuery("SELECT * FROM niki_categories where category_id='" + categId + "'");
                             int i = 0;
                             while (rs.next()) {
- 
-                                category_id =rs.getString(1); 
+
+                                category_id = rs.getString(1);
                                 category_descr = rs.getString(2);
-                                parent_category =rs.getString("parent_category"); 
+                                parent_category = rs.getString("parent_category");
                                 french_catagory_name = rs.getString("french_catagory_name");
-                                kinya_catagory_name =rs.getString("kinya_catagory_name");  
+                                kinya_catagory_name = rs.getString("kinya_catagory_name");
 
                                 i++;
                             }
@@ -176,51 +180,64 @@
 
                     %>
 
-                    <form  action="CategoryResponse.jsp" method="POST">
+                    <form class="form-horizontal" action="CategoryResponse.jsp" method="POST">
+                        <fieldset>
 
+                            <!-- Text input-->
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="Name">Category Id:</label>  
+                                <div class="col-md-5">
 
-                        <table id="updateItem" >
-
-                            <tr>
-                                <td>
-                                    Category Id: 
-                                </td>
-                                <td>
-                                    <input type="text" name="cat" value="<%=category_id%>" size="35" readonly="readonly"/> 
+                                    <input  name="cat" type="text" size="35" value="<%=category_id%>" class="form-control input-md" readonly="readonly">
                                     <input type="text" name="action" value="update" size="35" hidden="" /> 
 
-                                </td>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="Name">Category description:</label>  
+                                <div class="col-md-5">
 
-                            </tr>
-
-                            <tr><td> Category description: </td>
-                                <td><input type="text" name="catDesc" value="<%=category_descr%>" required="required" size="35" >
-                                </td> </tr>
-                            <tr><td> Parent Category: </td>
-                                <td><input type="text" name="parent" value="<%=parent_category%>" required="required" size="35" >
-                                </td> </tr>
-                            <tr><td> French: </td>
-                                <td><input type="text" name="french" value="<%=french_catagory_name%>" required="required" size="35" >
-                                </td> </tr>
-                            <tr><td> Kinya: </td>
-                                <td><input type="text" name="kinya" value="<%=kinya_catagory_name%>" required="required" size="35" >
-                                </td> </tr>
+                                    <input  name="catDesc" type="text" size="35" value="<%=category_descr%>" class="form-control input-md" required="required">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="Name">Parent Category:</label>  
+                                <div class="col-md-5">
+                                    <input  name="parent" type="text" size="35" value="<%=parent_category%>" class="form-control input-md" required="required">
 
 
-                            <tr>
-                                <td>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="Name">French Description:</label>  
+                                <div class="col-md-5">
 
-                                </td>
-                                <td>
-                                    <input value="UPDATE" type="submit"/>
-                                    
-                                </td>
+                                    <input name="french" type="text" size="35" value="<%=french_catagory_name%>" class="form-control input-md" required="required">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="Name">Kinya Description:</label>  
+                                <div class="col-md-5">
 
-                            </tr>
+                                    <input  name="kinya" type="text" size="35" value="<%=kinya_catagory_name%>" class="form-control input-md" required="required">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="submit"></label>
+                                <div class="col-md-5">
+                                    <input  type="submit" id="submit" name="submit" class="btn btn-success" value="UPDATE">
+                                </div>
+                            </div>
+                            </div>
+                            <!-- Button -->
 
-                        </table>
 
+                        </fieldset>
                     </form>
+
+
+
+
 
 
 
@@ -229,12 +246,12 @@
 
                 </div>
             </div>
-        </div>
 
 
-        <footer class="container-fluid text-center">
-            <p><strong> Copyright &#169; 2021 Algorithm,Inc.</strong></p>
-        </footer>
+
+            <footer class="container-fluid text-center">
+                <p><strong> Copyright &#169; 2021 Algorithm,Inc.</strong></p>
+            </footer>
 
 
     </body>

@@ -139,29 +139,49 @@ session.setAttribute("category",null);
 		</div>         
             
             
-         <div><h1>Package Entry Form</h1> </div>
+         <div><h1 >Package Entry Form</h1> </div>
         
         <h3>${cat.insertMsg}</h3>
         <h4>${cat.error} </h4>
         
 
         
-        <form name="inputCat" action="EmballageResponse.jsp" method="POST"> 
-            <table> 
-            <tr>  <td>   code  </td>
-            <td> <input type="text" name="niki_emballage_id" value="" required=true size="35"/></td>
-            </tr> 
-            <tr>  <td>   description: </td>
-            <td> <input type="text" name="niki_emballage_name" value="" required=true size="35" >
-            </td> </tr>
+        <form name="inputCat" class="form-horizontal" action="EmballageResponse.jsp" method="POST"> 
+            <fieldset>
+
+                                <!-- Text input-->
+                                <div class="form-group">
+                                      
+                                    <div class="col-md-5">
+                                        
+                                        <input  name="niki_emballage_id" type="text" size="35" placeholder="Code" class="form-control input-md" required="true">
+
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                      
+                                    <div class="col-md-5">
+                                        <input  name="niki_emballage_name" type="text" size="35" placeholder=" Description" class="form-control input-md" required="true">
+
+                                    </div>
+                                </div>
+                                <div class="form-group">
+  
+                                    <div class="col-md-5">
+                                        <input name="niki_emballage_info" type="text" size="35" placeholder="Info" class="form-control input-md" required="true">
+
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    
+                                    <div class="col-md-4">
+                                        <input  type="submit"  class="btn btn-success" value="SAVE">
+                                    </div>
+                                </div>
+
+                            </fieldset>
             
-            <tr>  <td> info: </td>
-            <td> <input type="text" name="niki_emballage_info" value="" required=true size="35" >
-            </td> </tr> 
-            <tr>  <td> </td>
-                  <td> <input value="save" type="submit"/>  </td>
-             </tr> 
-            </table>
 
             
         </form>
@@ -170,7 +190,7 @@ session.setAttribute("category",null);
                 <h3>${cat.insertMsg}</h3>
                 <h4>${cat.error} </h4>
                  
-                <h3 style="background-color:buttonface">Package List</h3>
+                <h3 style="background-color:buttonface; text-align: center">Package List</h3>
                 
                 <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%" >
                     <thead> 

@@ -130,8 +130,8 @@
                                 <div class="form-group">
                                     <label class="col-md-4 control-label" for="country">business granted</label>
                                     <div class="col-md-5">
-                                        <select  name="bus_cat_id" multiple="multiple"  required="required" class="form-control">
-                                            <!--<option value=""> SELECT BUSINESS CATEGORY</option>-->
+                                        <select  name="bus_cat_id"   required="required" class="form-control">
+                                            <option value=""> SELECT BUSINESS CATEGORY</option>
 
                                             <%
                                                 try {

@@ -132,11 +132,12 @@ session.setAttribute("taxrate",null);
     <div class="col-sm-8 text-left" >
 	        
  
+        
         <div>
                 <h3>${txr.insertMsg}</h3>
                 <h4>${txr.error} </h4>
                  
-                <h3 style="background-color:buttonface">HS CODE item List</h3>
+                <h3 style="background-color:orange;text-align: center;color: white">HS CODE item List</h3>
                 
                 <table  id="example" class="table table-striped table-bordered" cellspacing="0" width="100%" >
                     <thead> 

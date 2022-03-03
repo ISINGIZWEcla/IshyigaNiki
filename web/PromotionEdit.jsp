@@ -202,7 +202,7 @@
                         <div class="form-group">
                             <label class="col-md-4 control-label" for="country">business granted</label>
                             <div class="col-md-5">
-                                <select  name="bus_cat_id" multiple="multiple"  required="required" class="form-control">
+                                <select  name="bus_cat_id"   required="required" class="form-control">
                                     <%
 
                                         try {
