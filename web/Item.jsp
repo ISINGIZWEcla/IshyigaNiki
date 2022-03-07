@@ -482,7 +482,7 @@ int endValue = 0, nItems = 20,totalItems =0 ;
 
             </div>
 
-        </div>
+        
 
 
 

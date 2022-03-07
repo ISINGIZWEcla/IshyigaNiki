@@ -153,7 +153,7 @@
                         <br/><br/>
                         <div class="col-sm-3 col-sm-offset-2">
                             <input style="margin-left:10px" type="submit" id="submit" value="Save" name="submit" class="btn btn-primary">
-                        </div>
+                        </div>     
                 </form>
         </div>       
                     

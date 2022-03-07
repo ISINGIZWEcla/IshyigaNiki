@@ -138,7 +138,7 @@
                 </div>
                 <div class="col-sm-8 text-left" >
                     <div class="page-header">
-                        <h1 style="text-align: center; text-shadow: maroon;">FORM</h1>
+                        <h1 style=" text-align: center;background-color:orange;color: white">FORM</h1>
                     </div>         
 
 
@@ -199,7 +199,7 @@
                         <h3>${cat.insertMsg}</h3>
                         <h4>${cat.error} </h4>
 
-                        <h3 style="background-color:buttonface;text-align: center">Form List</h3>
+                        <h3 style=" text-align: center;background-color:orange;color: white">Form List</h3>
 
                         <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%" >
                             <thead> 

@@ -135,7 +135,7 @@ session.setAttribute("category",null);
     </div>
     <div class="col-sm-8 text-left" >
 		<div class="page-header">
-			<h1 style="text-align: center; text-shadow: maroon;">PACKAGE</h1>
+			<h1 style=" text-align: center;background-color:orange;color: white">PACKAGE</h1>
 		</div>         
             
             
@@ -190,7 +190,7 @@ session.setAttribute("category",null);
                 <h3>${cat.insertMsg}</h3>
                 <h4>${cat.error} </h4>
                  
-                <h3 style="background-color:buttonface; text-align: center">Package List</h3>
+                <h3 style=" text-align: center;background-color:orange;color: white">Package List</h3>
                 
                 <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%" >
                     <thead> 

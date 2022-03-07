@@ -160,14 +160,14 @@
             </div>
         </nav>
 
-        <div class="container-fluid text-center">
+        <div class="container">
+            <div class="version">
+                <h1 style="text-align: center; text-shadow: maroon;background-color: orange; color:white">Industry item Excel Export</h1>
+            </div>
             <div class="row content">
 
                 <div class="col-sm-8 text-left" >
-                    <div class="page-header">
-                        <h1 style="text-align: center; text-shadow: maroon;background-color: orange; color:white">
-                            Industry item Excel Export  </h1>
-                    </div>         
+                            
 
                     <h3>${it_tmp.insertMsg}</h3>
                     <h4>${it_tmp.error} </h4>
@@ -297,7 +297,7 @@
                                 <br/><br/>
                         <div class="col-sm-6"></div>
                         <div class="col-sm-3">
-                            <input class="form-control btn-info1" type="submit" id="submit" value="SEARCH" name="submit" >
+                            <input class="btn btn-primary" type="submit" id="submit" value="SEARCH" name="submit" >
                         </div>
 
 

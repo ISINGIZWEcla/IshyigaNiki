@@ -54,6 +54,7 @@
         <script src="assets/js/jquery.min.js"></script>
 
         <script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.5.3/js/bootstrapValidator.js" type="text/javascript"></script>
         <script src="assets/js/jquery.dataTables.min.js"></script>
         <script src="assets/js/dataTables.bootstrap.min.js"></script>
 
@@ -79,6 +80,67 @@
                             $form.trigger('submit'); // submit the form
                         });
                 // .one() is NOT a typo of .on()
+            });
+            $(document).ready(function () {
+                $('#validateItem').bootstrapValidator({
+                    feedbackIcons: {
+                        valid: 'glyphicon glyphicon-ok',
+                        invalid: 'glyphicon glyphicon-remove',
+                        validating: 'glyphicon glyphicon-refresh'
+                    },
+                    fields: {
+                        hs_code: {
+                            validators: {
+                                integer: {
+                                    message: 'The value is not an integer'
+                                }
+                            }
+                        },
+                        item_dosage: {
+                            validators: {
+                                numeric: {
+                                    message: ' Only numbers are allowed please'
+                                }
+                            }
+                        },
+                        item_packet: {
+                            validators: {
+                               numeric: {
+                                    message: ' Only numbers are allowed please'
+                                }
+                            }
+                        },
+                        item_poids_gr: {
+                            validators: {
+                                integer: {
+                                    message: 'The value is not an integer'
+                                }
+                            }
+                        },
+                        item_longeur_mm: {
+                            validators: {
+                                numeric: {
+                                    message: ' Only numbers are allowed please'
+                                }
+                            }
+                        },
+                        item_largeur_mm: {
+                            validators: {
+                                numeric: {
+                                    message: ' Only numbers are allowed please'
+                                }
+                            }
+                        },
+                        item_hauteur_mm: {
+                            validators: {
+                                numeric: {
+                                    message: ' Only numbers are allowed please'
+                                }
+                            }
+                        }
+
+                    }
+                });
             });
         </script>
 
@@ -234,7 +296,7 @@
 
                 <div class="col-sm-8 text-left" >
                     <div class="page-header">
-                        <h1 style=" text-align: center;background-color:orange ">UPDATE ITEM <%=item_commercial_name%></h1>
+                        <h1 style=" text-align: center;background-color:orange;color: white ">UPDATE ITEM <%=item_commercial_name%></h1>
                     </div>         
 
 
@@ -247,7 +309,7 @@
                     <h4>${busin_cat.error} </h4>
 
 
-                    <form  "name="validateItem" action="ItemUpdateResponse.jsp" method="POST">
+                    <form  "name="validateItem" id="validateItem" action="ItemUpdateResponse.jsp" method="POST">
 
                         <div class="container">
 

@@ -109,12 +109,47 @@
                         },
                         item_dosage: {
                             validators: {
+                                numeric: {
+                                    message: ' Only numbers are allowed please'
+                                }
+                            }
+                        },
+                        item_packet: {
+                            validators: {
+                               numeric: {
+                                    message: ' Only numbers are allowed please'
+                                }
+                            }
+                        },
+                        item_poids_gr: {
+                            validators: {
                                 integer: {
                                     message: 'The value is not an integer'
                                 }
                             }
+                        },
+                        item_longeur_mm: {
+                            validators: {
+                                numeric: {
+                                    message: ' Only numbers are allowed please'
+                                }
+                            }
+                        },
+                        item_largeur_mm: {
+                            validators: {
+                                numeric: {
+                                    message: ' Only numbers are allowed please'
+                                }
+                            }
+                        },
+                        item_hauteur_mm: {
+                            validators: {
+                                numeric: {
+                                    message: ' Only numbers are allowed please'
+                                }
+                            }
                         }
-                        
+
                     }
                 });
             });

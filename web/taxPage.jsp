@@ -114,7 +114,7 @@
 
                 <div class="col-sm-8 text-left" >
                     <div class="page-header">
-                        <h1 style="text-align: center; text-shadow: maroon;">AUTHORITIES</h1>
+                        <h1 style="text-align: center;background-color: orange;color: white">AUTHORITIES</h1>
                     </div>        
                     <div style="float: left;margin-right:20px; color: black; background: green; font-weight: bold; ">
                         <form action="Tax_Rate.jsp">
