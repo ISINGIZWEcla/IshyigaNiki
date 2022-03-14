@@ -208,8 +208,9 @@
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="niki.jsp">Home</a></li>
+                        <li ><a href="niki.jsp">Home</a></li>
                         <li><a href="niki.jsp">NIKI</a></li>
+                        <li class="active"><a href="ItemValidationReal.jsp">Validate item</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li><i class="glyphicon glyphicon-user" style="color: white;font-size: 2em;"> <%=user%></i></li>
@@ -650,7 +651,7 @@
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <div class="content"><select  name="category_id" required="required">
-                                                    <option value="<%=category_id%>"><%=categName%></option>
+                                                    
 
                                                     <%
                                                         String orig = "yesValidate";
@@ -727,7 +728,7 @@
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <div class="content"><select name="item_fabricant" required="required">
-                                                    <option value=""> </option>  <% try {
+                                                      <% try {
                                                             Connection conn = ConnectionClass.getConnection();
                                                             PreparedStatement st = conn.prepareStatement(
                                                                     "SELECT fabricant_id,niki_fabricant_name FROM niki.niki_fabricant ORDER BY niki_fabricant_name");

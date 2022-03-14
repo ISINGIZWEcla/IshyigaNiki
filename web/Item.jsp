@@ -138,7 +138,7 @@
 
         <script>
             $(document).ready(function () {
-               // $('#example').DataTable();
+                $('#example').DataTable();
 
             });
         </script>
@@ -275,6 +275,7 @@
                     <%  } %>
                 </div>  
                 
+                
                   <div class="col-sm-8"></div>  
                 <div class="col-xs-4" >
                 
@@ -301,6 +302,7 @@
                                     <th> creator </th> 
                                     <th> IMAGE </th> 
                                     <th> Edit </th> 
+                                    <th> Delete </th> 
                                         <% } else { %>
                                     <th> INN </th>
                                     <th> EXIST </th>
@@ -320,7 +322,7 @@
 //               }
 //                                     sqll +=" where bus_category_id like '%"+business_category+"%'";   
 //                                    }
-int endValue = 0, nItems = 20,totalItems =0 ;
+int endValue = 0, nItems = 500,totalItems =0 ;
                                     try {
                                         ArrayList<data> records;
 //                                        if (records == null) {
@@ -386,7 +388,9 @@ int endValue = 0, nItems = 20,totalItems =0 ;
                                            
 
 
-                                %>  
+                                %>
+                            
+                           
                                 <tr>   
                                     <%--<%=sqll%>--%>
 
@@ -417,6 +421,7 @@ int endValue = 0, nItems = 20,totalItems =0 ;
                                         <img src="<%=imgg%>" alt="IMAGE" class="img-fluid" style="height: 65px" /> 
                                     </td> 
                                     <td> <a href="ItemUpdate.jsp?action=update&nikicode=<%=singleData.niki_code%>" > EDIT </a></td>
+                            <form action="ItemsDeleteResponse.jsp"> <input type="hidden" name="nikicode" value="<%=singleData.niki_code%>"/><td> <input type="submit" value="Delete"/></td></form>
 
                                     <% } else {%>
                                     <td> <a href="ItemValidationReal.jsp?itemValidate=<%=item_temp_id%>&action=validate&attachNiki=<%=singleData.niki_code%>" class="btn btn-primary enable " data-toggle="modal" data-target="#basicModal" > ATTACH </a></td>
@@ -424,6 +429,7 @@ int endValue = 0, nItems = 20,totalItems =0 ;
                                     <% } %>
 
                                 </tr>
+                            
 
                                 <%
                                     inc++;
@@ -440,9 +446,9 @@ int endValue = 0, nItems = 20,totalItems =0 ;
                             </tbody>  
                         </table>
                         <div >
-                            <div class="mb-5 mt-5 container-fluid pt-sm-5 pb-sm-5">
+                            <div class="mb-5 mt-5 container-fluid pt-sm-5 pb-sm-5" style="position: center;text-align: center">
                                         <div class="row">
-                                            <div class="col-sm-6">
+                                            <div class="col-sm-2">
                                                 <% if(endValue >= nItems){
                                     
                                 
@@ -455,7 +461,7 @@ int endValue = 0, nItems = 20,totalItems =0 ;
                             </form>
                                 <%}%>
                                             </div>
-                                            <div class="col-sm-6">
+                                            <div class="col-sm-2">
                                                
                                                 <% if(endValue + nItems < totalItems){
                                     
