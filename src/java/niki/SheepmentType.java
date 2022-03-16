@@ -10,5 +10,5 @@ package niki;
  */
 public enum SheepmentType {
 FRIGO,COOL,NORMAL,HOT;
-
+    
 }

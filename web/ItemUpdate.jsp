@@ -295,8 +295,8 @@
                 %>
 
                 <div class="col-sm-8 text-left" >
-                    <div class="page-header">
-                        <h1 style=" text-align: center;background-color:orange;color: white ">UPDATE ITEM <%=item_commercial_name%></h1>
+                    <div class="page-header" >
+                        <h2 style=" text-align: center;background-color:orange;color: white ">UPDATE ITEM <%=item_commercial_name%></h2>
                     </div>         
 
 
@@ -743,11 +743,11 @@
 
 
                                    
-                
-                
-<button type="submit" class="btn btn-secondary btn-lg btn-block">UPDATE</button>
+                <div class="col-sm-4"></div>
+                                        <div class="col-xs-4">
+<button type="submit" class="btn btn-warning"">UPDATE</button>
 
-                            
+                                        </div>
                            
 
                         </div>
@@ -759,7 +759,7 @@
 
                 <div class="col-sm-4 text-left" >
                     <div class="page-header">
-                        <h4 style="text-align: center; text-shadow: maroon;"><%=item_commercial_name%> IMAGE</h1>
+                        <h4 style="text-align: center; text-shadow: maroon;"><%=item_commercial_name%> IMAGE</h4>
                     </div>
                     <%
                         String imgg = "assets/NIKI_IMAGE/" + nikicode + ".jpg";

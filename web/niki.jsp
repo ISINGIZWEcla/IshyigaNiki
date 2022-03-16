@@ -23,9 +23,9 @@
 
     <%
         Object checkUserPrivileges = session.getAttribute("userInSessionPrivileges");
-                            Object checkfName = session.getAttribute("userInSessionfName");
-                            Object checkType = session.getAttribute("userInSessionType");
-                            String ngezehe = " ndatangiye";
+        Object checkfName = session.getAttribute("userInSessionfName");
+        Object checkType = session.getAttribute("userInSessionType");
+        String ngezehe = " ndatangiye";
         String user = "";
         String user_type = "";
         String tempo = "";
@@ -44,21 +44,21 @@
             while (rs.next()) {
                 tempo = "(" + rs.getInt(1) + ")";
             }
-           if (checkUserPrivileges != null) {
-               String business_category = session.getAttribute("bussiness_category").toString(); 
-               if(business_category.contains("PHARMACY")){
-                  business_category="PHARMACY" ;
-               }
-            rs = ST.executeQuery("SELECT count(niki_code) FROM niki.niki_items_temp where busin_category_id like'%"+business_category+"%' AND STATUS ='TRANSFORMED'");
-            while (rs.next()) {
-                niki = "(" + rs.getInt(1) + ")";
+            if (checkUserPrivileges != null) {
+                String business_category = session.getAttribute("bussiness_category").toString();
+                if (business_category.contains("PHARMACY")) {
+                    business_category = "PHARMACY";
+                }
+                rs = ST.executeQuery("SELECT count(niki_code) FROM niki.niki_items_temp where busin_category_id like'%" + business_category + "%' AND STATUS ='TRANSFORMED'");
+                while (rs.next()) {
+                    niki = "(" + rs.getInt(1) + ")";
+                }
+            } else {
+                rs = ST.executeQuery("SELECT count(niki_code) FROM niki.niki_items");
+                while (rs.next()) {
+                    niki = "(" + rs.getInt(1) + ")";
+                }
             }
-           }else{
-              rs = ST.executeQuery("SELECT count(niki_code) FROM niki.niki_items");
-            while (rs.next()) {
-                niki = "(" + rs.getInt(1) + ")";
-            }   
-           }
             rs = ST.executeQuery("SELECT count(busin_category_id) FROM niki.niki_business_categories");
             while (rs.next()) {
                 bus = "(" + rs.getInt(1) + ")";
@@ -105,17 +105,18 @@
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="niki.jsp">Home</a></li>
                         <li><a href="categoriesPage.jsp">Categories</a></li>
-                        <%if (checkUserPrivileges != null) {
-                            user_type=session.getAttribute("userInSessionType").toString();
-                            if(user_type.contains("ISHYIGA_ADMIN")){
+                            <%if (checkUserPrivileges != null) {
+                                    user_type = session.getAttribute("userInSessionType").toString();
+                                    if (user_type.contains("ISHYIGA_ADMIN")) {
                             %>
                         <li><a href="accountsPage.jsp">ADMINISTRATION</a></li>
-                        <%
-                            }}%>
+                            <%
+                                }
+                            }%>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <%
-                            
+
                             if (checkUserPrivileges == null) {
                         %>
                         <!--<li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>-->
@@ -127,12 +128,12 @@
                             session.setAttribute("busin_category", null);
 
                         %>
-                       <li><a> <span class="glyphicon glyphicon-user"></span> <%=user%></a></li> 
+                        <li><a> <span class="glyphicon glyphicon-user"></span> <%=user%></a></li> 
                         <li><a  href="Logout.jsp">
                                 <span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
-                        <%                       }
-                            %>  
-                        
+                                <%                       }
+                                %>  
+
                     </ul>
                 </div>
             </div>
@@ -180,6 +181,8 @@
                         </div>
                     </a>
                 </div>
+                    
+                             
             </div>
 
             <div class="row">
@@ -220,6 +223,7 @@
                         </div>
                     </a>
                 </div>
+                      
             </div>
 
             <div class="row">
@@ -260,7 +264,33 @@
                         </div>
                     </a>
                 </div>
+                       
             </div>
+                             <div class="row">
+                <div class="col-sm-4">
+                    <a href="Rejected.jsp">
+                        <div id="first" class="buttonBox">
+                            <button class="niki_buttons"><i class="bi bi-x" aria-hidden="true" id="icon">&nbsp</i>Rejected
+                            </button>
+                            <div class="border"></div>
+                            <div class="border"></div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-sm-4">
+                    <a href="Reversed.jsp">
+                        <div id="first" class="buttonBox">
+                            <button class="niki_buttons"><i class="fa fa-reverse" aria-hidden="true" id="icon">&nbsp</i>REversed
+                            </button>
+                            <div class="border"></div>
+                            <div class="border"></div>
+                        </div>
+                    </a>
+                </div>
+               
+            </div>
+
+           
 
         </div>
         <div class="footer">

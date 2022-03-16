@@ -125,7 +125,7 @@
           ex.printStackTrace();
         }
         try {
-            String updateQuerry = "update niki_items_temp set status='deleted' where item_id='" + singleData.itemTempId + "' ";
+            String updateQuerry = "update niki_items_temp set status='REPLACED' where item_id='" + singleData.itemTempId + "' ";
             Connection con = ConnectionClass.getConnection();
             Statement ST = con.createStatement();
             ST.executeUpdate(updateQuerry);
@@ -142,6 +142,16 @@ System.out.println("Successfully deleted niki item with the nic code="+nikiCode+
         } catch (Exception ex) {
            ex.printStackTrace();
         }
+    try {
+            String deleteQuerry = "delete from niki_item_business_category where niki_code='" + nikiCode + "'";
+            Connection con = ConnectionClass.getConnection();
+            Statement ST = con.createStatement();
+            ST.executeUpdate(deleteQuerry);
+System.out.println("Successfully deleted niki item with the nic code="+nikiCode+" !");
+        } catch (Exception ex) {
+           ex.printStackTrace();
+        }
+
 
     //niki_items==>delete
     //niki_items_temp>>Update Status
