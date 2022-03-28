@@ -801,7 +801,11 @@
 
 
 
-                            <button type="submit" class="btn btn-secondary btn-lg btn-block">VALIDATE</button>
+                                 <div class="col-sm-4"></div>
+                                        <div class="col-xs-4">
+<button type="submit" class="btn btn-warning"">VALIDATE</button>
+
+                                        </div>
 
 
 

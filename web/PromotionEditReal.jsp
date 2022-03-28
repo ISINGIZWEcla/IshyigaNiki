@@ -326,7 +326,7 @@
                                     <td> <%= rs2.getString(6)%></td>
                                     <td> <%= rs2.getString(7)%></td> 
                                     <td> <a class="btn btn-success" href="PromotionEditItem.jsp?promo_code=<%=promo_code%>&attachNiki=<%=niki_code%>&action=update"> EDIT </a></td>
-                                    <td> <a class="btn btn-success" href="PromotionItemEdit.jsp?promo_code=<%=promo_code%>&attachNiki=<%=niki_code%>&action=REMOVE"> REMOVE </a></td>
+                            <td> <a class="btn btn-success" href="RemoveProduct.jsp?promo_code=<%=promo_code%>&attachNiki=<%=niki_code%>&action=REMOVE" onclick="return confirm('Are you sure you want to delete this product?')"> REMOVE </a></td>
 
                                 </tr>
 

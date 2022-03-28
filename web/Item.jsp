@@ -421,10 +421,10 @@ int endValue = 0, nItems = 500,totalItems =0 ;
                                         <img src="<%=imgg%>" alt="IMAGE" class="img-fluid" style="height: 65px" /> 
                                     </td> 
                                     <td> <a href="ItemUpdate.jsp?action=update&nikicode=<%=singleData.niki_code%>" > EDIT </a></td>
-                            <form action="ItemsDeleteResponse.jsp"> <input type="hidden" name="nikicode" value="<%=singleData.niki_code%>"/><td> <input class="btn btn-warning" type="submit" value="Delete"/></td></form>
+                            <form action="ItemsDeleteResponse.jsp"> <input type="hidden" name="nikicode" value="<%=singleData.niki_code%>"/><td> <input class="btn btn-warning" onclick="return confirm('Are you sure you want to delete this item?')" type="submit" value="Delete"/></td></form>
 
                                     <% } else {%>
-                                    <td> <a href="ItemValidationReal.jsp?itemValidate=<%=item_temp_id%>&action=validate&attachNiki=<%=singleData.niki_code%>" class="btn btn-primary enable " data-toggle="modal" data-target="#basicModal" > ATTACH </a></td>
+                                    <td> <a href="ItemValidationReal.jsp?itemValidate=<%=item_temp_id%>&action=validate&attachNiki=<%=singleData.niki_code%>" class="btn btn-primary enable"  > ATTACH </a></td>
                                     <td> <a href="ItemRejectSleepResponse.jsp?itemRejectSleep=<%=item_temp_id%>&action=sleepFinal&attachNiki=<%=singleData.niki_code%>" class="btn btn-primary enable"> SAME </a></td>
                                     <% } %>
 

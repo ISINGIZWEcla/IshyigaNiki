@@ -5,6 +5,7 @@
 --%>
 
 
+<%@page import="javax.swing.JOptionPane"%>
 <%@page import="niki.SheepmentType"%>
 <%@page import="niki.ConnectionClass"%>
 <%@page import="java.sql.*"%>
@@ -146,18 +147,20 @@ System.out.println("Successfully deleted niki item with the nic code="+nikiCode+
             String deleteQuerry = "delete from niki_item_business_category where niki_code='" + nikiCode + "'";
             Connection con = ConnectionClass.getConnection();
             Statement ST = con.createStatement();
-            ST.executeUpdate(deleteQuerry);
-System.out.println("Successfully deleted niki item with the nic code="+nikiCode+" !");
-        } catch (Exception ex) {
-           ex.printStackTrace();
-        }
 
+       ST.executeUpdate(deleteQuerry);
+       System.out.println("Successfully deleted niki item with the nic code="+nikiCode+" !");
+       
+ }
+        catch (Exception ex) {
+          ex.printStackTrace();
+        } 
+    
+     response.sendRedirect("Item.jsp");
 
-    //niki_items==>delete
-    //niki_items_temp>>Update Status
-    //niki_item_business_category==>delete
-    //niki_items_deleted Insert
+   %>
+  
 
-    %>
-  <jsp:forward page="Item.jsp"/>
+   
+ 
 </html>
